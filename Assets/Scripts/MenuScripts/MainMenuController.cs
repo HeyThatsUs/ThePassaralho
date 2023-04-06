@@ -31,7 +31,16 @@ public class MainMenuController : MonoBehaviour
             AnimatorConfiguracoes.Play("Fechar");
             AnimatorConfiguracoes.SetBool("Aberto", false);
         }
+               
+    }
 
-        
+    public void ProximoPassaralho()
+    {
+
+    }
+
+    public void AnteriorPassaralho()
+    {
+
     }
 }
