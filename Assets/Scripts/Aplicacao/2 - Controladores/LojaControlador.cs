@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Loja : MonoBehaviour
+public class LojaControlador : MonoBehaviour
 {
-    [SerializeField] public List<ItemLoja> ItensLoja;
+    [SerializeField]
+    public List<ItemLoja> ItensLoja;
     public GameObject Display;
 
     private ItemAtual ItemAtual;
@@ -28,7 +29,9 @@ public class Loja : MonoBehaviour
 
     public void ProximoItem()
     {
-        var proximoItem = ItensLoja.Where( p => p.Index == this.ItemAtual.Index + 1).FirstOrDefault();
+        var proximoItem = ItensLoja
+            .Where(p => p.Index == this.ItemAtual.Index + 1)
+            .FirstOrDefault();
 
         if (proximoItem == null)
             this.ItemAtual = new ItemAtual(ItensLoja.First());
@@ -40,7 +43,9 @@ public class Loja : MonoBehaviour
 
     public void ItemAnterior()
     {
-        var proximoItem = ItensLoja.Where(p => p.Index == this.ItemAtual.Index - 1).FirstOrDefault();
+        var proximoItem = ItensLoja
+            .Where(p => p.Index == this.ItemAtual.Index - 1)
+            .FirstOrDefault();
 
         if (proximoItem == null)
             this.ItemAtual = new ItemAtual(ItensLoja.Last());

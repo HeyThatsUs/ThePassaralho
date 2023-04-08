@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovimento : MonoBehaviour
+public class PassaralhoMovimentoControlador : MonoBehaviour
 {
     public float Velocidade = 5f;
     public GameObject TargetMovimento;
@@ -16,8 +16,8 @@ public class PlayerMovimento : MonoBehaviour
 
     void Start()
     {
-            this.Passaralho_Rb = Passaralho.GetComponent<Rigidbody2D>();
-            this.Target_Rb = TargetMovimento.GetComponent<Rigidbody2D>();
+        this.Passaralho_Rb = Passaralho.GetComponent<Rigidbody2D>();
+        this.Target_Rb = TargetMovimento.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -25,12 +25,18 @@ public class PlayerMovimento : MonoBehaviour
     {
         OlharParaTarget();
 
-        var movimentoGradual = Vector3.Lerp(Passaralho.transform.position, TargetMovimento.transform.position, 3f * Time.fixedDeltaTime);
+        var movimentoGradual = Vector3.Lerp(
+            Passaralho.transform.position,
+            TargetMovimento.transform.position,
+            3f * Time.fixedDeltaTime
+        );
         this.Passaralho_Rb.MovePosition(new Vector3(0f, movimentoGradual.y, 0f));
 
         var movimentoTarget = this.TargetMovimento.transform.position + this.Movimento;
 
-        Target_Rb.MovePosition(new Vector3 (TargetMovimento.transform.position.x, movimentoTarget.y, 0f) );
+        Target_Rb.MovePosition(
+            new Vector3(TargetMovimento.transform.position.x, movimentoTarget.y, 0f)
+        );
     }
 
     private void OlharParaTarget()
