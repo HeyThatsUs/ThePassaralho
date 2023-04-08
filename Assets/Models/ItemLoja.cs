@@ -27,6 +27,7 @@ namespace Assets.Models
         {
             Id = obj.Id;
             Index= obj.Index;
+            Nome = obj.Nome;
             Descricao = obj.Descricao;
             Valor = obj.Valor;
             ObjectPreview = obj.ObjectPreview;
