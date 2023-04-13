@@ -20,6 +20,7 @@ namespace Assets.Models
         public SaveFile()
         {
             ItensAdquiridosLoja= new List<int>();
+            ItensAdquiridosLoja.Add(1);
             PassaralhoAtualId=0;
             QtdPassacoins=0;
             UserName = "Teste";

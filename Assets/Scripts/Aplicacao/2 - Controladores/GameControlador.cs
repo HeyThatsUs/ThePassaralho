@@ -8,12 +8,14 @@ public class GameControlador : MonoBehaviour
 {
     public Animator MenusAnimator;
     private Animator GameAnimator;
+    public GameObject MenuPrimeiroAcesso;
 
 
     public GameObject Loja;
     public GameObject Player;
     private SaveAndLoadController SaveController;
     private SaveFile Save;
+    private bool PrimeiroAcesso = false;
 
     private void Start()
     {
@@ -21,21 +23,40 @@ public class GameControlador : MonoBehaviour
 
         //LoadGame
         this.CarregaInformacoesSaveFile();
+
+        if (PrimeiroAcesso)
+        {
+            AbreMenuPrimeiroAcesso();
+            PrimeiroAcesso = false;
+        }
     }
 
     private void CarregaInformacoesSaveFile()
     {
         SaveController = new SaveAndLoadController();
         Save = SaveController.Load();
-        if (Save == null) Save = new SaveFile();
-
-
+        if (Save == null) 
+        { 
+            Save = new SaveFile(); 
+            PrimeiroAcesso = true; 
+        }
     }
 
     public void IniciaGame()
     {
         GameAnimator.Play("IniciaGame");
         MenusAnimator.Play("Menu_Main_Esconder");
+    }
+
+    public void AbreMenuPrimeiroAcesso()
+    {
+        MenuPrimeiroAcesso.SetActive(true);
+    }
+
+    public void SalvarDadosPrimeiroAcesso()
+    {
+        this.Save.UserName = "James";
+        SaveController.Save(this.Save);
     }
 
     public void Animacao_IniciaGame_Finalizada()
