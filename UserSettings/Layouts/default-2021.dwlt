@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 9}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 98
+  controlID: 131
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 47
+  controlID: 18
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 17
+  controlID: 129
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 0
-  controlID: 97
+  controlID: 130
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -399,22 +399,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprites/Menus
+    - Assets/Scripts/Share/1 - Dominio
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Sprites/Menus
+  - Assets/Scripts/Share/1 - Dominio
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\keneralTurkin\Documents\GitHub\ThePassaralho
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 13.400024}
-    m_SelectedIDs: 16660000
-    m_LastClickedID: 26134
-    m_ExpandedIDs: 00000000fa650000fc650000fe6500000066000002660000046600001266000000ca9a3b
+    scrollPos: {x: 0, y: 138.40082}
+    m_SelectedIDs: 18660000
+    m_LastClickedID: 26136
+    m_ExpandedIDs: 00000000fc650000fe65000000660000026600000466000006660000106600001a66000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -442,7 +442,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fa650000fc650000fe650000006600000266000004660000
+    m_ExpandedIDs: 00000000fc650000fe65000000660000026600000466000006660000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -469,7 +469,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -486,7 +486,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 4}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -570,9 +570,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: f2160000
       m_LastClickedID: 0
-      m_ExpandedIDs: 26fbffff9a600000a2600000aa600000c4600000246100003c6100004e6100008e610000c2610000f0610000f8610000126200006c620000ae620000b8620000fe62000016630000
+      m_ExpandedIDs: 26fbffff12620000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -876,9 +876,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1256.5283, y: 488.1912, z: 5.206715}
+    m_Target: {x: 13.282116, y: 1.2911124, z: 22.905855}
     speed: 2
-    m_Value: {x: 1324.3971, y: 501.09464, z: 5.985948}
+    m_Value: {x: 13.282116, y: 1.2911124, z: 22.905855}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -929,9 +929,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1809.5538
+    m_Target: 27.076736
     speed: 2
-    m_Value: 1731.6305
+    m_Value: 27.076736
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1047,7 +1047,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1

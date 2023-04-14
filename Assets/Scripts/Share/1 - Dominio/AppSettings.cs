@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Share._1___Dominio
 {
@@ -10,9 +11,9 @@ namespace Assets.Scripts.Share._1___Dominio
     {
         public static string GetSaveFileBasePath()
         {
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var path = Application.dataPath;
 
-            return path + "/ThePassaralho";
+            return path + "\\ThePassaralho";
         }
     }
 }
