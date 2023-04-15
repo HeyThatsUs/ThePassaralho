@@ -19,11 +19,11 @@ namespace Assets.Models
     }
 
     [Serializable]
-    public class ItemAtual : ItemLoja
+    public class Item : ItemLoja
     {
         [SerializeField] public bool Adquirido = false;
 
-        public ItemAtual(ItemLoja obj)
+        public Item(ItemLoja obj)
         {
             Id = obj.Id;
             Index= obj.Index;

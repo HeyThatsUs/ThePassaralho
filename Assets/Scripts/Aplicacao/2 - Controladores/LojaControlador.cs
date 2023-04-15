@@ -1,4 +1,5 @@
 using Assets.Models;
+using Assets.Scripts.Aplicacao._2___Controladores;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +12,24 @@ public class LojaControlador : MonoBehaviour
     [SerializeField]
     public List<ItemLoja> ItensLoja;
     public GameObject Display;
-    public GameObject Passaralho;
 
-    private ItemAtual ItemAtual;
+    [HideInInspector]
+    public GameControlador GameControlador;
+
+    //Referencias Internas
+    private MenusControlador Menus_Controlador;
+
+
+    private Item ItemAtual;
     private GameObject PreviewAtual;
     private int indexGerador = 1;
 
 
     //Botões e labels
     public TextMeshProUGUI BtnComprarEquipar;
-    public TextMeshProUGUI LblValor;
+
+    //ProprieadesInternas
+    private bool PossuiItemAtual = false;
 
 
     private void Start()
@@ -30,10 +39,15 @@ public class LojaControlador : MonoBehaviour
             item.Index = this.indexGerador;
             this.indexGerador++;
         }
+        this.ItemAtual = new Item(ItensLoja.FirstOrDefault());
 
-        this.ItemAtual = new ItemAtual(ItensLoja.FirstOrDefault());
-
+        AddReferencias();
         AtualizaItemDisplay();
+    }
+
+    public void AddReferencias()
+    {
+        this.Menus_Controlador = this.GameControlador.Menus_Controlador;
     }
 
     public void ProximoItem()
@@ -43,9 +57,10 @@ public class LojaControlador : MonoBehaviour
             .FirstOrDefault();
 
         if (proximoItem == null)
-            this.ItemAtual = new ItemAtual(ItensLoja.First());
+            this.ItemAtual = new Item(ItensLoja.First());
         else
-            this.ItemAtual = new ItemAtual(proximoItem);
+            this.ItemAtual = new Item(proximoItem);
+
 
         AtualizaItemDisplay();
     }
@@ -57,9 +72,9 @@ public class LojaControlador : MonoBehaviour
             .FirstOrDefault();
 
         if (proximoItem == null)
-            this.ItemAtual = new ItemAtual(ItensLoja.Last());
+            this.ItemAtual = new Item(ItensLoja.Last());
         else
-            this.ItemAtual = new ItemAtual(proximoItem);
+            this.ItemAtual = new Item(proximoItem);
 
         AtualizaItemDisplay();
     }
@@ -71,19 +86,58 @@ public class LojaControlador : MonoBehaviour
             Destroy(PreviewAtual);
         }
 
-        PreviewAtual = Instantiate(ItemAtual.ObjectPreview, this.transform);
+        var save = this.GameControlador.Save;
 
-        this.LblValor.text = $"{ItemAtual.Nome}: ${ItemAtual.Valor.ToString()}";
+        if (save.ItensAdquiridosLoja.Any(p => p == ItemAtual.Id))
+        {
+            this.PossuiItemAtual = true;
+
+            if (ItemAtual.Id == this.GameControlador.Save.PassaralhoAtualId)
+                this.Menus_Controlador.LblEquiparComprar.text = "Equipado";
+            else
+                this.Menus_Controlador.LblEquiparComprar.text = "Equipar";
+
+            this.Menus_Controlador.LblValorItem.text = "Adiquirido";
+        }
+        else
+        {
+            this.PossuiItemAtual = false;
+            this.Menus_Controlador.LblEquiparComprar.text = "Comprar";
+            this.Menus_Controlador.LblValorItem.text = $"{ItemAtual.Nome}: ${ItemAtual.Valor}";
+        }
+
+        PreviewAtual = Instantiate(ItemAtual.ObjectPreview, this.Display.transform);
+        this.Display.transform.SetParent(PreviewAtual.transform);
     }
 
     public void ComprarItem()
     {
+        var saveFile = this.GameControlador.Save;
 
+        if (saveFile.QtdPassacoins >= this.ItemAtual.Valor)
+        {
+            saveFile.QtdPassacoins -= this.ItemAtual.Valor;
+            saveFile.ItensAdquiridosLoja.Add(ItemAtual.Id);
+            saveFile.PassaralhoAtualId = ItemAtual.Id;
+
+            this.GameControlador.SaveController.Save(saveFile);
+
+            this.Menus_Controlador.AtualizarSaldoPassaCoins(saveFile.QtdPassacoins);
+        }
+        else
+            this.Menus_Controlador.Notificar("Voce nao possui saldo suficiente!");
     }
 
     public void EquiparItem()
     {
-        var passaralho = Instantiate(ItemAtual.ObjectPreview, this.Passaralho.transform);
-        this.Passaralho.transform.SetParent(passaralho.transform);
+        if (PossuiItemAtual == false)
+        {
+            ComprarItem();
+        }
+
+        this.GameControlador.Save.PassaralhoAtualId = this.ItemAtual.Id;
+        this.GameControlador.SaveController.Save(this.GameControlador.Save);
+
+        this.AtualizaItemDisplay();
     }
 }

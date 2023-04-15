@@ -11,9 +11,9 @@ namespace Assets.Scripts.Share._1___Dominio
     {
         public static string GetSaveFileBasePath()
         {
-            var path = Application.dataPath;
+            var path = Application.persistentDataPath;
 
-            return path + "\\ThePassaralho";
+            return path;
         }
     }
 }
