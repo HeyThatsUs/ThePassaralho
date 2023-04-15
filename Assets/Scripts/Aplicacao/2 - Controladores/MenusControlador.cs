@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MenusControlador : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class MenusControlador : MonoBehaviour
 
     [Header("Referencia Animators")]
     public Animator MenuConfiguracoes_Animator;
+    public Animator Notificador;
     [HideInInspector] 
     public Animator MenusGeral_Animator;
 
@@ -19,6 +21,7 @@ public class MenusControlador : MonoBehaviour
     public TextMeshProUGUI LblEquiparComprar;
     public TextMeshProUGUI LblValorItem;
     public TextMeshProUGUI LblSaldoPassacoins;
+    public TextMeshProUGUI LblNotificador;
 
     private void Start()
     {
@@ -46,6 +49,8 @@ public class MenusControlador : MonoBehaviour
 
     public void Notificar(string mensagem)
     {
+        this.Notificador.Play("Noticacao", -1, 0f);
 
+        this.LblNotificador.text = mensagem;
     }
 }

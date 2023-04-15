@@ -4691,10 +4691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hud: {fileID: 1375652695}
   MenuConfiguracoes_Animator: {fileID: 127672849}
+  Notificador: {fileID: 1613320986}
   MenusGeral_Animator: {fileID: 1375652701}
   LblEquiparComprar: {fileID: 1166425782}
   LblValorItem: {fileID: 535918032}
   LblSaldoPassacoins: {fileID: 634689057}
+  LblNotificador: {fileID: 1759033413}
 --- !u!95 &1375652701
 Animator:
   serializedVersion: 5
@@ -5312,6 +5314,7 @@ GameObject:
   - component: {fileID: 1613320983}
   - component: {fileID: 1613320985}
   - component: {fileID: 1613320984}
+  - component: {fileID: 1613320986}
   m_Layer: 5
   m_Name: Notificador
   m_TagString: Untagged
@@ -5378,6 +5381,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613320982}
   m_CullTransparentMesh: 1
+--- !u!95 &1613320986
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613320982}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bcb62d032cdf79143b24c44f3bee3547, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1616708993
 GameObject:
   m_ObjectHideFlags: 0
@@ -6190,7 +6213,7 @@ GameObject:
   - component: {fileID: 1759033414}
   - component: {fileID: 1759033413}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LblNotificador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6214,7 +6237,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -58.2217, y: -51.1787}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1759033413
 MonoBehaviour:
@@ -6263,12 +6286,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 192.45
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 500
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
