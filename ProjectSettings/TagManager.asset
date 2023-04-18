@@ -50,3 +50,6 @@ TagManager:
   - name: Debug
     uniqueID: 2996564591
     locked: 0
+  - name: ObstaculosEColetaveis
+    uniqueID: 2029646791
+    locked: 0
