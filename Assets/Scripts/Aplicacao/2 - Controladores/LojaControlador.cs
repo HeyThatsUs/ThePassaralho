@@ -19,11 +19,9 @@ public class LojaControlador : MonoBehaviour
     //Referencias Internas
     private MenusControlador Menus_Controlador;
 
-
     private Item ItemAtual;
     private GameObject PreviewAtual;
     private int indexGerador = 1;
-
 
     //Botões e labels
     public TextMeshProUGUI BtnComprarEquipar;
@@ -42,7 +40,14 @@ public class LojaControlador : MonoBehaviour
         this.ItemAtual = new Item(ItensLoja.FirstOrDefault());
 
         AddReferencias();
+        IniciarLoja();
         AtualizaItemDisplay();
+    }
+
+    public void IniciarLoja()
+    {
+        var passaralhoInicial = this.ItensLoja.Where(p => p.Index == this.GameControlador.Save.PassaralhoAtualId).FirstOrDefault();
+        this.ItemAtual = new Item(passaralhoInicial);
     }
 
     public void AddReferencias()

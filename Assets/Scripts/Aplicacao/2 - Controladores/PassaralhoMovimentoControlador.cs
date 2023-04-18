@@ -16,7 +16,7 @@ public class PassaralhoMovimentoControlador : MonoBehaviour
 
     void Start()
     {
-        this.Passaralho_Rb = Passaralho.GetComponent<Rigidbody2D>();
+        this.Passaralho_Rb = this.GetComponent<Rigidbody2D>();
         this.Target_Rb = TargetMovimento.GetComponent<Rigidbody2D>();
     }
 

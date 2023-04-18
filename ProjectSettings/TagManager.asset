@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Cenario
   - 
   - 
   - 
@@ -43,4 +43,10 @@ TagManager:
     locked: 0
   - name: Fundo
     uniqueID: 1778952439
+    locked: 0
+  - name: Player
+    uniqueID: 3341878147
+    locked: 0
+  - name: Debug
+    uniqueID: 2996564591
     locked: 0

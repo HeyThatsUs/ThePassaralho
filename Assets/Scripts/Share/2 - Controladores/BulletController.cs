@@ -5,21 +5,18 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public GameObject obj;
     public DirecaoMovimentoBala Direcao;
     public float Velocidade = 5f;
 
- 
-
-    void Update()
+    private void FixedUpdate()
     {
         switch (Direcao)
         {
             case DirecaoMovimentoBala.Esquerda:
-                obj.transform.Translate(new Vector3((Time.deltaTime * Velocidade)* -1, 0f, 0f));
+                this.transform.Translate(new Vector3((Time.fixedDeltaTime * Velocidade) * -1, 0f, 0f));
                 break;
             case DirecaoMovimentoBala.Direita:
-                obj.transform.Translate(new Vector3(Time.deltaTime * Velocidade, 0f, 0f));
+                this.transform.Translate(new Vector3(Time.fixedDeltaTime * Velocidade, 0f, 0f));
                 break;
         }
     }

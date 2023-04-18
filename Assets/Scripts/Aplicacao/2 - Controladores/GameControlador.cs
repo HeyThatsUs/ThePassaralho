@@ -21,6 +21,7 @@ public class GameControlador : MonoBehaviour
     [Header("Referencias")]
     public MenusControlador Menus_Controlador;
     public PlayerController Player_Controlador;
+    public EmissorController EmissorPai_Controlador;
 
     //Referencias Internas
     private Animator MenusGeralAnimator;
@@ -30,14 +31,14 @@ public class GameControlador : MonoBehaviour
     private void Awake()
     {
         this.Loja_Controlador.GameControlador = this;
+
+        //LoadGame
+        this.CarregaInformacoesSaveFile();
     }
 
     private void Start()
     {
         GameAnimator = this.GetComponent<Animator>();
-
-        //LoadGame
-        this.CarregaInformacoesSaveFile();
 
         if (PrimeiroAcesso)
         {
@@ -76,7 +77,6 @@ public class GameControlador : MonoBehaviour
     private void AtualizaDadosMenu()
     {
         this.Menus_Controlador.AtualizarSaldoPassaCoins(this.Save.QtdPassacoins);
-        this.Loja_Controlador.AtualizaItemDisplay();
     }
 
     public void IniciaGame()
@@ -87,6 +87,7 @@ public class GameControlador : MonoBehaviour
         var passaralhoPrefab = this.Loja_Controlador.ItensLoja.Where(p => p.Id == this.Save.PassaralhoAtualId).FirstOrDefault().ObjectPreview;
         var passaralho = Instantiate(passaralhoPrefab, this.Player_Controlador.Passaralho.transform);
         this.Player_Controlador.Passaralho.transform.SetParent(passaralho.transform);
+        this.EmissorPai_Controlador.AtivaTodosEmissores();
     }
 
     public void AbreMenuPrimeiroAcesso()
