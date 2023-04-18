@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 278859031}
   - component: {fileID: 278859030}
   - component: {fileID: 278859029}
+  - component: {fileID: 278859032}
   m_Layer: 0
   m_Name: MontanhaTras
   m_TagString: Untagged
@@ -627,6 +628,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278859027}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &278859032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278859027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa542a7becb2c46498927873b12794c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Velocidade: 1
+  sortingLayer: Fundo
+  sortingOrder: 4
 --- !u!1 &280251399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,6 +1403,7 @@ GameObject:
   - component: {fileID: 547951411}
   - component: {fileID: 547951410}
   - component: {fileID: 547951409}
+  - component: {fileID: 547951412}
   m_Layer: 0
   m_Name: Gramas
   m_TagString: Untagged
@@ -1473,6 +1490,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547951407}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &547951412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547951407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa542a7becb2c46498927873b12794c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Velocidade: 1
+  sortingLayer: Fundo
+  sortingOrder: 8
 --- !u!1 &578739982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,6 +1837,7 @@ GameObject:
   - component: {fileID: 710791918}
   - component: {fileID: 710791917}
   - component: {fileID: 710791916}
+  - component: {fileID: 710791919}
   m_Layer: 0
   m_Name: Nuvens
   m_TagString: Untagged
@@ -1891,6 +1924,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710791914}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &710791919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710791914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa542a7becb2c46498927873b12794c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Velocidade: 1
+  sortingLayer: Fundo
+  sortingOrder: 1
 --- !u!1 &732625117
 GameObject:
   m_ObjectHideFlags: 0
@@ -3506,8 +3554,9 @@ GameObject:
   - component: {fileID: 1079418187}
   - component: {fileID: 1079418186}
   - component: {fileID: 1079418185}
+  - component: {fileID: 1079418188}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: MontanhaFrente
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3592,6 +3641,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079418183}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1079418188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079418183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa542a7becb2c46498927873b12794c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Velocidade: 1
+  sortingLayer: Fundo
+  sortingOrder: 6
 --- !u!1 &1116710140
 GameObject:
   m_ObjectHideFlags: 0
@@ -3738,6 +3802,7 @@ GameObject:
   - component: {fileID: 1120052523}
   - component: {fileID: 1120052522}
   - component: {fileID: 1120052521}
+  - component: {fileID: 1120052524}
   m_Layer: 0
   m_Name: Folhas
   m_TagString: Untagged
@@ -3824,6 +3889,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120052519}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1120052524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120052519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa542a7becb2c46498927873b12794c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Velocidade: 1
+  sortingLayer: Fundo
+  sortingOrder: 8
 --- !u!1 &1137660213
 GameObject:
   m_ObjectHideFlags: 0
@@ -5516,6 +5596,7 @@ GameObject:
   - component: {fileID: 1578483918}
   - component: {fileID: 1578483917}
   - component: {fileID: 1578483916}
+  - component: {fileID: 1578483919}
   m_Layer: 0
   m_Name: Cipos
   m_TagString: Untagged
@@ -5602,6 +5683,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578483914}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1578483919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578483914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa542a7becb2c46498927873b12794c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Velocidade: 1
+  sortingLayer: Fundo
+  sortingOrder: 10
 --- !u!1 &1588780730
 GameObject:
   m_ObjectHideFlags: 0
