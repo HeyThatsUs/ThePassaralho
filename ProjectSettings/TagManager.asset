@@ -54,3 +54,6 @@ TagManager:
   - name: ObstaculosEColetaveis
     uniqueID: 2029646791
     locked: 0
+  - name: Frente
+    uniqueID: 2565267825
+    locked: 0
