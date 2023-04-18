@@ -111,6 +111,7 @@ public class LojaControlador : MonoBehaviour
             EquiparItem(false);
 
             this.BtnComprarEquipar.gameObject.SetActive(false);
+            this.GameControlador.PodeIniciar = true;
         }
         else
         {
@@ -118,6 +119,7 @@ public class LojaControlador : MonoBehaviour
             this.Menus_Controlador.LblEquiparComprar.text = "Comprar";
             this.Menus_Controlador.LblValorItem.text = $"{ItemAtual.Nome}: ${ItemAtual.Valor}";
             this.BtnComprarEquipar.gameObject.SetActive(true);
+            this.GameControlador.PodeIniciar = false;
         }
 
     }
@@ -137,7 +139,7 @@ public class LojaControlador : MonoBehaviour
             this.Menus_Controlador.AtualizarSaldoPassaCoins(saveFile.QtdPassacoins);
         }
         else
-            this.Menus_Controlador.Notificar("Voce nao possui saldo suficiente!");
+            this.Menus_Controlador.Notificar("Saldo insuficiente!");
     }
 
     public void EquiparItem(bool Atualizar = true)

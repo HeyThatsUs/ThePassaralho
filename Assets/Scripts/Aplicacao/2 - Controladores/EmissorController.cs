@@ -8,6 +8,7 @@ public class EmissorController : MonoBehaviour
     public float IntervaloEmissao = 3f;
     public float Temp_IntervaloEmissao = 0f;
     public List<GameObject> ObjetosEmissao;
+    [Range(1, 20)]
     public float MultiplicadorVelocidade = 1;
     public bool Ativo = false;
     public bool ehPai = false;
@@ -57,6 +58,8 @@ public class EmissorController : MonoBehaviour
         var objIndex = Random.Range(0, ObjetosEmissao.Count() - 1);
         var objEmitido = Instantiate(ObjetosEmissao[objIndex], this.transform);
         objEmitido.transform.SetParent(null);
+        var rb = objEmitido.GetComponent<Rigidbody2D>();
+        rb.AddForce(new Vector2(-150f * MultiplicadorVelocidade, 0f));
 
         Temp_IntervaloEmissao = IntervaloEmissao;
         Emitir = false;

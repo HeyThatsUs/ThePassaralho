@@ -9,6 +9,7 @@ public class PassaralhoMovimentoControlador : MonoBehaviour
     public float Velocidade = 5f;
     public GameObject TargetMovimento;
     public GameObject Passaralho;
+    public bool Habilitado = true;
 
     private Vector3 Movimento;
     private Rigidbody2D Passaralho_Rb;
@@ -23,20 +24,23 @@ public class PassaralhoMovimentoControlador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OlharParaTarget();
+        if (Habilitado)
+        {
+            OlharParaTarget();
 
-        var movimentoGradual = Vector3.Lerp(
-            Passaralho.transform.position,
-            TargetMovimento.transform.position,
-            3f * Time.fixedDeltaTime
-        );
-        this.Passaralho_Rb.MovePosition(new Vector3(0f, movimentoGradual.y, 0f));
+            var movimentoGradual = Vector3.Lerp(
+                Passaralho.transform.position,
+                TargetMovimento.transform.position,
+                3f * Time.fixedDeltaTime
+            );
+            this.Passaralho_Rb.MovePosition(new Vector3(0f, movimentoGradual.y, 0f));
 
-        var movimentoTarget = this.TargetMovimento.transform.position + this.Movimento;
+            var movimentoTarget = this.TargetMovimento.transform.position + this.Movimento;
 
-        Target_Rb.MovePosition(
-            new Vector3(TargetMovimento.transform.position.x, movimentoTarget.y, 0f)
-        );
+            Target_Rb.MovePosition(
+                new Vector3(TargetMovimento.transform.position.x, movimentoTarget.y, 0f)
+            );
+        }
     }
 
     private void OlharParaTarget()

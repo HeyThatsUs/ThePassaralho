@@ -11,7 +11,45 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
     public class PlayerController : MonoBehaviour
     {
         public GameObject Passaralho;
-        public int Vida;
+        public int Vida = 100;
         private int VidaAtual;
+        public Animator Animator;
+        private Rigidbody2D Rb;
+        private PassaralhoMovimentoControlador MovimentoControlador;
+
+        private void Awake()
+        {
+            VidaAtual = Vida;
+            this.Rb = GetComponent<Rigidbody2D>();
+            this.Rb.gravityScale = 0;
+            this.MovimentoControlador = GetComponent<PassaralhoMovimentoControlador>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Obstaculo"))
+            {
+                this.RecebeDano(collision.gameObject.GetComponent<ObstaculoControlador>().ValorDano);
+            }
+        }
+
+        public void RecebeDano(int valor)
+        {
+            this.VidaAtual -= valor; 
+            var variacao = UnityEngine.Random.Range(1, 10);
+
+            if (variacao % 2 == 0)
+            {
+                this.Animator.Play("RecebendoDano", 0, 0f);
+            }else
+                this.Animator.Play("RecebendoDano_Reverse", 0, 0f);
+
+            if (VidaAtual <= 0)
+            {
+                this.Rb.gravityScale = 1;
+                this.MovimentoControlador.Habilitado = false;
+                GameControlador.Self.GameOver();
+            }
+        }
     }
 }
