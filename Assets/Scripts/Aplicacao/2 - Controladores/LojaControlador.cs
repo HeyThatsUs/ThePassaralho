@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LojaControlador : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class LojaControlador : MonoBehaviour
     private int indexGerador = 1;
 
     //Botões e labels
-    public TextMeshProUGUI BtnComprarEquipar;
+    public Button BtnComprarEquipar;
 
     //ProprieadesInternas
     private bool PossuiItemAtual = false;
@@ -93,6 +94,11 @@ public class LojaControlador : MonoBehaviour
 
         var save = this.GameControlador.Save;
 
+        this.Menus_Controlador.LblValorItem.text = $"{ItemAtual.Nome}";
+
+        PreviewAtual = Instantiate(ItemAtual.ObjectPreview, this.Display.transform);
+        this.Display.transform.SetParent(PreviewAtual.transform);
+
         if (save.ItensAdquiridosLoja.Any(p => p == ItemAtual.Id))
         {
             this.PossuiItemAtual = true;
@@ -102,17 +108,18 @@ public class LojaControlador : MonoBehaviour
             else
                 this.Menus_Controlador.LblEquiparComprar.text = "Equipar";
 
-            this.Menus_Controlador.LblValorItem.text = "Adiquirido";
+            EquiparItem(false);
+
+            this.BtnComprarEquipar.gameObject.SetActive(false);
         }
         else
         {
             this.PossuiItemAtual = false;
             this.Menus_Controlador.LblEquiparComprar.text = "Comprar";
             this.Menus_Controlador.LblValorItem.text = $"{ItemAtual.Nome}: ${ItemAtual.Valor}";
+            this.BtnComprarEquipar.gameObject.SetActive(true);
         }
 
-        PreviewAtual = Instantiate(ItemAtual.ObjectPreview, this.Display.transform);
-        this.Display.transform.SetParent(PreviewAtual.transform);
     }
 
     public void ComprarItem()
@@ -133,7 +140,7 @@ public class LojaControlador : MonoBehaviour
             this.Menus_Controlador.Notificar("Voce nao possui saldo suficiente!");
     }
 
-    public void EquiparItem()
+    public void EquiparItem(bool Atualizar = true)
     {
         if (PossuiItemAtual == false)
         {
@@ -143,6 +150,6 @@ public class LojaControlador : MonoBehaviour
         this.GameControlador.Save.PassaralhoAtualId = this.ItemAtual.Id;
         this.GameControlador.SaveController.Save(this.GameControlador.Save);
 
-        this.AtualizaItemDisplay();
+        if(Atualizar || PossuiItemAtual ==  false) this.AtualizaItemDisplay();
     }
 }
