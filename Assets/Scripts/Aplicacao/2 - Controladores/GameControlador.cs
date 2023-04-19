@@ -109,6 +109,11 @@ public class GameControlador : MonoBehaviour
         MenuPrimeiroAcesso.SetActive(true);
     }
 
+    public void AbreMenuModoGame()
+    {
+        this.Menus_Controlador.MenuModoGame.SetActive(true);
+    }
+
     public void SalvarDadosPrimeiroAcesso()
     {
         this.Save.UserName = "James";
@@ -124,11 +129,12 @@ public class GameControlador : MonoBehaviour
 
     public void GameOver()
     {
+        SaveController.Save(this.Save);
         this.Menus_Controlador.MenuGameOver.SetActive(true);
     }
 
     public void ReiniciaGame()
     {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene("MainMenuEModoInfinito", LoadSceneMode.Single);
     }
 }

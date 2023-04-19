@@ -15,6 +15,10 @@ namespace Assets.Models
 
         public int QtdPassacoins;
 
+        public int Pontuacao;
+
+        public float DistanciaPercorrida;
+
         public string UserName;
 
         public SaveFile()

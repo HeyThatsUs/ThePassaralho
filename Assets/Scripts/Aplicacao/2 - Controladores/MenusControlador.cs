@@ -11,6 +11,7 @@ public class MenusControlador : MonoBehaviour
     [Header("Referencias Menus")]
     public GameObject Hud;
     public GameObject MenuGameOver;
+    public GameObject MenuModoGame;
 
     [Header("Referencia Animators")]
     public Animator MenuConfiguracoes_Animator;
