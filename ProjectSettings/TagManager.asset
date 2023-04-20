@@ -5,16 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Obstaculo
+  - BonusItem
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Limitadores
   - Water
   - UI
   - Player
   - Cenario
-  - 
+  - Movimento
   - 
   - 
   - 

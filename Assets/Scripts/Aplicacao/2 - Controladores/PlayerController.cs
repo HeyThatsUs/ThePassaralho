@@ -33,9 +33,17 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Obstaculo"))
+            switch (collision.tag)
             {
+                case "Obstaculo":
                 this.RecebeDano(collision.gameObject.GetComponent<ObstaculoControlador>().ValorDano);
+                    break;
+                case "BonusItem":
+                    var bonus = collision.gameObject.GetComponent<BonusItem>();
+                    this.VidaAtual += bonus.Vida;
+                    GameControlador.Self.Save.QtdPassacoins += bonus.Passacoins;
+                    MenusControlador.Self.AtualizaDadosHudGameplay(this.VidaAtual);
+                    break;
             }
         }
 

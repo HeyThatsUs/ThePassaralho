@@ -74,6 +74,11 @@ public class MenusControlador : MonoBehaviour
         this.LblSaldoPassacoins.text = Saldo.ToString();
     }
 
+    public void AtualizaDadosHudGameplay(int vida)
+    {
+        this.LblVida.text = "" + vida;
+    }
+
     public void Notificar(string mensagem)
     {
         this.Notificador.Play("Noticacao", -1, 0f);
