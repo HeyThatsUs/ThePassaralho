@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,6 +13,7 @@ public class MenusControlador : MonoBehaviour
     public GameObject Hud;
     public GameObject MenuGameOver;
     public GameObject MenuModoGame;
+    public GameObject HudGameplay;
 
     [Header("Referencia Animators")]
     public Animator MenuConfiguracoes_Animator;
@@ -24,10 +26,23 @@ public class MenusControlador : MonoBehaviour
     public TextMeshProUGUI LblValorItem;
     public TextMeshProUGUI LblSaldoPassacoins;
     public TextMeshProUGUI LblNotificador;
+    public TextMeshProUGUI LblDistancia;
+    public TextMeshProUGUI LblVida;
+    public TextMeshProUGUI LblLevelAtual;
+
+    //Internios
+    [HideInInspector]
+    public static MenusControlador Self;
+
+    private void Awake()
+    {
+        MenusControlador.Self = this;
+    }
 
     private void Start()
     {
         MenusGeral_Animator = GetComponent<Animator>();
+        LblVida.text = ""+100;
     }
 
     public void AbreMenuConfig()
@@ -42,6 +57,16 @@ public class MenusControlador : MonoBehaviour
             MenuConfiguracoes_Animator.Play("Fechar");
             MenuConfiguracoes_Animator.SetBool("Aberto", false);
         }
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    public void AtualizaDistanciaPercorrida(int distancia)
+    {
+        this.LblDistancia.text = distancia + "M"; 
     }
 
     public void AtualizarSaldoPassaCoins(int Saldo)

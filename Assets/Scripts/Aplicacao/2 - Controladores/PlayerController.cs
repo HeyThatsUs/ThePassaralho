@@ -10,10 +10,16 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
 {
     public class PlayerController : MonoBehaviour
     {
+        [Header("Referencias")]
         public GameObject Passaralho;
-        public int Vida = 100;
-        private int VidaAtual;
+        public MenusControlador MenusControlador;
         public Animator Animator;
+
+        [Header("Variaveis")]
+        public int Vida = 100;
+
+        //Internas
+        private int VidaAtual;
         private Rigidbody2D Rb;
         private PassaralhoMovimentoControlador MovimentoControlador;
 
@@ -50,6 +56,8 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
                 this.MovimentoControlador.Habilitado = false;
                 GameControlador.Self.GameOver();
             }
+
+            this.MenusControlador.LblVida.text = VidaAtual.ToString();
         }
     }
 }

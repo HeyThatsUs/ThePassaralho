@@ -35,14 +35,38 @@ public class GameControlador : MonoBehaviour
     private Animator MenusGeralAnimator;
 
     private bool PrimeiroAcesso = false;
+    private bool JogoIniciado = false;
+    private int DistanciaPercorrida = 0;
+
+    [Header("Variáveis")]
+    public float Temporizador_Distancia = 5f;
+    private float Temp_Temporizador_Distancia;
+    [HideInInspector]
+    public int LevelAtual = 0;
 
     private void Awake()
     {
+        Temp_Temporizador_Distancia = Temporizador_Distancia;
+
         this.Loja_Controlador.GameControlador = this;
         GameControlador.Self = this;
 
         //LoadGame
         this.CarregaInformacoesSaveFile();
+    }
+
+    private void FixedUpdate()
+    {
+        if (JogoIniciado)
+        {
+            Temp_Temporizador_Distancia -= Time.fixedDeltaTime;
+            if (Temp_Temporizador_Distancia <= 0)
+            {
+                DistanciaPercorrida += 1;
+                this.Menus_Controlador.AtualizaDistanciaPercorrida(DistanciaPercorrida);
+                Temp_Temporizador_Distancia = Temporizador_Distancia;
+            }
+        }
     }
 
     private void Start()
@@ -96,9 +120,15 @@ public class GameControlador : MonoBehaviour
             var passaralho = Instantiate(passaralhoPrefab, this.Player_Controlador.Passaralho.transform);
             this.Player_Controlador.Passaralho.transform.SetParent(passaralho.transform);
             this.Player_Controlador.Animator =  passaralho.GetComponent<Animator>();
+
             this.EmissorPai_Controlador.AtivaTodosEmissores();
+
             GameAnimator.Play("IniciaGame");
             MenusGeralAnimator.Play("Menu_Main_Esconder");
+
+            this.Menus_Controlador.HudGameplay.SetActive(true);
+
+            JogoIniciado = true;
         }
         else
             this.Menus_Controlador.Notificar("Selecione um passaralho adquirido para iniciar!");

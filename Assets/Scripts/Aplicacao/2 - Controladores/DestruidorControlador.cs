@@ -7,5 +7,12 @@ public class DestruidorControlador : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(collision.gameObject);
+
+        if (collision.CompareTag("Obstaculo"))
+        {
+            GameControlador.Self.LevelAtual += 1;
+            MenusControlador.Self.LblLevelAtual.text = ""+GameControlador.Self.LevelAtual;
+        }
+
     }
 }
