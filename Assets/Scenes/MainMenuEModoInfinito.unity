@@ -847,7 +847,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1507765903}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &278859029
 MeshCollider:
@@ -1142,6 +1142,7 @@ GameObject:
   - component: {fileID: 299300389}
   - component: {fileID: 299300390}
   - component: {fileID: 299300391}
+  - component: {fileID: 299300392}
   m_Layer: 8
   m_Name: TargetMovimento
   m_TagString: Untagged
@@ -1263,6 +1264,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &299300392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299300387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759bc640fc620a64980afbe0265c58b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MostrarSprite: 0
 --- !u!1 &309726836
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,7 +2766,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1507765903}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &547951409
 MeshCollider:
@@ -2909,6 +2923,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578739982}
   m_CullTransparentMesh: 1
+--- !u!1 &600358372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 600358373}
+  m_Layer: 0
+  m_Name: Desafio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &600358373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600358372}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1507765903}
+  - {fileID: 1304608895}
+  m_Father: {fileID: 667980264}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &620861092
 GameObject:
   m_ObjectHideFlags: 0
@@ -3181,7 +3228,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1507765903}
+  - {fileID: 600358373}
+  - {fileID: 2041699617}
+  - {fileID: 1197885122}
   m_Father: {fileID: 1862112069}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3294,7 +3343,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1507765903}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &710791916
 MeshCollider:
@@ -5573,6 +5622,7 @@ GameObject:
   - component: {fileID: 998226128}
   - component: {fileID: 998226130}
   - component: {fileID: 998226129}
+  - component: {fileID: 998226131}
   m_Layer: 3
   m_Name: Superior
   m_TagString: Untagged
@@ -5673,6 +5723,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &998226131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998226127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759bc640fc620a64980afbe0265c58b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MostrarSprite: 0
 --- !u!1 &1013574497
 GameObject:
   m_ObjectHideFlags: 0
@@ -5939,7 +6002,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1507765903}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1079418185
 MeshCollider:
@@ -6375,7 +6438,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1507765903}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1120052521
 MeshCollider:
@@ -6937,6 +7000,7 @@ GameObject:
   - component: {fileID: 1168815691}
   - component: {fileID: 1168815693}
   - component: {fileID: 1168815692}
+  - component: {fileID: 1168815694}
   m_Layer: 5
   m_Name: LateralL
   m_TagString: Untagged
@@ -7003,6 +7067,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168815690}
   m_CullTransparentMesh: 1
+--- !u!114 &1168815694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168815690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759bc640fc620a64980afbe0265c58b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MostrarSprite: 0
 --- !u!1 &1168837399
 GameObject:
   m_ObjectHideFlags: 0
@@ -7080,6 +7157,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168837399}
   m_CullTransparentMesh: 1
+--- !u!1 &1197885121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1197885122}
+  m_Layer: 0
+  m_Name: Multiplayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1197885122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197885121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667980264}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1212389500
 GameObject:
   m_ObjectHideFlags: 0
@@ -7763,8 +7871,8 @@ Transform:
   - {fileID: 998226128}
   - {fileID: 1695152782}
   - {fileID: 1102987128}
-  m_Father: {fileID: 1507765903}
-  m_RootOrder: 0
+  m_Father: {fileID: 600358373}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1327493371
 GameObject:
@@ -9275,7 +9383,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1304608895}
   - {fileID: 547951408}
   - {fileID: 1120052520}
   - {fileID: 710791915}
@@ -9283,7 +9390,7 @@ Transform:
   - {fileID: 1987223416}
   - {fileID: 278859028}
   - {fileID: 1079418184}
-  m_Father: {fileID: 667980264}
+  m_Father: {fileID: 600358373}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1515641615
@@ -9898,7 +10005,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1507765903}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1578483916
 MeshCollider:
@@ -10738,6 +10845,7 @@ GameObject:
   - component: {fileID: 1695152782}
   - component: {fileID: 1695152784}
   - component: {fileID: 1695152783}
+  - component: {fileID: 1695152785}
   m_Layer: 3
   m_Name: Inferior
   m_TagString: Untagged
@@ -10838,6 +10946,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1695152785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695152781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759bc640fc620a64980afbe0265c58b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MostrarSprite: 0
 --- !u!1 &1699195108
 GameObject:
   m_ObjectHideFlags: 0
@@ -13034,7 +13155,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1507765903}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1987223417
 SpriteRenderer:
@@ -13512,6 +13633,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039812786}
   m_CullTransparentMesh: 1
+--- !u!1 &2041699616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041699617}
+  m_Layer: 0
+  m_Name: Campanha
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2041699617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041699616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667980264}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2057947433
 GameObject:
   m_ObjectHideFlags: 0
@@ -13932,6 +14084,7 @@ GameObject:
   - component: {fileID: 2077649020}
   - component: {fileID: 2077649023}
   - component: {fileID: 2077649022}
+  - component: {fileID: 2077649024}
   m_Layer: 0
   m_Name: Destruidor
   m_TagString: Untagged
@@ -14065,6 +14218,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2077649024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077649018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759bc640fc620a64980afbe0265c58b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MostrarSprite: 0
 --- !u!1 &2082971957
 GameObject:
   m_ObjectHideFlags: 0
