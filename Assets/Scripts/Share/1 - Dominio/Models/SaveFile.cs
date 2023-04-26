@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Assets.Models
 {
     [Serializable]
-    public class SaveFile
+    public class SaveFile : Arquivos
     {
         public List<int> ItensAdquiridosLoja;
 
@@ -21,12 +21,12 @@ namespace Assets.Models
 
         public string UserName;
 
-        public SaveFile()
+        public SaveFile() : base("SaveBug.bug")
         {
-            ItensAdquiridosLoja= new List<int>();
+            ItensAdquiridosLoja = new List<int>();
             ItensAdquiridosLoja.Add(1);
-            PassaralhoAtualId=0;
-            QtdPassacoins=0;
+            PassaralhoAtualId = 0;
+            QtdPassacoins = 0;
             UserName = "Teste";
         }
     }
