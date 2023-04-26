@@ -19,7 +19,7 @@ public class Arquivos
         Nome = nomeArquivo;
         Diretorio = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/ThePassaralho";
         DiretorioCompleto = $"{Diretorio}/{Nome}";
-        Criptografar = true;
+        Criptografar = false;
     }
 
     

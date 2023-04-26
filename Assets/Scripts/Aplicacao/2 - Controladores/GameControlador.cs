@@ -182,7 +182,6 @@ public class GameControlador : MonoBehaviour
 
     public void GameOver()
     {
-        SaveController.Save(this.Save);
         MenusControlador.Self.HudGameplay.SetActive(false);
         MenusControlador.Self.MenuGameOver.SetActive(true);
         this.JogoIniciado = false;
