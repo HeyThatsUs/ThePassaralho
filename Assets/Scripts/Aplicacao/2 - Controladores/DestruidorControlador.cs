@@ -10,8 +10,13 @@ public class DestruidorControlador : MonoBehaviour
 
         if (collision.CompareTag("Obstaculo"))
         {
-            GameControlador.Self.LevelAtual += 1;
-            MenusControlador.Self.LblLevelAtual.text = ""+GameControlador.Self.LevelAtual;
+            if (GameControlador.Self.JogoIniciado)
+            {
+                GameControlador.Self.LevelAtual += 1;
+                MenusControlador.Self.LblLevelAtual.text = ""+GameControlador.Self.LevelAtual;
+                GameControlador.Self.Temp_ContadorTrocaDeCenario--;
+                Debug.Log(GameControlador.Self.Temp_ContadorTrocaDeCenario);
+            }
         }
 
     }

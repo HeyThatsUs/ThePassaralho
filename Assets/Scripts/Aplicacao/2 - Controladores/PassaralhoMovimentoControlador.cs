@@ -6,10 +6,13 @@ using UnityEngine.InputSystem;
 
 public class PassaralhoMovimentoControlador : MonoBehaviour
 {
-    public float Velocidade = 5f;
+    [Header("Variáveis")]
+    public float VelocidadePassaralho = 5f;
     public GameObject TargetMovimento;
     public GameObject Passaralho;
     public bool Habilitado = true;
+    [Range(1, 10)]
+    public float SensibilidadeTarget = 3;
 
     private Vector3 Movimento;
     private Rigidbody2D Passaralho_Rb;
@@ -31,15 +34,28 @@ public class PassaralhoMovimentoControlador : MonoBehaviour
             var movimentoGradual = Vector3.Lerp(
                 Passaralho.transform.position,
                 TargetMovimento.transform.position,
-                3f * Time.fixedDeltaTime
+                VelocidadePassaralho * Time.fixedDeltaTime
             );
             this.Passaralho_Rb.MovePosition(new Vector3(0f, movimentoGradual.y, 0f));
 
-            var movimentoTarget = this.TargetMovimento.transform.position + this.Movimento;
+            var movimentoTarget = Vector3.Lerp(this.TargetMovimento.transform.position, this.TargetMovimento.transform.position + (this.Movimento / SensibilidadeTarget), 3f);
 
             Target_Rb.MovePosition(
                 new Vector3(TargetMovimento.transform.position.x, movimentoTarget.y, 0f)
             );
+
+            if (Input.touchCount > 0)
+            {
+                Touch toque = Input.GetTouch(0);
+
+                var posicaoMundo = Camera.main.ScreenToWorldPoint(toque.position);
+
+                Target_Rb.MovePosition(
+                new Vector3(TargetMovimento.transform.position.x, posicaoMundo.y, 0f)
+                );
+
+            }
+
         }
     }
 

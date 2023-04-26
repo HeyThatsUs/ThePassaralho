@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Playables;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MenusControlador : MonoBehaviour
 {
@@ -18,7 +13,8 @@ public class MenusControlador : MonoBehaviour
     [Header("Referencia Animators")]
     public Animator MenuConfiguracoes_Animator;
     public Animator Notificador;
-    [HideInInspector] 
+    public Animator NotificadorInGame;
+    [HideInInspector]
     public Animator MenusGeral_Animator;
 
     [Header("Referencias Labels")]
@@ -26,6 +22,7 @@ public class MenusControlador : MonoBehaviour
     public TextMeshProUGUI LblValorItem;
     public TextMeshProUGUI LblSaldoPassacoins;
     public TextMeshProUGUI LblNotificador;
+    public TextMeshProUGUI LblNotificadorInGame;
     public TextMeshProUGUI LblDistancia;
     public TextMeshProUGUI LblVida;
     public TextMeshProUGUI LblLevelAtual;
@@ -36,13 +33,13 @@ public class MenusControlador : MonoBehaviour
 
     private void Awake()
     {
-        MenusControlador.Self = this;
+        Self = this;
     }
 
     private void Start()
     {
         MenusGeral_Animator = GetComponent<Animator>();
-        LblVida.text = ""+100;
+        LblVida.text = "" + 100;
     }
 
     public void AbreMenuConfig()
@@ -61,12 +58,12 @@ public class MenusControlador : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     public void AtualizaDistanciaPercorrida(int distancia)
     {
-        this.LblDistancia.text = distancia + "M"; 
+        this.LblDistancia.text = distancia + "M";
     }
 
     public void AtualizarSaldoPassaCoins(int Saldo)
@@ -79,10 +76,18 @@ public class MenusControlador : MonoBehaviour
         this.LblVida.text = "" + vida;
     }
 
-    public void Notificar(string mensagem)
+    public void Notificar(string mensagem, bool inGame = false)
     {
-        this.Notificador.Play("Noticacao", -1, 0f);
 
-        this.LblNotificador.text = mensagem;
+        if (!inGame)
+        {
+            this.LblNotificador.text = mensagem;
+            this.Notificador.Play("Noticacao", -1, 0f);
+        }
+        else
+        {
+            this.LblNotificadorInGame.text = mensagem;
+            this.NotificadorInGame.Play("Noticacao", -1, 0f);
+        }
     }
 }

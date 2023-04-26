@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Share._2___Controladores
 {
@@ -16,7 +17,7 @@ namespace Assets.Scripts.Share._2___Controladores
         public string SaveFilePathCompleto { get; set; }
         public SaveAndLoadController()
         {
-            SaveFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/ThePassaralho";
+            SaveFilePath = Application.persistentDataPath;
             SaveFilePathCompleto = SaveFilePath + "/SaveBug.bug";
         }
 

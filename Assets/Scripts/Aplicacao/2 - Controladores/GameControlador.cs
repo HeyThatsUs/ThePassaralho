@@ -27,26 +27,32 @@ public class GameControlador : MonoBehaviour
     public bool PodeIniciar = false;
 
     [Header("Referencias")]
-    public MenusControlador Menus_Controlador;
     public PlayerController Player_Controlador;
-    public EmissorController EmissorPai_Controlador;
+    public CenariosControlador CenariosControlador;
+    public EmissorController Emissor;
 
     //Referencias Internas
     private Animator MenusGeralAnimator;
-
     private bool PrimeiroAcesso = false;
-    private bool JogoIniciado = false;
+    public bool JogoIniciado = false;
     private int DistanciaPercorrida = 0;
 
     [Header("Variáveis")]
-    public float Temporizador_Distancia = 5f;
+    public float Temporizador_Distancia_Percorrida = 5f;
     private float Temp_Temporizador_Distancia;
+    [Range(1, 30)]
+    public float VelocidadeGameUniversal = 3f;
     [HideInInspector]
     public int LevelAtual = 0;
+    public int ContadorTrocaDeCenario = 50;
+    [HideInInspector]
+    public int Temp_ContadorTrocaDeCenario = 0;
+
 
     private void Awake()
     {
-        Temp_Temporizador_Distancia = Temporizador_Distancia;
+        Temp_Temporizador_Distancia = Temporizador_Distancia_Percorrida;
+        Temp_ContadorTrocaDeCenario = ContadorTrocaDeCenario;
 
         this.Loja_Controlador.GameControlador = this;
         GameControlador.Self = this;
@@ -63,8 +69,13 @@ public class GameControlador : MonoBehaviour
             if (Temp_Temporizador_Distancia <= 0)
             {
                 DistanciaPercorrida += 1;
-                this.Menus_Controlador.AtualizaDistanciaPercorrida(DistanciaPercorrida);
-                Temp_Temporizador_Distancia = Temporizador_Distancia;
+                MenusControlador.Self.AtualizaDistanciaPercorrida(DistanciaPercorrida);
+                Temp_Temporizador_Distancia = Temporizador_Distancia_Percorrida;
+            }
+
+            if (Temp_ContadorTrocaDeCenario <= 0)
+            {
+                this.CenariosControlador.AlteraCenarioAtual();
             }
         }
     }
@@ -84,7 +95,7 @@ public class GameControlador : MonoBehaviour
 
     private void AddReferencias()
     {
-        MenusGeralAnimator= this.Menus_Controlador.MenusGeral_Animator;
+        MenusGeralAnimator= MenusControlador.Self.MenusGeral_Animator;
     }
 
     private void CarregaInformacoesSaveFile()
@@ -109,7 +120,7 @@ public class GameControlador : MonoBehaviour
 
     private void AtualizaDadosMenu()
     {
-        this.Menus_Controlador.AtualizarSaldoPassaCoins(this.Save.QtdPassacoins);
+        MenusControlador.Self.AtualizarSaldoPassaCoins(this.Save.QtdPassacoins);
     }
 
     public void IniciaGame()
@@ -121,17 +132,17 @@ public class GameControlador : MonoBehaviour
             this.Player_Controlador.Passaralho.transform.SetParent(passaralho.transform);
             this.Player_Controlador.Animator =  passaralho.GetComponent<Animator>();
 
-            this.EmissorPai_Controlador.AtivaTodosEmissores();
+            this.Emissor.Ativo = true;
 
             GameAnimator.Play("IniciaGame");
             MenusGeralAnimator.Play("Menu_Main_Esconder");
 
-            this.Menus_Controlador.HudGameplay.SetActive(true);
+            MenusControlador.Self.HudGameplay.SetActive(true);
 
             JogoIniciado = true;
         }
         else
-            this.Menus_Controlador.Notificar("Selecione um passaralho adquirido para iniciar!");
+            MenusControlador.Self.Notificar("Selecione um passaralho adquirido para iniciar!");
     }
 
     public void AbreMenuPrimeiroAcesso()
@@ -141,7 +152,7 @@ public class GameControlador : MonoBehaviour
 
     public void AbreMenuModoGame()
     {
-        this.Menus_Controlador.MenuModoGame.SetActive(true);
+        MenusControlador.Self.MenuModoGame.SetActive(true);
     }
 
     public void SalvarDadosPrimeiroAcesso()
@@ -160,7 +171,9 @@ public class GameControlador : MonoBehaviour
     public void GameOver()
     {
         SaveController.Save(this.Save);
-        this.Menus_Controlador.MenuGameOver.SetActive(true);
+        MenusControlador.Self.HudGameplay.SetActive(false);
+        MenusControlador.Self.MenuGameOver.SetActive(true);
+        this.JogoIniciado = false;
     }
 
     public void ReiniciaGame()

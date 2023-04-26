@@ -53,7 +53,7 @@ public class LojaControlador : MonoBehaviour
 
     public void AddReferencias()
     {
-        this.Menus_Controlador = this.GameControlador.Menus_Controlador;
+        this.Menus_Controlador = MenusControlador.Self;
     }
 
     public void ProximoItem()
