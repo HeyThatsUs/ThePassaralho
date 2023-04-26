@@ -1,15 +1,15 @@
 using Assets.Models;
 using Assets.Scripts.Aplicacao._2___Controladores;
 using Assets.Scripts.Share._2___Controladores;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameControlador : MonoBehaviour
 {
+    private ArquivoSaveControlador _arquivoSaveControlador;
+    private SaveFile _saveFile;
+
     private Animator GameAnimator;
     public GameObject MenuPrimeiroAcesso;
     public LojaControlador Loja_Controlador;
@@ -18,10 +18,31 @@ public class GameControlador : MonoBehaviour
     public static GameControlador Self;
 
     [HideInInspector]
-    public SaveFile Save;
+    public ArquivoSaveControlador ArquivoSave
+    { 
+        get 
+        { 
+            if (_arquivoSaveControlador == null)
+            {
+                _arquivoSaveControlador = new ArquivoSaveControlador();
+            }
+            return _arquivoSaveControlador;
+        } 
+    }
 
     [HideInInspector]
-    public SaveAndLoadController SaveController;
+    public SaveFile Save
+    {
+        get
+        {
+            if (_saveFile == null)
+            {
+                _saveFile = ArquivoSave.Carregar();
+
+            }
+            return _saveFile;
+        }
+    }
 
     [HideInInspector]
     public bool PodeIniciar = false;
@@ -30,6 +51,7 @@ public class GameControlador : MonoBehaviour
     public MenusControlador Menus_Controlador;
     public PlayerController Player_Controlador;
     public EmissorController EmissorPai_Controlador;
+
 
     //Referencias Internas
     private Animator MenusGeralAnimator;
@@ -89,17 +111,7 @@ public class GameControlador : MonoBehaviour
 
     private void CarregaInformacoesSaveFile()
     {
-        SaveController = new SaveAndLoadController();
-        Save = SaveController.Load();
-        if (Save == null) 
-        {
-            //remover a quantidade 500
-            Save = new SaveFile()
-            {
-                QtdPassacoins = 500
-            }; 
-            PrimeiroAcesso = true; 
-        }
+        var ArquivoSaveControlador = new ArquivoSaveControlador();        
 
         if(this.Save.PassaralhoAtualId == 0) this.Save.PassaralhoAtualId= 1;
 
@@ -147,7 +159,7 @@ public class GameControlador : MonoBehaviour
     public void SalvarDadosPrimeiroAcesso()
     {
         this.Save.UserName = "James";
-        SaveController.Save(this.Save);
+        ArquivoSave.Salvar(); 
         this.MenuPrimeiroAcesso.SetActive(false);
     }
 
@@ -159,7 +171,7 @@ public class GameControlador : MonoBehaviour
 
     public void GameOver()
     {
-        SaveController.Save(this.Save);
+        ArquivoSave.Salvar(); 
         this.Menus_Controlador.MenuGameOver.SetActive(true);
     }
 

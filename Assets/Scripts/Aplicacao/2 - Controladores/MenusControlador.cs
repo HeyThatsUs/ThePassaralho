@@ -14,6 +14,7 @@ public class MenusControlador : MonoBehaviour
     public GameObject MenuGameOver;
     public GameObject MenuModoGame;
     public GameObject HudGameplay;
+    public GameObject MenuPontuacoes;
 
     [Header("Referencia Animators")]
     public Animator MenuConfiguracoes_Animator;
@@ -63,6 +64,13 @@ public class MenusControlador : MonoBehaviour
     {
         
     }
+
+
+    public void AbreMenuPontuacao()
+    {
+        this.MenuPontuacoes.SetActive(true);
+    }
+
 
     public void AtualizaDistanciaPercorrida(int distancia)
     {

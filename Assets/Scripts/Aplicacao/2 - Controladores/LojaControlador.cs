@@ -1,10 +1,6 @@
 using Assets.Models;
-using Assets.Scripts.Aplicacao._2___Controladores;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -92,14 +88,12 @@ public class LojaControlador : MonoBehaviour
             Destroy(PreviewAtual);
         }
 
-        var save = this.GameControlador.Save;
-
         this.Menus_Controlador.LblValorItem.text = $"{ItemAtual.Nome}";
 
         PreviewAtual = Instantiate(ItemAtual.ObjectPreview, this.Display.transform);
         this.Display.transform.SetParent(PreviewAtual.transform);
 
-        if (save.ItensAdquiridosLoja.Any(p => p == ItemAtual.Id))
+        if (this.GameControlador.Save.ItensAdquiridosLoja.Any(p => p == ItemAtual.Id))
         {
             this.PossuiItemAtual = true;
 
@@ -126,17 +120,15 @@ public class LojaControlador : MonoBehaviour
 
     public void ComprarItem()
     {
-        var saveFile = this.GameControlador.Save;
-
-        if (saveFile.QtdPassacoins >= this.ItemAtual.Valor)
+        if (GameControlador.Save.QtdPassacoins >= this.ItemAtual.Valor)
         {
-            saveFile.QtdPassacoins -= this.ItemAtual.Valor;
-            saveFile.ItensAdquiridosLoja.Add(ItemAtual.Id);
-            saveFile.PassaralhoAtualId = ItemAtual.Id;
+            GameControlador.Save.QtdPassacoins -= this.ItemAtual.Valor;
+            GameControlador.Save.ItensAdquiridosLoja.Add(ItemAtual.Id);
+            GameControlador.Save.PassaralhoAtualId = ItemAtual.Id;
 
-            this.GameControlador.SaveController.Save(saveFile);
+            this.GameControlador.ArquivoSave.Salvar();
 
-            this.Menus_Controlador.AtualizarSaldoPassaCoins(saveFile.QtdPassacoins);
+            this.Menus_Controlador.AtualizarSaldoPassaCoins(GameControlador.Save.QtdPassacoins);
         }
         else
             this.Menus_Controlador.Notificar("Saldo insuficiente!");
@@ -149,9 +141,9 @@ public class LojaControlador : MonoBehaviour
             ComprarItem();
         }
 
-        this.GameControlador.Save.PassaralhoAtualId = this.ItemAtual.Id;
-        this.GameControlador.SaveController.Save(this.GameControlador.Save);
+        GameControlador.Save.PassaralhoAtualId = this.ItemAtual.Id;
+        GameControlador.ArquivoSave.Salvar();
 
-        if(Atualizar || PossuiItemAtual ==  false) this.AtualizaItemDisplay();
+        if (Atualizar || PossuiItemAtual ==  false) this.AtualizaItemDisplay();
     }
 }
