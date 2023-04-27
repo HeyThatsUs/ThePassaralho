@@ -6,26 +6,26 @@ using System.Text;
 
 public class ArquivosControlador<T> where T: Arquivos
 {
-    private T _arquivo;
+    public T Arquivo;
 
 
     public ArquivosControlador(T arquivo)
     {
-        _arquivo = arquivo;
+        Arquivo = arquivo;
     }
 
     private void CriarDiretorio()
     {
-        if (!Directory.Exists(_arquivo.Diretorio))
+        if (!Directory.Exists(Arquivo.Diretorio))
         {
-            Directory.CreateDirectory(_arquivo.Diretorio);
+            Directory.CreateDirectory(Arquivo.Diretorio);
         }
 
     }
 
     public bool ArquivoExiste()
     {
-        return File.Exists(_arquivo.DiretorioCompleto);
+        return File.Exists(Arquivo.DiretorioCompleto);
     }
 
     public T Carregar()
@@ -33,9 +33,9 @@ public class ArquivosControlador<T> where T: Arquivos
         if (ArquivoExiste())
         {
 
-            var sConteudo = File.ReadAllText(_arquivo.DiretorioCompleto);
+            var sConteudo = File.ReadAllText(Arquivo.DiretorioCompleto);
 
-            if (_arquivo.Criptografar)
+            if (Arquivo.Criptografar)
             {
                 var textoBytes = Convert.FromBase64String(sConteudo);
                 sConteudo = CriptografiaControlador.Descriptografar(textoBytes);             
@@ -43,20 +43,20 @@ public class ArquivosControlador<T> where T: Arquivos
 
             return JsonConvert.DeserializeObject<T>(sConteudo);
         }
-        return _arquivo;
+        return Arquivo;
     }
 
     public void Salvar()
     {
         CriarDiretorio();
 
-        var sConteudo = JsonConvert.SerializeObject(_arquivo);
+        var sConteudo = JsonConvert.SerializeObject(Arquivo);
 
-        if (_arquivo.Criptografar)
+        if (Arquivo.Criptografar)
         {
             byte[] encryptedBytes = CriptografiaControlador.Criptografar(sConteudo);
             sConteudo = Convert.ToBase64String(encryptedBytes);
         }
-        File.WriteAllText(_arquivo.DiretorioCompleto, sConteudo);
+        File.WriteAllText(Arquivo.DiretorioCompleto, sConteudo);
     }
 }

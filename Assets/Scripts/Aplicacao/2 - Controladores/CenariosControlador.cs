@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class CenariosControlador : MonoBehaviour
 {
-
+    [Header("Referencias")]
     public List<Cenario> Cenarios;
+    public Animator GlitchAnimator;
+
     private List<Cenario> CenariosFluxoAleatorio;
     private List<Cenario> CenariosFluxoHistoria_Inicio;
     private List<Cenario> CenariosFluxoHistoria_Fim;
@@ -34,8 +37,14 @@ public class CenariosControlador : MonoBehaviour
         CenariosFluxoAleatorio = Cenarios.Where(p => p.FluxoHistoria == false).ToList();
     }
 
-    public void AlteraCenarioAtual()
+    public string AlteraCenarioAtual()
     {
+        GlitchAnimator.Play("TrocaCenario", -1,0f);
+
+        Task.Delay(55).GetAwaiter().GetResult();
+
+        CenarioAtual.gameObject.SetActive(false);
+
         if (FluxoHistoria)
         {
             AlteraCenarioFluxoHistoria();
@@ -49,10 +58,10 @@ public class CenariosControlador : MonoBehaviour
 
             if (cenariosValidos.Count() > 0)
             {
-                var index = Random.Range(0, CenariosFluxoAleatorio.Count() - 1);
+                var index = Random.Range(0, CenariosFluxoAleatorio.Count());
                 var cenario = cenariosValidos[index];
 
-                //cenario.gameObject.SetActive(true);
+                cenario.gameObject.SetActive(true);
                 GameControlador.Self.Temp_ContadorTrocaDeCenario = GameControlador.Self.ContadorTrocaDeCenario;
                 CenariosJaUtilizados.Add(cenario.Id);
                 CenarioAtual = cenario;
@@ -63,32 +72,36 @@ public class CenariosControlador : MonoBehaviour
                 AlteraCenarioFluxoHistoria();
             }
         }
-
+        
         MenusControlador.Self.Notificar($"Novo Cenário: {CenarioAtual.Nome}", true);
+
+        return CenarioAtual.Nome;
     }
 
     private void AlteraCenarioFluxoHistoria()
     {
-        var cenarioFinal = CenariosFluxoHistoria_Fim.Where(p => CenariosJaUtilizados.Any(x => x == p.Id)).FirstOrDefault();
+         var cenarioFinal = CenariosFluxoHistoria_Fim.Where(p => !CenariosJaUtilizados.Any(x => x == p.Id)).FirstOrDefault();
 
         if (cenarioFinal == null)
         {
-            //Reinicia Fluxo
+            ////Reinicia Fluxo
             var cenarioInicial = CenariosFluxoHistoria_Inicio.FirstOrDefault();
-            CenarioAtual.gameObject.SetActive(false);
             CenarioAtual = cenarioInicial;
             CenarioAtual.gameObject.SetActive(true);
             FluxoHistoria = false;
             GameControlador.Self.Temp_ContadorTrocaDeCenario = GameControlador.Self.ContadorTrocaDeCenario;
+            CenariosJaUtilizados = new List<int>();
         }
         else
         {
-            CenarioAtual.gameObject.SetActive(false);
             CenarioAtual = cenarioFinal;
             CenarioAtual.gameObject.SetActive(true);
             GameControlador.Self.Temp_ContadorTrocaDeCenario = GameControlador.Self.ContadorTrocaDeCenario;
             TrocaInicial = true;
+            CenariosJaUtilizados.Add(cenarioFinal.Id);
         }
 
     }
+
+
 }

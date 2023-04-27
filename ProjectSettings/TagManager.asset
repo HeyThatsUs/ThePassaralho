@@ -43,14 +43,17 @@ TagManager:
   - name: Fundo
     uniqueID: 1778952439
     locked: 0
-  - name: Player
-    uniqueID: 3341878147
-    locked: 0
   - name: Debug
     uniqueID: 2996564591
     locked: 0
+  - name: Glitch
+    uniqueID: 1734260143
+    locked: 0
   - name: ObstaculosEColetaveis
     uniqueID: 2029646791
+    locked: 0
+  - name: Player
+    uniqueID: 3341878147
     locked: 0
   - name: Frente
     uniqueID: 2565267825

@@ -19,7 +19,7 @@ public class GameControlador : MonoBehaviour
 
     [HideInInspector]
     public ArquivoSaveControlador ArquivoSave
-    { 
+        { 
         get 
         { 
             if (_arquivoSaveControlador == null)
@@ -79,6 +79,9 @@ public class GameControlador : MonoBehaviour
         this.Loja_Controlador.GameControlador = this;
         GameControlador.Self = this;
 
+        Save.SetDiretorio(Application.persistentDataPath);
+        this._arquivoSaveControlador.Arquivo = Save;
+
         //LoadGame
         this.CarregaInformacoesSaveFile();
     }
@@ -97,9 +100,16 @@ public class GameControlador : MonoBehaviour
 
             if (Temp_ContadorTrocaDeCenario <= 0)
             {
-                this.CenariosControlador.AlteraCenarioAtual();
+                var nomeCenarioAtual = this.CenariosControlador.AlteraCenarioAtual();
+                AplicaModificacoesCenario();
             }
         }
+    }
+
+    private void AplicaModificacoesCenario()
+    {
+        //alterar Musica, Obstaculos e Bonus;
+
     }
 
     private void Start()
@@ -122,8 +132,6 @@ public class GameControlador : MonoBehaviour
 
     private void CarregaInformacoesSaveFile()
     {
-        var ArquivoSaveControlador = new ArquivoSaveControlador();        
-
         if(this.Save.PassaralhoAtualId == 0) this.Save.PassaralhoAtualId= 1;
 
         AtualizaDadosMenu();
