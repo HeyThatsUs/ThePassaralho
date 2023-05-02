@@ -219,6 +219,6 @@ public class GameControlador : MonoBehaviour
     public void HabilitaGameplayEspaco()
     {
         this.Player_Controlador.AtivaGameplayNave();
-        this.Emissor.AlteracaoDeCenario("Espaco");
+        //this.Emissor.AlteracaoDeCenario("Espaco");
     }
 }

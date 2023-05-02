@@ -16,6 +16,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
             if (collision.gameObject.CompareTag("Missil"))
             {
                 Destroy(this.gameObject);
+                Destroy(collision.gameObject);
             }
         }
     }
