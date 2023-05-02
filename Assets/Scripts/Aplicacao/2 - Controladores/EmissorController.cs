@@ -13,6 +13,7 @@ public class EmissorController : MonoBehaviour
     [Header("Obstaculos Mapas")]
     public List<GameObject> ObjetosEmissao_Floresta;
     public List<GameObject> ObjetosEmissao_Mar;
+    public List<GameObject> ObjetosEmissao_Espaco;
     public List<GameObject> ObjetosEmissao_Deserto;
     private List<GameObject> ObjetosEmissao_Atual;
 
@@ -31,7 +32,7 @@ public class EmissorController : MonoBehaviour
     private bool Emitir = false;
     private bool EmitirBonus = false;
     private Transform[] PontosEmissao;
-    private List<EmissorController> EmissoresFilhos =  new List<EmissorController>();
+    private List<EmissorController> EmissoresFilhos = new List<EmissorController>();
 
     private void Start()
     {
@@ -61,6 +62,9 @@ public class EmissorController : MonoBehaviour
             case "Deserto":
                 ObjetosEmissao_Atual = ObjetosEmissao_Deserto;
                 break;
+            case "Espaco":
+                ObjetosEmissao_Atual = ObjetosEmissao_Espaco;
+                break;
         }
     }
 
@@ -78,7 +82,7 @@ public class EmissorController : MonoBehaviour
     {
         var delta = Time.fixedDeltaTime;
 
-        if(Temp_IntervaloEmissao > 0)
+        if (Temp_IntervaloEmissao > 0)
         {
             Temp_IntervaloEmissao -= delta;
         }
@@ -95,13 +99,14 @@ public class EmissorController : MonoBehaviour
 
     private void EmiteObjeto()
     {
-        var objIndex = Random.Range(0, ObjetosEmissao_Atual.Count());
+        var objIndex = Random.Range(0, ObjetosEmissao_Atual.Count() -1);
+        Debug.Log($"Index emissao " + objIndex);
         var objEmitido = Instantiate(ObjetosEmissao_Atual[objIndex], this.transform);
         objEmitido.transform.SetParent(null);
         AplicaBulletBehaivor(objEmitido);
 
-        if(IntervaloEmissao > 0.8)
-        IntervaloEmissao = IntervaloEmissao - (IntervaloEmissao / 100);
+        if (IntervaloEmissao > 0.8)
+            IntervaloEmissao = IntervaloEmissao - (IntervaloEmissao / 100);
 
         Temp_IntervaloEmissao = IntervaloEmissao;
         Emitir = false;

@@ -1,6 +1,7 @@
 using Assets.Models;
 using Assets.Scripts.Aplicacao._2___Controladores;
 using Assets.Scripts.Share._2___Controladores;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -62,8 +63,9 @@ public class GameControlador : MonoBehaviour
     [Header("Variáveis")]
     public float Temporizador_Distancia_Percorrida = 5f;
     private float Temp_Temporizador_Distancia;
-    [Range(1, 30)]
+    [Range(1, 10)]
     public float VelocidadeGameUniversal = 3f;
+    public float VelocidadeGameEspaco = 0.5f;
     [HideInInspector]
     public int LevelAtual = 0;
     public int ContadorTrocaDeCenario = 50;
@@ -101,14 +103,20 @@ public class GameControlador : MonoBehaviour
             if (Temp_ContadorTrocaDeCenario <= 0)
             {
                 var nomeCenarioAtual = this.CenariosControlador.AlteraCenarioAtual();
-                AplicaModificacoesCenario();
+                AplicaModificacoesCenario(nomeCenarioAtual);
             }
         }
     }
 
-    private void AplicaModificacoesCenario()
+    private void AplicaModificacoesCenario(string cenario)
     {
         //alterar Musica, Obstaculos e Bonus;
+        switch (cenario)
+        {
+            case "Espaco":
+                HabilitaGameplayEspaco();
+                break;
+        }
 
     }
 
@@ -198,5 +206,19 @@ public class GameControlador : MonoBehaviour
     public void ReiniciaGame()
     {
         SceneManager.LoadScene("MainMenuEModoInfinito", LoadSceneMode.Single);
+    }
+
+    public void AumentaVelocidadeUniversal()
+    {
+        if(VelocidadeGameUniversal < 10)
+        {
+            VelocidadeGameUniversal += 0.5f;
+        }
+    }
+
+    public void HabilitaGameplayEspaco()
+    {
+        this.Player_Controlador.AtivaGameplayNave();
+        this.Emissor.AlteracaoDeCenario("Espaco");
     }
 }

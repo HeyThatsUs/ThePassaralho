@@ -15,7 +15,6 @@ public class DestruidorControlador : MonoBehaviour
                 GameControlador.Self.LevelAtual += 1;
                 MenusControlador.Self.LblLevelAtual.text = ""+GameControlador.Self.LevelAtual;
                 GameControlador.Self.Temp_ContadorTrocaDeCenario--;
-                Debug.Log(GameControlador.Self.Temp_ContadorTrocaDeCenario);
             }
         }
 

@@ -39,7 +39,7 @@ public class CenariosControlador : MonoBehaviour
 
     public string AlteraCenarioAtual()
     {
-        GlitchAnimator.Play("TrocaCenario", -1,0f);
+        GlitchAnimator.Play("TrocaCenario", -1, 0f);
 
         Task.Delay(55).GetAwaiter().GetResult();
 
@@ -58,7 +58,8 @@ public class CenariosControlador : MonoBehaviour
 
             if (cenariosValidos.Count() > 0)
             {
-                var index = Random.Range(0, CenariosFluxoAleatorio.Count());
+                var index = Random.Range(0, CenariosFluxoAleatorio.Count() - 1);
+                Debug.Log($"Index cenario " + index);
                 var cenario = cenariosValidos[index];
 
                 cenario.gameObject.SetActive(true);
@@ -72,15 +73,18 @@ public class CenariosControlador : MonoBehaviour
                 AlteraCenarioFluxoHistoria();
             }
         }
-        
-        MenusControlador.Self.Notificar($"Novo Cenário: {CenarioAtual.Nome}", true);
+
+        if (CenarioAtual.Nome != "Floresta")
+            MenusControlador.Self.Notificar($"Novo Cenário: {CenarioAtual.Nome}", true);
+        else
+            MenusControlador.Self.Notificar($"Novo Cenário: {CenarioAtual.Nome} | Velocidade Aumentada!", true);
 
         return CenarioAtual.Nome;
     }
 
     private void AlteraCenarioFluxoHistoria()
     {
-         var cenarioFinal = CenariosFluxoHistoria_Fim.Where(p => !CenariosJaUtilizados.Any(x => x == p.Id)).FirstOrDefault();
+        var cenarioFinal = CenariosFluxoHistoria_Fim.Where(p => !CenariosJaUtilizados.Any(x => x == p.Id)).FirstOrDefault();
 
         if (cenarioFinal == null)
         {
@@ -91,6 +95,7 @@ public class CenariosControlador : MonoBehaviour
             FluxoHistoria = false;
             GameControlador.Self.Temp_ContadorTrocaDeCenario = GameControlador.Self.ContadorTrocaDeCenario;
             CenariosJaUtilizados = new List<int>();
+            GameControlador.Self.AumentaVelocidadeUniversal();
         }
         else
         {
