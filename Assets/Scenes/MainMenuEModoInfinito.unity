@@ -15575,8 +15575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30bf00cc67be4b845a455fd5efd52668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntervaloEmissao: 2
-  IntervaloEmissaoBonus: 5
+  IntervaloEmissao: 3.5
+  IntervaloEmissaoBonus: 10
   ObjetosEmissao_Floresta:
   - {fileID: 1534997743757836693, guid: 360e96ac9e90ec9458fa2c8b38e52aed, type: 3}
   - {fileID: 2731445104124670245, guid: f0da205161dc0c74db7969face1ac4a3, type: 3}
