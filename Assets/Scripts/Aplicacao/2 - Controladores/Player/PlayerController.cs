@@ -14,6 +14,9 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
         public GameObject Passaralho;
         public MenusControlador MenusControlador;
         public Animator Animator;
+        [HideInInspector]
+        public PlayerPrefabReferenciasControlador ReferenciasPrefab;
+
 
         [Header("Variaveis")]
         public int Vida = 100;
@@ -21,13 +24,14 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
 
         //Internas
         private int VidaAtual;
+        [HideInInspector]
         public int Temp_VidaFoguete;
         private bool GameplayNave = false;
         private Rigidbody2D Rb;
         private PassaralhoMovimentoControlador MovimentoControlador;
         private GameObject Nave;
-        private PlayerPrefabReferenciasControlador ReferenciasPrefab;
-
+        [HideInInspector]
+        public PlayerVantagensController PlayerVantagens;
         private void Awake()
         {
             VidaAtual = Vida;
@@ -36,6 +40,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
             this.Rb.gravityScale = 0;
             this.MovimentoControlador = GetComponent<PassaralhoMovimentoControlador>();
             this.ReferenciasPrefab = GetComponentInChildren<PlayerPrefabReferenciasControlador>();
+            this.PlayerVantagens = GetComponentInChildren<PlayerVantagensController>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -43,9 +48,17 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
             switch (collision.tag)
             {
                 case "Obstaculo":
-                    this.RecebeDano(collision.gameObject.GetComponent<ObstaculoControlador>().ValorDano);
+                    if (!PlayerVantagens.AtivoEscudoProtecao)
+                        this.RecebeDano(collision.gameObject.GetComponent<ObstaculoControlador>().ValorDano);
+                    else
+                        PlayerVantagens.DesativaVantagem(TipoVantagem.EscudoProtecao);
+                    break;
+                case "Disparo":
+                    this.RecebeDano(25);
+                    Destroy(collision.gameObject);
                     break;
                 case "BonusItem":
+                    AudioControlador.Self.Play("Vantagem_Recolhida");
                     var bonus = collision.gameObject.GetComponent<BonusItem>();
                     this.VidaAtual += bonus.Vida;
                     GameControlador.Self.Save.QtdPassacoins += bonus.Passacoins;
@@ -53,21 +66,26 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
 
                     if (bonus.EhVantagem)
                     {
-                        switch (bonus.TipoVantagem)
-                        {
-                            case TipoVantagem.VidaExtra:
-                                break;
-                            case TipoVantagem.EscudoProtecao:
-                                break;
-                            case TipoVantagem.Foguete:
-                                if (GameplayNave == false)
-                                    this.AtivaGameplayNave();
-                                else
-                                    this.Temp_VidaFoguete += this.VidaFoguete;
-                                break;
-                        }
+                        GerenciaVantagens(bonus.TipoVantagem);
                     }
+                    break;
+            }
+        }
 
+        public void GerenciaVantagens(TipoVantagem tipoVantagem)
+        {
+            switch (tipoVantagem)
+            {
+                case TipoVantagem.VidaExtra:
+                    break;
+                case TipoVantagem.EscudoProtecao:
+                    this.ReferenciasPrefab.EscudoProtecao.SetActive(true);
+                    PlayerVantagens.AtivaVantagem(TipoVantagem.EscudoProtecao);
+                    break;
+                case TipoVantagem.Foguete:
+                    PlayerVantagens.AtivaVantagem(TipoVantagem.Foguete);
+                    if (GameplayNave == false)
+                        this.AtivaGameplayNave();
                     break;
             }
         }
@@ -128,6 +146,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
         {
             this.ReferenciasPrefab.Foguete.SetActive(false);
             this.GameplayNave = false;
+            this.PlayerVantagens.DesativaVantagem(TipoVantagem.Foguete);
         }
     }
 }

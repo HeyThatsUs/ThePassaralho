@@ -6,7 +6,6 @@ public class Cenario :  MonoBehaviour
 {
     public int Id;
     [HideInInspector]
-    public int Index;
     public string Nome;
     public bool FluxoHistoria;
     public bool Inicio;

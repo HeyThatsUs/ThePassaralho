@@ -3,6 +3,7 @@ using Assets.Scripts.Aplicacao._2___Controladores;
 using Assets.Scripts.Share._2___Controladores;
 using System;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,15 +21,15 @@ public class GameControlador : MonoBehaviour
 
     [HideInInspector]
     public ArquivoSaveControlador ArquivoSave
-        { 
-        get 
-        { 
+    {
+        get
+        {
             if (_arquivoSaveControlador == null)
             {
                 _arquivoSaveControlador = new ArquivoSaveControlador();
             }
             return _arquivoSaveControlador;
-        } 
+        }
     }
 
     [HideInInspector]
@@ -52,13 +53,9 @@ public class GameControlador : MonoBehaviour
     public PlayerController Player_Controlador;
     public CenariosControlador CenariosControlador;
     public EmissorController Emissor;
+    public GameObject LimitadorCentral;
 
 
-    //Referencias Internas
-    private Animator MenusGeralAnimator;
-    private bool PrimeiroAcesso = false;
-    public bool JogoIniciado = false;
-    private int DistanciaPercorrida = 0;
 
     [Header("Variáveis")]
     public float Temporizador_Distancia_Percorrida = 5f;
@@ -69,14 +66,26 @@ public class GameControlador : MonoBehaviour
     [HideInInspector]
     public int LevelAtual = 0;
     public int ContadorTrocaDeCenario = 50;
+    public int ContadorTrocaDeCenarioEspaco = 5;
     [HideInInspector]
-    public int Temp_ContadorTrocaDeCenario = 0;
+    public bool GameplayEspaco = false;
 
+    //Referencias Internas
+    private Animator MenusGeralAnimator;
+    private bool PrimeiroAcesso = false;
+    public bool JogoIniciado = false;
+    public bool ConverterMetrosEmPassacoins = false;
+    private int DistanciaPercorrida = 0;
+    private int Temp_ContadorTrocaDeCenario = 0;
+    [HideInInspector]
+    public int Temp_ContadorTrocaDeCenarioEspaco = 5;
+    private float Timer_inicioTransferencia = 1f;
 
     private void Awake()
     {
         Temp_Temporizador_Distancia = Temporizador_Distancia_Percorrida;
         Temp_ContadorTrocaDeCenario = ContadorTrocaDeCenario;
+        Temp_ContadorTrocaDeCenarioEspaco = ContadorTrocaDeCenarioEspaco;
 
         this.Loja_Controlador.GameControlador = this;
         GameControlador.Self = this;
@@ -100,10 +109,38 @@ public class GameControlador : MonoBehaviour
                 Temp_Temporizador_Distancia = Temporizador_Distancia_Percorrida;
             }
 
-            if (Temp_ContadorTrocaDeCenario <= 0)
+            if (Temp_ContadorTrocaDeCenario <= 0 || Temp_ContadorTrocaDeCenarioEspaco <= 0)
             {
+                this.Emissor.GetComponent<EmissorController>().DestroiObstaculosEmTela();
                 var nomeCenarioAtual = this.CenariosControlador.AlteraCenarioAtual();
                 AplicaModificacoesCenario(nomeCenarioAtual);
+                Temp_ContadorTrocaDeCenario = ContadorTrocaDeCenario;
+                Temp_ContadorTrocaDeCenarioEspaco = ContadorTrocaDeCenarioEspaco + 2;
+            }
+        }
+
+        ConversorMetragem();
+    }
+
+    private void ConversorMetragem()
+    {
+        if (ConverterMetrosEmPassacoins )
+        {
+            if (Timer_inicioTransferencia > 0) Timer_inicioTransferencia -= Time.fixedDeltaTime;
+
+            if(Timer_inicioTransferencia <= 0)
+            {
+                if (DistanciaPercorrida > 0)
+                {
+                    DistanciaPercorrida--;
+                    MenusControlador.Self.LblDistandiaConversor.text = "" + DistanciaPercorrida;
+                    var valor = Convert.ToInt32(MenusControlador.Self.LblPassacoinsConversor.text) + 1;
+                    MenusControlador.Self.LblPassacoinsConversor.text = "" + valor;
+                }
+                else
+                {
+                    ConverterMetrosEmPassacoins = false;
+                }
             }
         }
     }
@@ -111,13 +148,28 @@ public class GameControlador : MonoBehaviour
     private void AplicaModificacoesCenario(string cenario)
     {
         //alterar Musica, Obstaculos e Bonus;
+        LimitadorCentral.SetActive(false);
+        this.GameplayEspaco = false;
+        var emissorControlador = this.Emissor.GetComponent<EmissorController>();
+        if (emissorControlador.IntervaloEmissao > 1)
+        {
+            emissorControlador.IntervaloEmissao -= 0.2f;
+            MenusControlador.Self.Notificar("Quantidade de Obstáculos aumentada!", true);
+        }
+
         switch (cenario)
         {
+
             case "Espaco":
                 HabilitaGameplayEspaco();
+                MenusControlador.Self.LblInimigosRestantes.text = ""+ ContadorTrocaDeCenarioEspaco;
+                break;
+            default:
+                this.Player_Controlador.ReferenciasPrefab.Foguete.GetComponent<FogueteControlador>().CoolDown = 5;
                 break;
         }
 
+        this.Emissor.AlteracaoDeCenario(cenario);
     }
 
     private void Start()
@@ -135,12 +187,12 @@ public class GameControlador : MonoBehaviour
 
     private void AddReferencias()
     {
-        MenusGeralAnimator= MenusControlador.Self.MenusGeral_Animator;
+        MenusGeralAnimator = MenusControlador.Self.MenusGeral_Animator;
     }
 
     private void CarregaInformacoesSaveFile()
     {
-        if(this.Save.PassaralhoAtualId == 0) this.Save.PassaralhoAtualId= 1;
+        if (this.Save.PassaralhoAtualId == 0) this.Save.PassaralhoAtualId = 1;
 
         AtualizaDadosMenu();
 
@@ -158,7 +210,7 @@ public class GameControlador : MonoBehaviour
             var passaralhoPrefab = this.Loja_Controlador.ItensLoja.Where(p => p.Id == this.Save.PassaralhoAtualId).FirstOrDefault().ObjectPreview;
             var passaralho = Instantiate(passaralhoPrefab, this.Player_Controlador.Passaralho.transform);
             this.Player_Controlador.Passaralho.transform.SetParent(passaralho.transform);
-            this.Player_Controlador.Animator =  passaralho.GetComponent<Animator>();
+            this.Player_Controlador.Animator = passaralho.GetComponent<Animator>();
 
             this.Emissor.Ativo = true;
 
@@ -186,7 +238,7 @@ public class GameControlador : MonoBehaviour
     public void SalvarDadosPrimeiroAcesso()
     {
         this.Save.UserName = "James";
-        ArquivoSave.Salvar(); 
+        ArquivoSave.Salvar();
         this.MenuPrimeiroAcesso.SetActive(false);
     }
 
@@ -201,6 +253,11 @@ public class GameControlador : MonoBehaviour
         MenusControlador.Self.HudGameplay.SetActive(false);
         MenusControlador.Self.MenuGameOver.SetActive(true);
         this.JogoIniciado = false;
+        this.Save.QtdPassacoins += DistanciaPercorrida;
+        ConverterMetrosEmPassacoins = true;
+        Timer_inicioTransferencia = 3f;
+        MenusControlador.Self.LblDistandiaConversor.text = "" + DistanciaPercorrida;
+        ArquivoSave.Salvar();
     }
 
     public void ReiniciaGame()
@@ -210,15 +267,31 @@ public class GameControlador : MonoBehaviour
 
     public void AumentaVelocidadeUniversal()
     {
-        if(VelocidadeGameUniversal < 10)
+
+        if (VelocidadeGameUniversal < 10)
         {
             VelocidadeGameUniversal += 0.5f;
+            MenusControlador.Self.Notificar("Velocidade aumentada!", true);
         }
     }
 
     public void HabilitaGameplayEspaco()
     {
+        this.GameplayEspaco = true;
         this.Player_Controlador.AtivaGameplayNave();
-        //this.Emissor.AlteracaoDeCenario("Espaco");
+        LimitadorCentral.SetActive(true);
+    }
+
+    public void AdicionaLevelGame()
+    {
+        if (JogoIniciado)
+        {
+            LevelAtual += 1;
+            MenusControlador.Self.LblLevelAtual.text = "" + LevelAtual;
+            if (!GameplayEspaco)
+                Temp_ContadorTrocaDeCenario--;
+            else
+                Temp_ContadorTrocaDeCenarioEspaco--;
+        }
     }
 }

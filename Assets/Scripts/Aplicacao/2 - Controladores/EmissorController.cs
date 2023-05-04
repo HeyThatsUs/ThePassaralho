@@ -28,11 +28,14 @@ public class EmissorController : MonoBehaviour
     public bool ehPai = false;
 
 
+
     //Internas
     private bool Emitir = false;
     private bool EmitirBonus = false;
     private Transform[] PontosEmissao;
     private List<EmissorController> EmissoresFilhos = new List<EmissorController>();
+    private bool UtilizarPontosEmissao = false;
+    private List<GameObject> ObstaculosEmitidos = new List<GameObject>();
 
     private void Start()
     {
@@ -55,15 +58,23 @@ public class EmissorController : MonoBehaviour
         {
             case "Floresta":
                 ObjetosEmissao_Atual = ObjetosEmissao_Floresta;
+                UtilizarPontosEmissao = false;
                 break;
-            case "Mar":
-                ObjetosEmissao_Atual = ObjetosEmissao_Mar;
-                break;
-            case "Deserto":
-                ObjetosEmissao_Atual = ObjetosEmissao_Deserto;
-                break;
+            //case "Mar":
+            //    ObjetosEmissao_Atual = ObjetosEmissao_Mar;
+            //    UtilizarPontosEmissao = false;
+            //    break;
+            //case "Deserto":
+            //    ObjetosEmissao_Atual = ObjetosEmissao_Deserto;
+            //    UtilizarPontosEmissao = false;
+            //    break;
             case "Espaco":
                 ObjetosEmissao_Atual = ObjetosEmissao_Espaco;
+                UtilizarPontosEmissao = true;
+                break;
+            default:
+                ObjetosEmissao_Atual = ObjetosEmissao_Floresta;
+                UtilizarPontosEmissao = false;
                 break;
         }
     }
@@ -99,14 +110,23 @@ public class EmissorController : MonoBehaviour
 
     private void EmiteObjeto()
     {
-        var objIndex = Random.Range(0, ObjetosEmissao_Atual.Count() -1);
+        var objIndex = Random.Range(0, ObjetosEmissao_Atual.Count());
+        var pontoEmissao = this.transform;
+
+        if (this.UtilizarPontosEmissao)
+        {
+            var indexEmissao = Random.Range(0, PontosEmissao.Count());
+            pontoEmissao = this.PontosEmissao[indexEmissao];
+        }
+
         Debug.Log($"Index emissao " + objIndex);
-        var objEmitido = Instantiate(ObjetosEmissao_Atual[objIndex], this.transform);
+        var objEmitido = Instantiate(ObjetosEmissao_Atual[objIndex], pontoEmissao);
         objEmitido.transform.SetParent(null);
+        ObstaculosEmitidos.Add(objEmitido);
         AplicaBulletBehaivor(objEmitido);
 
-        if (IntervaloEmissao > 0.8)
-            IntervaloEmissao = IntervaloEmissao - (IntervaloEmissao / 100);
+        //if (IntervaloEmissao > 1)
+        //    IntervaloEmissao = IntervaloEmissao - (IntervaloEmissao / 100);
 
         Temp_IntervaloEmissao = IntervaloEmissao;
         Emitir = false;
@@ -133,5 +153,13 @@ public class EmissorController : MonoBehaviour
     {
         var rb = objEmitido.GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(-150f * GameControlador.Self.VelocidadeGameUniversal, 0f));
+    }
+
+    public void DestroiObstaculosEmTela()
+    {
+        foreach (var item in ObstaculosEmitidos)
+        {
+            Destroy(item);
+        }
     }
 }

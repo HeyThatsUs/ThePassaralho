@@ -25,13 +25,6 @@ public class CenariosControlador : MonoBehaviour
         CenariosJaUtilizados = new List<int>();
         TrocaInicial = true;
 
-        var index = 0;
-        foreach (var item in Cenarios)
-        {
-            item.Index = index + 1;
-            index++;
-        }
-
         CenariosFluxoHistoria_Inicio = Cenarios.Where(p => p.FluxoHistoria == true && p.Inicio == true).ToList();
         CenariosFluxoHistoria_Fim = Cenarios.Where(p => p.FluxoHistoria == true && p.Inicio == false).ToList();
         CenariosFluxoAleatorio = Cenarios.Where(p => p.FluxoHistoria == false).ToList();
@@ -44,6 +37,14 @@ public class CenariosControlador : MonoBehaviour
         Task.Delay(55).GetAwaiter().GetResult();
 
         CenarioAtual.gameObject.SetActive(false);
+
+        switch (CenarioAtual.GetComponent<Cenario>().Nome)
+        {
+            case "Espaco":
+                MenusControlador.Self.Notificar("Aliens: Bater em Retirada!!", true);
+                break;
+        }
+
 
         if (FluxoHistoria)
         {
@@ -58,12 +59,11 @@ public class CenariosControlador : MonoBehaviour
 
             if (cenariosValidos.Count() > 0)
             {
-                var index = Random.Range(0, CenariosFluxoAleatorio.Count() - 1);
+                var index = Random.Range(0, cenariosValidos.Count());
                 Debug.Log($"Index cenario " + index);
                 var cenario = cenariosValidos[index];
 
                 cenario.gameObject.SetActive(true);
-                GameControlador.Self.Temp_ContadorTrocaDeCenario = GameControlador.Self.ContadorTrocaDeCenario;
                 CenariosJaUtilizados.Add(cenario.Id);
                 CenarioAtual = cenario;
             }
@@ -74,10 +74,7 @@ public class CenariosControlador : MonoBehaviour
             }
         }
 
-        if (CenarioAtual.Nome != "Floresta")
-            MenusControlador.Self.Notificar($"Novo Cenário: {CenarioAtual.Nome}", true);
-        else
-            MenusControlador.Self.Notificar($"Novo Cenário: {CenarioAtual.Nome} | Velocidade Aumentada!", true);
+        MenusControlador.Self.Notificar($"Novo Cenário: {CenarioAtual.Nome}", true);
 
         return CenarioAtual.Nome;
     }
@@ -93,7 +90,6 @@ public class CenariosControlador : MonoBehaviour
             CenarioAtual = cenarioInicial;
             CenarioAtual.gameObject.SetActive(true);
             FluxoHistoria = false;
-            GameControlador.Self.Temp_ContadorTrocaDeCenario = GameControlador.Self.ContadorTrocaDeCenario;
             CenariosJaUtilizados = new List<int>();
             GameControlador.Self.AumentaVelocidadeUniversal();
         }
@@ -101,7 +97,6 @@ public class CenariosControlador : MonoBehaviour
         {
             CenarioAtual = cenarioFinal;
             CenarioAtual.gameObject.SetActive(true);
-            GameControlador.Self.Temp_ContadorTrocaDeCenario = GameControlador.Self.ContadorTrocaDeCenario;
             TrocaInicial = true;
             CenariosJaUtilizados.Add(cenarioFinal.Id);
         }

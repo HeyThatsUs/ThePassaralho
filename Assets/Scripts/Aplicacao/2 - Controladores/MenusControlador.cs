@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 
@@ -27,10 +30,19 @@ public class MenusControlador : MonoBehaviour
     public TextMeshProUGUI LblDistancia;
     public TextMeshProUGUI LblVida;
     public TextMeshProUGUI LblLevelAtual;
+    public TextMeshProUGUI LblDistandiaConversor;
+    public TextMeshProUGUI LblPassacoinsConversor;
+    public TextMeshProUGUI LblInimigosRestantes;
+
+    [Header("Variaveis")]
+
+    public float TimerNotificador = 5;
+    public float Temp_TimerNotificador;
 
     //Internios
     [HideInInspector]
     public static MenusControlador Self;
+    private List<Notificacao> Notificacoes =  new List<Notificacao>();
 
     private void Awake()
     {
@@ -41,6 +53,7 @@ public class MenusControlador : MonoBehaviour
     {
         MenusGeral_Animator = GetComponent<Animator>();
         LblVida.text = "" + 100;
+        Temp_TimerNotificador = TimerNotificador;
     }
 
     public void AbreMenuConfig()
@@ -57,11 +70,13 @@ public class MenusControlador : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        if(Temp_TimerNotificador > 0)
+            Temp_TimerNotificador = Temp_TimerNotificador - Time.fixedDeltaTime;
 
+        ExibeNotificacoes();
     }
-
 
     public void AbreMenuPontuacao()
     {
@@ -86,16 +101,38 @@ public class MenusControlador : MonoBehaviour
 
     public void Notificar(string mensagem, bool inGame = false)
     {
+        Notificacoes.Add(new Notificacao
+        {
+            Msg= mensagem,
+            InGame=inGame,
+        });
+    }
 
-        if (!inGame)
+    private void ExibeNotificacoes()
+    {
+
+        if(Temp_TimerNotificador <= 0 && Notificacoes.Count() > 0)
         {
-            this.LblNotificador.text = mensagem;
-            this.Notificador.Play("Noticacao", -1, 0f);
-        }
-        else
-        {
-            this.LblNotificadorInGame.text = mensagem;
-            this.NotificadorInGame.Play("Noticacao", -1, 0f);
+            var notificacao = Notificacoes.FirstOrDefault();
+
+            Notificacoes.Remove(notificacao);
+            if (!notificacao.InGame)
+            {
+                this.LblNotificador.text = notificacao.Msg;
+                this.Notificador.Play("Noticacao", -1, 0f);
+            }
+            else
+            {
+                this.LblNotificadorInGame.text = notificacao.Msg;
+                this.NotificadorInGame.Play("Noticacao", -1, 0f);
+            }
+
+            Temp_TimerNotificador = TimerNotificador;
         }
     }
+}
+
+public class Notificacao{
+    public string Msg { get; set; }
+    public bool InGame { get; set; }
 }
