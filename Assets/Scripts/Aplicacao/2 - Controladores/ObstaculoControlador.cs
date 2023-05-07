@@ -11,6 +11,8 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
         public int ValorDano = 50;
         public bool Atira = false;
         public GameObject Disparo;
+        public GameObject Explosao;
+
 
         private float TimerDisparo;
 
@@ -53,6 +55,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
         {
             if (collision.gameObject.CompareTag("Missil"))
             {
+                Instantiate(Explosao, this.transform);
                 Destroy(this.gameObject);
                 Destroy(collision.gameObject);
                 GameControlador.Self.AdicionaLevelGame();

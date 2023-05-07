@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2029646791
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6b874d598aca13747961ee8d75b78654, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -180,6 +180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ValorDano: 50
+  Atira: 0
+  Disparo: {fileID: 0}
+  Explosao: {fileID: 3976349965764320033, guid: 61c39eb87fd54a345878ca0d363c5993, type: 3}
 --- !u!1 &7539811043709417978
 GameObject:
   m_ObjectHideFlags: 0
