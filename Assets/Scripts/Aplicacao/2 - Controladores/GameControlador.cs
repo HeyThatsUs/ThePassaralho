@@ -1,7 +1,9 @@
 using Assets.Models;
 using Assets.Scripts.Aplicacao._2___Controladores;
+using Assets.Scripts.Share._1___Dominio.Models;
 using Assets.Scripts.Share._2___Controladores;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
@@ -18,6 +20,7 @@ public class GameControlador : MonoBehaviour
 
     [HideInInspector]
     public static GameControlador Self;
+
 
     [HideInInspector]
     public ArquivoSaveControlador ArquivoSave
@@ -52,29 +55,29 @@ public class GameControlador : MonoBehaviour
     [Header("Referencias")]
     public PlayerController Player_Controlador;
     public CenariosControlador CenariosControlador;
-    public EmissorController Emissor;
     public GameObject LimitadorCentral;
+    public List<Emissor> Emissores;
 
+    [Header("Configurações Game")]
+    public float Global_IntevaloEmissao;
+    public float Global_IntevaloEmissaoBonus;
+    [Range(3, 10)] public float Global_VelocidadeGame;
+    public float VelocidadeGameEspaco;
+    public int ContadorTrocaDeCenario;
+    public int ContadorTrocaDeCenarioEspaco;
+    public bool ConverterMetrosEmPassacoins;
 
-
-    [Header("Variáveis")]
-    public float Temporizador_Distancia_Percorrida = 5f;
-    private float Temp_Temporizador_Distancia;
-    [Range(1, 10)]
-    public float VelocidadeGameUniversal = 3f;
-    public float VelocidadeGameEspaco = 0.5f;
-    [HideInInspector]
-    public int LevelAtual = 0;
-    public int ContadorTrocaDeCenario = 50;
-    public int ContadorTrocaDeCenarioEspaco = 5;
-    [HideInInspector]
-    public bool GameplayEspaco = false;
+    //Variaveis Ocultas
+    [HideInInspector] public int LevelAtual = 0;
+    [HideInInspector] public bool GameplayEspaco = false;
+    [HideInInspector] public bool JogoIniciado = false;
 
     //Referencias Internas
+    private Emissor EmissorAtual;
+    private float Temporizador_Distancia_Percorrida = 5f;
+    private float Temp_Temporizador_Distancia;
     private Animator MenusGeralAnimator;
     private bool PrimeiroAcesso = false;
-    public bool JogoIniciado = false;
-    public bool ConverterMetrosEmPassacoins = false;
     private int DistanciaPercorrida = 0;
     private int Temp_ContadorTrocaDeCenario = 0;
     [HideInInspector]
@@ -86,6 +89,8 @@ public class GameControlador : MonoBehaviour
         Temp_Temporizador_Distancia = Temporizador_Distancia_Percorrida;
         Temp_ContadorTrocaDeCenario = ContadorTrocaDeCenario;
         Temp_ContadorTrocaDeCenarioEspaco = ContadorTrocaDeCenarioEspaco;
+
+        Emissores = Emissores.Where(p => p.Ativo).ToList();
 
         this.Loja_Controlador.GameControlador = this;
         GameControlador.Self = this;
@@ -111,8 +116,9 @@ public class GameControlador : MonoBehaviour
 
             if (Temp_ContadorTrocaDeCenario <= 0 || Temp_ContadorTrocaDeCenarioEspaco <= 0)
             {
-                this.Emissor.GetComponent<EmissorController>().DestroiObstaculosEmTela();
+                this.EmissorAtual.GameObject.GetComponent<EmissorController>().DestroiObstaculosEmTela();
                 var nomeCenarioAtual = this.CenariosControlador.AlteraCenarioAtual();
+                Debug.Log(nomeCenarioAtual);
                 AplicaModificacoesCenario(nomeCenarioAtual);
                 Temp_ContadorTrocaDeCenario = ContadorTrocaDeCenario;
                 Temp_ContadorTrocaDeCenarioEspaco = ContadorTrocaDeCenarioEspaco + 2;
@@ -124,11 +130,11 @@ public class GameControlador : MonoBehaviour
 
     private void ConversorMetragem()
     {
-        if (ConverterMetrosEmPassacoins )
+        if (ConverterMetrosEmPassacoins)
         {
             if (Timer_inicioTransferencia > 0) Timer_inicioTransferencia -= Time.fixedDeltaTime;
 
-            if(Timer_inicioTransferencia <= 0)
+            if (Timer_inicioTransferencia <= 0)
             {
                 if (DistanciaPercorrida > 0)
                 {
@@ -150,26 +156,33 @@ public class GameControlador : MonoBehaviour
         //alterar Musica, Obstaculos e Bonus;
         LimitadorCentral.SetActive(false);
         this.GameplayEspaco = false;
-        var emissorControlador = this.Emissor.GetComponent<EmissorController>();
-        if (emissorControlador.IntervaloEmissao > 1)
+        if (this.Global_IntevaloEmissao > 1)
         {
-            emissorControlador.IntervaloEmissao -= 0.2f;
+            this.Global_IntevaloEmissao -= 0.2f;
             MenusControlador.Self.Notificar("Quantidade de Obstáculos aumentada!", true);
         }
 
+        EmissorAtual.GameObject.GetComponent<EmissorController>().EmissaoAtiva = false;
+
         switch (cenario)
         {
-
             case "Espaco":
                 HabilitaGameplayEspaco();
-                MenusControlador.Self.LblInimigosRestantes.text = ""+ ContadorTrocaDeCenarioEspaco;
+                MenusControlador.Self.LblInimigosRestantes.text = "" + ContadorTrocaDeCenarioEspaco;
+                EmissorAtual = Emissores.Where(p => p.Nome == "Espaco").FirstOrDefault();
                 break;
             default:
                 this.Player_Controlador.ReferenciasPrefab.Foguete.GetComponent<FogueteControlador>().CoolDown = 5;
                 break;
         }
 
-        this.Emissor.AlteracaoDeCenario(cenario);
+        EmissorAtual = Emissores.Where(p => p.Nome == cenario).FirstOrDefault();
+
+        if(EmissorAtual == null)
+            EmissorAtual = Emissores.Where(p => p.Nome == "Floresta").FirstOrDefault();
+
+        if (EmissorAtual != null)
+            EmissorAtual.GameObject.GetComponent<EmissorController>().EmissaoAtiva = true;
     }
 
     private void Start()
@@ -212,7 +225,8 @@ public class GameControlador : MonoBehaviour
             this.Player_Controlador.Passaralho.transform.SetParent(passaralho.transform);
             this.Player_Controlador.Animator = passaralho.GetComponent<Animator>();
 
-            this.Emissor.Ativo = true;
+            EmissorAtual = this.Emissores.Where(p => p.Nome == "Floresta").FirstOrDefault();
+            EmissorAtual.GameObject.GetComponent<EmissorController>().EmissaoAtiva = true;
 
             GameAnimator.Play("IniciaGame");
             MenusGeralAnimator.Play("Menu_Main_Esconder");
@@ -268,9 +282,9 @@ public class GameControlador : MonoBehaviour
     public void AumentaVelocidadeUniversal()
     {
 
-        if (VelocidadeGameUniversal < 10)
+        if (Global_VelocidadeGame < 10)
         {
-            VelocidadeGameUniversal += 0.5f;
+            Global_VelocidadeGame += 0.5f;
             MenusControlador.Self.Notificar("Velocidade aumentada!", true);
         }
     }

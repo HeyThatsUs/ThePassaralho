@@ -1,19 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BonusItem : MonoBehaviour
+[Serializable]
+public class BonusItem 
 {
-    public int Passacoins = 0;
-    public int Vida = 0;
-    public bool EhVantagem = false;
-    public TipoVantagem TipoVantagem;
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Destroy(this.gameObject);
-    }
-
+    [SerializeField] public int Passacoins = 0;
+    [SerializeField] public int Vida = 0;
+    [SerializeField] public bool EhVantagem = false;
+    [SerializeField] public bool Ativo = false;
+    [SerializeField] public TipoVantagem TipoVantagem;
+    [SerializeField] public GameObject GameObject;
 }
 public enum TipoVantagem
 {

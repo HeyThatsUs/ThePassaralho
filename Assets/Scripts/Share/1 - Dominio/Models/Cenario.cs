@@ -9,6 +9,7 @@ public class Cenario :  MonoBehaviour
     public string Nome;
     public bool FluxoHistoria;
     public bool Inicio;
+    public bool Ativo;
     public Animator Animator;
 
     private void Awake()

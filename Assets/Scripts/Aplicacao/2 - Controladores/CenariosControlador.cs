@@ -25,6 +25,7 @@ public class CenariosControlador : MonoBehaviour
         CenariosJaUtilizados = new List<int>();
         TrocaInicial = true;
 
+        Cenarios = Cenarios.Where(p => p.Ativo == true).ToList();
         CenariosFluxoHistoria_Inicio = Cenarios.Where(p => p.FluxoHistoria == true && p.Inicio == true).ToList();
         CenariosFluxoHistoria_Fim = Cenarios.Where(p => p.FluxoHistoria == true && p.Inicio == false).ToList();
         CenariosFluxoAleatorio = Cenarios.Where(p => p.FluxoHistoria == false).ToList();

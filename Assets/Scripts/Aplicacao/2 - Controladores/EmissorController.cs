@@ -1,3 +1,6 @@
+using Assets.Scripts.Share._1___Dominio;
+using Assets.Scripts.Share._1___Dominio.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,83 +8,37 @@ using UnityEngine;
 
 public class EmissorController : MonoBehaviour
 {
-    public float IntervaloEmissao = 3f;
-    private float Temp_IntervaloEmissao = 0f;
-    public float IntervaloEmissaoBonus = 3f;
-    private float Temp_IntervaloEmissaoBonus = 0f;
-
-    [Header("Obstaculos Mapas")]
-    public List<GameObject> ObjetosEmissao_Floresta;
-    public List<GameObject> ObjetosEmissao_Mar;
-    public List<GameObject> ObjetosEmissao_Espaco;
-    public List<GameObject> ObjetosEmissao_Deserto;
-    private List<GameObject> ObjetosEmissao_Atual;
-
-    [Header("Bonus Mapas")]
-    public List<GameObject> ObjetosEmissaoBonus_Base;
-    private List<GameObject> ObjetosEmissaoBonus_Atual;
 
     [Header("Variáveis")]
-    [HideInInspector]
-    public float Velocidade = 1;
-    public bool Ativo = false;
-    public bool ehPai = false;
-
-
+    public List<Obstaculo> Obstaculos;
+    public List<BonusItem> ItensBonus;
+    public bool EmissaoAtiva = false;
 
     //Internas
+    [HideInInspector] public float VelocidadeObstaculos = 1;
+    private List<PontoEmissao> PontosEmissao;
     private bool Emitir = false;
     private bool EmitirBonus = false;
-    private Transform[] PontosEmissao;
-    private List<EmissorController> EmissoresFilhos = new List<EmissorController>();
-    private bool UtilizarPontosEmissao = false;
     private List<GameObject> ObstaculosEmitidos = new List<GameObject>();
+    private float Temp_IntervaloEmissao;
+    private float Temp_IntervaloEmissaoBonus;
 
     private void Start()
     {
-        Temp_IntervaloEmissao = IntervaloEmissao;
-        Temp_IntervaloEmissaoBonus = IntervaloEmissaoBonus;
-        Velocidade = GameControlador.Self.VelocidadeGameUniversal;
-        PontosEmissao = gameObject.GetComponentsInChildren<Transform>();
-        this.ObjetosEmissao_Atual = this.ObjetosEmissao_Floresta;
-        this.ObjetosEmissaoBonus_Atual = this.ObjetosEmissaoBonus_Base;
+        Temp_IntervaloEmissao = GameControlador.Self.Global_IntevaloEmissao;
+        Temp_IntervaloEmissaoBonus = GameControlador.Self.Global_IntevaloEmissaoBonus;
 
-        if (ehPai)
-        {
-            EmissoresFilhos = GetComponentsInChildren<EmissorController>().Where(p => p.ehPai == false).ToList();
-        }
-    }
+        VelocidadeObstaculos = GameControlador.Self.Global_VelocidadeGame;
 
-    public void AlteracaoDeCenario(string cenario)
-    {
-        switch (cenario)
-        {
-            case "Floresta":
-                ObjetosEmissao_Atual = ObjetosEmissao_Floresta;
-                UtilizarPontosEmissao = false;
-                break;
-            //case "Mar":
-            //    ObjetosEmissao_Atual = ObjetosEmissao_Mar;
-            //    UtilizarPontosEmissao = false;
-            //    break;
-            //case "Deserto":
-            //    ObjetosEmissao_Atual = ObjetosEmissao_Deserto;
-            //    UtilizarPontosEmissao = false;
-            //    break;
-            case "Espaco":
-                ObjetosEmissao_Atual = ObjetosEmissao_Espaco;
-                UtilizarPontosEmissao = true;
-                break;
-            default:
-                ObjetosEmissao_Atual = ObjetosEmissao_Floresta;
-                UtilizarPontosEmissao = false;
-                break;
-        }
+        Obstaculos = Obstaculos.Where(p => p.Ativo).ToList();
+        ItensBonus = ItensBonus.Where(p => p.Ativo).ToList();
+
+        PontosEmissao = PontosEmissaoController.Self.PontosEmissao;
     }
 
     private void FixedUpdate()
     {
-        if (Ativo)
+        if (EmissaoAtiva)
         {
             GerenciaIntervalo();
             if (Emitir) EmiteObjeto();
@@ -110,49 +67,53 @@ public class EmissorController : MonoBehaviour
 
     private void EmiteObjeto()
     {
-        var objIndex = Random.Range(0, ObjetosEmissao_Atual.Count());
-        var pontoEmissao = this.transform;
-
-        if (this.UtilizarPontosEmissao)
+        if(Obstaculos != null && Obstaculos.Count() > 0)
         {
-            var indexEmissao = Random.Range(0, PontosEmissao.Count());
-            pontoEmissao = this.PontosEmissao[indexEmissao];
+            var itensDisponiveis = Obstaculos.Where(p => p.Ativo == true).ToList();
+            var indexSorteio = UtilitarioRandom.GerarNumeroAleatorio(1, Obstaculos.Count());
+            var obstaculo = Obstaculos[indexSorteio -1];
+            var transformEmissao = this.transform;
+
+            if (obstaculo.UtilizaPontosEmissao)
+            {
+                var pontosDisponiveis = PontosEmissao.Where(p => p.TipoPontoEmissao == obstaculo.TipoPontoEmissao).ToList();
+                var indexSorteioEmissao = UtilitarioRandom.GerarNumeroAleatorio(1 , pontosDisponiveis.Count());
+                var pontoEmissao = pontosDisponiveis[indexSorteioEmissao -1];
+                transformEmissao = pontoEmissao.GameObject.transform;
+            }
+
+            var objEmitido = Instantiate(obstaculo.GameObject, transformEmissao);
+            objEmitido.transform.SetParent(null);
+            ObstaculosEmitidos.Add(objEmitido);
+            AplicaBulletBehaivor(objEmitido);
         }
 
-        Debug.Log($"Index emissao " + objIndex);
-        var objEmitido = Instantiate(ObjetosEmissao_Atual[objIndex], pontoEmissao);
-        objEmitido.transform.SetParent(null);
-        ObstaculosEmitidos.Add(objEmitido);
-        AplicaBulletBehaivor(objEmitido);
-
-        //if (IntervaloEmissao > 1)
-        //    IntervaloEmissao = IntervaloEmissao - (IntervaloEmissao / 100);
-
-        Temp_IntervaloEmissao = IntervaloEmissao;
+        Temp_IntervaloEmissao = GameControlador.Self.Global_IntevaloEmissao;
         Emitir = false;
     }
 
     private void EmiteObjetoBonus()
     {
-        var objIndex = Random.Range(0, ObjetosEmissaoBonus_Atual.Count());
+        if (ItensBonus != null && ItensBonus.Count() > 0)
+        {
+            var indexSorteio = UnityEngine.Random.Range(1, ItensBonus.Count()) - 1;
+            var bonus = ItensBonus[indexSorteio];
+            var transformEmissao = this.transform;
+            var objEmitido = Instantiate(bonus.GameObject, transformEmissao); 
+            objEmitido.transform.SetParent(null);
+            ObstaculosEmitidos.Add(objEmitido);
+            AplicaBulletBehaivor(objEmitido);
+        }
 
-        var indexEmissao = Random.Range(0, PontosEmissao.Count());
-
-        var objEmitido = Instantiate(ObjetosEmissaoBonus_Atual[objIndex], this.PontosEmissao[indexEmissao]);
-        objEmitido.transform.SetParent(null);
-        AplicaBulletBehaivor(objEmitido);
-
-        if (IntervaloEmissaoBonus > 5)
-            IntervaloEmissaoBonus = IntervaloEmissaoBonus - (IntervaloEmissaoBonus / 100);
-
-        Temp_IntervaloEmissaoBonus = IntervaloEmissaoBonus;
-        EmitirBonus = false;
+        Temp_IntervaloEmissaoBonus = GameControlador.Self.Global_IntevaloEmissaoBonus;
+        Emitir = false;
     }
 
     private void AplicaBulletBehaivor(GameObject objEmitido)
     {
         var rb = objEmitido.GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(-150f * GameControlador.Self.VelocidadeGameUniversal, 0f));
+        var velocidade = -150f * GameControlador.Self.Global_VelocidadeGame;
+        rb.AddForce(new Vector2(-150f * GameControlador.Self.Global_VelocidadeGame, 0f));
     }
 
     public void DestroiObstaculosEmTela()
