@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Share._1___Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,6 +13,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
         public bool Atira = false;
         public GameObject Disparo;
         public GameObject Explosao;
+        public GameObject Particula;
 
 
         private float TimerDisparo;
@@ -39,6 +41,22 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
         {
             AudioControlador.Self.Play("Laser_Disparo");
             var objEmitido = Instantiate(Disparo, this.transform);
+
+            var particulas = new List<GameObject>
+            {
+                Instantiate(Particula),
+                Instantiate(Particula)
+            };
+
+            foreach (var item in particulas)
+            {
+                item.transform.localPosition = this.transform.localPosition;
+                var rb = item.AddComponent<Rigidbody2D>();
+                rb.AddForce(new Vector2(UtilitarioRandom.GerarNumeroAleatorio(5, 10), UtilitarioRandom.GerarNumeroAleatorio(5, 10)), ForceMode2D.Impulse);
+                rb.AddTorque(UtilitarioRandom.GerarNumeroAleatorio(50, 200));
+                AudioControlador.Self.Play("Madeira_Quebrando");
+            }
+
             objEmitido.transform.parent= null;
             objEmitido.SetActive(true);
             objEmitido.GetComponent<Rigidbody2D>().AddForce( new Vector2(-20, 0f), ForceMode2D.Impulse);

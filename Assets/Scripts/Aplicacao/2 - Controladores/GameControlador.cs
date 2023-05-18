@@ -118,10 +118,9 @@ public class GameControlador : MonoBehaviour
             {
                 this.EmissorAtual.GameObject.GetComponent<EmissorController>().DestroiObstaculosEmTela();
                 var nomeCenarioAtual = this.CenariosControlador.AlteraCenarioAtual();
-                Debug.Log(nomeCenarioAtual);
-                AplicaModificacoesCenario(nomeCenarioAtual);
                 Temp_ContadorTrocaDeCenario = ContadorTrocaDeCenario;
                 Temp_ContadorTrocaDeCenarioEspaco = ContadorTrocaDeCenarioEspaco + 2;
+                AplicaModificacoesCenario(nomeCenarioAtual);
             }
         }
 

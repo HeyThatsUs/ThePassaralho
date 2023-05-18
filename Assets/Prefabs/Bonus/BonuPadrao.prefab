@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8916997262170965263}
   - component: {fileID: 478873446046668612}
-  - component: {fileID: 8140341537079283090}
   - component: {fileID: 7309801456915824149}
   - component: {fileID: 3052744653333005899}
   m_Layer: 10
@@ -58,22 +57,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8140341537079283090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658618311846675447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 265aed5ebb41b3b4c8d9cada7698ff56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Passacoins: 0
-  Vida: 50
-  EhVantagem: 0
-  TipoVantagem: 0
 --- !u!95 &7309801456915824149
 Animator:
   serializedVersion: 5

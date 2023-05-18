@@ -22,7 +22,7 @@ public class ItemDestrutivelController : MonoBehaviour
             foreach (var item in particulas)
             {
                 item.transform.localPosition = this.transform.localPosition;
-                var rb = item.AddComponent<Rigidbody2D>();
+                var rb = item.GetComponent<Rigidbody2D>();
                 rb.AddForce(new Vector2(UtilitarioRandom.GerarNumeroAleatorio(5, 10), UtilitarioRandom.GerarNumeroAleatorio(5, 10)), ForceMode2D.Impulse);
                 rb.AddTorque(UtilitarioRandom.GerarNumeroAleatorio(50, 200));
                 AudioControlador.Self.Play("Madeira_Quebrando");
