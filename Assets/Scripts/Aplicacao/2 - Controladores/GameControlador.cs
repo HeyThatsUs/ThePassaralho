@@ -195,6 +195,8 @@ public class GameControlador : MonoBehaviour
         }
 
         AddReferencias();
+
+        AudioControlador.Self.Play("Menu");
     }
 
     private void AddReferencias()

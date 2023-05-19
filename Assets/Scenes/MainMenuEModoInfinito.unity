@@ -1313,6 +1313,12 @@ MonoBehaviour:
     Tom: 1
     Loop: 0
     Source: {fileID: 0}
+  - Nome: Menu
+    Som: {fileID: 8300000, guid: 38fe3e85fc967c44c8332e9279cd02bd, type: 3}
+    Volume: 0.2
+    Tom: 1
+    Loop: 1
+    Source: {fileID: 0}
 --- !u!4 &216149860
 Transform:
   m_ObjectHideFlags: 0
