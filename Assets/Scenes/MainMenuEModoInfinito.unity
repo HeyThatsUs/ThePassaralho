@@ -11030,7 +11030,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2, y: 0.2}
   m_AnchorMax: {x: 0.80200005, y: 0.753}
-  m_AnchoredPosition: {x: -4.5001984, y: 0.17602539}
+  m_AnchoredPosition: {x: -4.5002136, y: 0.17602539}
   m_SizeDelta: {x: 9, y: -0.35003662}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &865048023
@@ -22847,7 +22847,7 @@ GameObject:
   - component: {fileID: 1468275970}
   m_Layer: 6
   m_Name: Passaralho
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
