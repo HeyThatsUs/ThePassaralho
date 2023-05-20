@@ -5118,12 +5118,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5416870479405457086, guid: 73d129b547341dc4cb028512c7ebcb6d, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416870479405457086, guid: 73d129b547341dc4cb028512c7ebcb6d, type: 3}
       propertyPath: m_AngularDrag
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5416870479405457086, guid: 73d129b547341dc4cb028512c7ebcb6d, type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416870479405457086, guid: 73d129b547341dc4cb028512c7ebcb6d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7363013903120226701, guid: 73d129b547341dc4cb028512c7ebcb6d, type: 3}
       propertyPath: m_RootOrder

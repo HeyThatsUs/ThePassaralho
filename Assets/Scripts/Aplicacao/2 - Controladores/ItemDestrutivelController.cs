@@ -10,25 +10,30 @@ public class ItemDestrutivelController : MonoBehaviour
     public GameObject particula;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        switch (collision.tag)
         {
-            var particulas = new List<GameObject>();
-            particulas.Add(Instantiate(particula));
-            particulas.Add(Instantiate(particula));
-            particulas.Add(Instantiate(particula));
-            particulas.Add(Instantiate(particula));
-            particulas.Add(Instantiate(particula));
+            case "Player":
+            case "Missil":
+                var particulas = new List<GameObject>
+                {
+                    Instantiate(particula),
+                    Instantiate(particula),
+                    Instantiate(particula),
+                    Instantiate(particula),
+                    Instantiate(particula)
+                };
 
-            foreach (var item in particulas)
-            {
-                item.transform.localPosition = this.transform.localPosition;
-                var rb = item.GetComponent<Rigidbody2D>();
-                rb.AddForce(new Vector2(UtilitarioRandom.GerarNumeroAleatorio(5, 10), UtilitarioRandom.GerarNumeroAleatorio(5, 10)), ForceMode2D.Impulse);
-                rb.AddTorque(UtilitarioRandom.GerarNumeroAleatorio(50, 200));
-                AudioControlador.Self.Play("Madeira_Quebrando");
-            }
+                foreach (var item in particulas)
+                {
+                    item.transform.localPosition = this.transform.localPosition;
+                    var rb = item.GetComponent<Rigidbody2D>();
+                    rb.AddForce(new Vector2(UtilitarioRandom.GerarNumeroAleatorio(5, 10), UtilitarioRandom.GerarNumeroAleatorio(5, 10)), ForceMode2D.Impulse);
+                    rb.AddTorque(UtilitarioRandom.GerarNumeroAleatorio(50, 200));
+                    AudioControlador.Self.Play("Madeira_Quebrando");
+                }
 
-            Destroy(this.gameObject);
+                Destroy(this.gameObject);
+                break;
         }
     }
 

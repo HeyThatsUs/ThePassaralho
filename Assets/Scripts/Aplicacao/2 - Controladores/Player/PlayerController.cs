@@ -59,7 +59,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
                     break;
                 case "BonusItem":
                     AudioControlador.Self.Play("Vantagem_Recolhida");
-                    var bonus = collision.gameObject.GetComponent<BonusItem>();
+                    var bonus = collision.gameObject.GetComponent<Bonus>();
                     this.VidaAtual += bonus.Vida;
                     GameControlador.Self.Save.QtdPassacoins += bonus.Passacoins;
                     MenusControlador.Self.AtualizaDadosHudGameplay(this.VidaAtual);
@@ -68,6 +68,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
                     {
                         GerenciaVantagens(bonus.TipoVantagem);
                     }
+                    Destroy(bonus.gameObject);
                     break;
             }
         }

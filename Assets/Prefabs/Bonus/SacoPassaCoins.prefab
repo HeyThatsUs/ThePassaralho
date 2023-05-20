@@ -9,7 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 658618311846675447, guid: 72d5eefb7e1fc2d44b4ee81ae8d80040, type: 3}
       propertyPath: m_Name
-      value: BonuPadrao
+      value: SacoPassaCoins
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697911855708212969, guid: 72d5eefb7e1fc2d44b4ee81ae8d80040, type: 3}
+      propertyPath: Vida
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697911855708212969, guid: 72d5eefb7e1fc2d44b4ee81ae8d80040, type: 3}
+      propertyPath: Passacoins
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697911855708212969, guid: 72d5eefb7e1fc2d44b4ee81ae8d80040, type: 3}
+      propertyPath: UtilizaPontosEmissao
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8916997262170965263, guid: 72d5eefb7e1fc2d44b4ee81ae8d80040, type: 3}
       propertyPath: m_RootOrder

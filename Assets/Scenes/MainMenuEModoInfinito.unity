@@ -560,7 +560,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.85
+  m_fontSize: 149.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -671,8 +671,9 @@ MonoBehaviour:
     UtilizaPontosEmissao: 1
     GameObject: {fileID: 8304168461310690328, guid: b641279cf04e274499eb88cf7f3adcba, type: 3}
     TipoPontoEmissao: 2
-  ItensBonus: []
+  ListaItensBonus: []
   EmissaoAtiva: 0
+  Bonus: []
   VelocidadeObstaculos: 1
 --- !u!1 &127672847
 GameObject:
@@ -1291,25 +1292,25 @@ MonoBehaviour:
     Source: {fileID: 0}
   - Nome: Vantagem_Recolhida
     Som: {fileID: 8300000, guid: c0b72ff0256ca95428e044ed6d77760a, type: 3}
-    Volume: 0.5
+    Volume: 0.2
     Tom: 2
     Loop: 0
     Source: {fileID: 0}
   - Nome: Laser_Disparo
     Som: {fileID: 8300000, guid: 5f582bb956a75654085f8b7b210d1827, type: 3}
-    Volume: 0.5
+    Volume: 0.2
     Tom: 1
     Loop: 0
     Source: {fileID: 0}
   - Nome: Foguete_Voando_Loop
     Som: {fileID: 8300000, guid: ceb8f5234c90b894083de4046db9ae63, type: 3}
-    Volume: 0.5
+    Volume: 0.2
     Tom: 1
     Loop: 1
     Source: {fileID: 0}
   - Nome: Madeira_Quebrando
     Som: {fileID: 8300000, guid: 55797dc24b9e64440944bb549467c461, type: 3}
-    Volume: 0.5
+    Volume: 0.2
     Tom: 1
     Loop: 0
     Source: {fileID: 0}
@@ -1732,10 +1733,20 @@ MonoBehaviour:
     TipoPontoEmissao: 0
   - Ativo: 1
     UtilizaPontosEmissao: 0
-    GameObject: {fileID: 5031246217145564698, guid: 904caf9cb57468a459083b75cf665a59, type: 3}
+    GameObject: {fileID: 7130102514179013576, guid: b812865a7d466ec4d85edaf625c01692, type: 3}
     TipoPontoEmissao: 0
-  ItensBonus: []
+  ListaItensBonus:
+  - Ativo: 1
+    Bonus: {fileID: 1697911855708212969, guid: 72d5eefb7e1fc2d44b4ee81ae8d80040, type: 3}
+  - Ativo: 1
+    Bonus: {fileID: 5452486379733884670, guid: 56eb436e28dad144e84d2d91fbb357da, type: 3}
+  - Ativo: 1
+    Bonus: {fileID: 1628874156990653223, guid: 50bb8c5fc4b3d7c48a146915f0d5e3a1, type: 3}
+  - Ativo: 1
+    Bonus: {fileID: 1628874156990653223, guid: 50bb8c5fc4b3d7c48a146915f0d5e3a1, type: 3}
   EmissaoAtiva: 0
+  Bonus:
+  - {fileID: 0}
   VelocidadeObstaculos: 1
 --- !u!1 &265167737
 GameObject:
@@ -3460,8 +3471,9 @@ MonoBehaviour:
     UtilizaPontosEmissao: 1
     GameObject: {fileID: 7627974603346895021, guid: 0e82d25a5d24e3f4b9005d05eece81a0, type: 3}
     TipoPontoEmissao: 2
-  ItensBonus: []
+  ListaItensBonus: []
   EmissaoAtiva: 0
+  Bonus: []
   VelocidadeObstaculos: 1
 --- !u!1 &447019031
 GameObject:
@@ -3855,7 +3867,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.3
+  m_fontSize: 74.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4572,7 +4584,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.05
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10626,7 +10638,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.8
+  m_fontSize: 65.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10921,7 +10933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759bc640fc620a64980afbe0265c58b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MostrarSprite: 1
+  MostrarSprite: 0
 --- !u!61 &842776881
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11036,7 +11048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2, y: 0.2}
   m_AnchorMax: {x: 0.80200005, y: 0.753}
-  m_AnchoredPosition: {x: -4.5002136, y: 0.17602539}
+  m_AnchoredPosition: {x: -4.500244, y: 0.17602539}
   m_SizeDelta: {x: 9, y: -0.35003662}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &865048023
@@ -11909,7 +11921,7 @@ MonoBehaviour:
   Nome: Mar
   FluxoHistoria: 0
   Inicio: 0
-  Ativo: 1
+  Ativo: 0
   Animator: {fileID: 0}
 --- !u!1 &897007715
 GameObject:
@@ -13457,7 +13469,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9.65
+  m_fontSize: 35.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14697,7 +14709,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.3
+  m_fontSize: 73.3
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15204,7 +15216,7 @@ MonoBehaviour:
   Nome: Deserto
   FluxoHistoria: 0
   Inicio: 0
-  Ativo: 1
+  Ativo: 0
   Animator: {fileID: 0}
 --- !u!1 &1237840227
 GameObject:
@@ -16271,7 +16283,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.75
+  m_fontSize: 78.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -23542,7 +23554,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.3
+  m_fontSize: 80.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -23829,7 +23841,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.3
+  m_fontSize: 80.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24654,7 +24666,7 @@ MonoBehaviour:
   Nome: Base Militar
   FluxoHistoria: 1
   Inicio: 0
-  Ativo: 1
+  Ativo: 0
   Animator: {fileID: 1618357766}
 --- !u!1 &1627155752
 GameObject:
@@ -25534,7 +25546,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.25
+  m_fontSize: 149.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -27944,7 +27956,7 @@ MonoBehaviour:
   Nome: Cidade
   FluxoHistoria: 1
   Inicio: 0
-  Ativo: 1
+  Ativo: 0
   Animator: {fileID: 0}
 --- !u!1 &1984382243
 GameObject:
@@ -28443,7 +28455,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.05
+  m_fontSize: 85.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -29490,7 +29502,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.7
+  m_fontSize: 64.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

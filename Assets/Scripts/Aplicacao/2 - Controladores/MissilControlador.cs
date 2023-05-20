@@ -9,7 +9,15 @@ public class MissilControlador : MonoBehaviour
     private void OnDestroy()
     {
         AudioControlador.Self.Play("Missil_Explosao");
- 
-        //instancia explosao
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        this.GetComponent<Animator>().Play("Explode", -1, 0f);
+    }
+
+    public void ExplosaoFinalizada()
+    {
+        Destroy(this.gameObject);
     }
 }

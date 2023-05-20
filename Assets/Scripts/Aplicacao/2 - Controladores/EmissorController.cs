@@ -1,5 +1,7 @@
 using Assets.Scripts.Share._1___Dominio;
 using Assets.Scripts.Share._1___Dominio.Models;
+using Assets.Scripts.Share._1___Dominio.ViewModels;
+using Assets.Scripts.Share._3___Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,10 +13,11 @@ public class EmissorController : MonoBehaviour
 
     [Header("Variáveis")]
     public List<Obstaculo> Obstaculos;
-    public List<BonusItem> ItensBonus;
+    public List<ItemBonusListaViewModel> ListaItensBonus;
     public bool EmissaoAtiva = false;
 
     //Internas
+    [HideInInspector] public List<Bonus> Bonus;
     [HideInInspector] public float VelocidadeObstaculos = 1;
     private List<PontoEmissao> PontosEmissao;
     private bool Emitir = false;
@@ -31,7 +34,7 @@ public class EmissorController : MonoBehaviour
         VelocidadeObstaculos = GameControlador.Self.Global_VelocidadeGame;
 
         Obstaculos = Obstaculos.Where(p => p.Ativo).ToList();
-        ItensBonus = ItensBonus.Where(p => p.Ativo).ToList();
+        Bonus = ListaItensBonus.Where(p => p.Ativo).Select(p => p.Bonus).ToList();
 
         PontosEmissao = PontosEmissaoController.Self.PontosEmissao;
     }
@@ -94,19 +97,28 @@ public class EmissorController : MonoBehaviour
 
     private void EmiteObjetoBonus()
     {
-        if (ItensBonus != null && ItensBonus.Count() > 0)
+        if (ListaItensBonus != null && ListaItensBonus.Count() > 0)
         {
-            var indexSorteio = UnityEngine.Random.Range(1, ItensBonus.Count()) - 1;
-            var bonus = ItensBonus[indexSorteio];
+            var indexSorteio = UnityEngine.Random.Range(1, ListaItensBonus.Count()) - 1;
+            var bonus = Bonus[indexSorteio];
             var transformEmissao = this.transform;
-            var objEmitido = Instantiate(bonus.GameObject, transformEmissao); 
+
+            if (bonus.UtilizaPontosEmissao)
+            {
+                var pontosDisponiveis = PontosEmissao.Where(p => p.TipoPontoEmissao == TipoPontoEmissao.Frontal).ToList();
+                var indexSorteioEmissao = UtilitarioRandom.GerarNumeroAleatorio(1, pontosDisponiveis.Count());
+                var pontoEmissao = pontosDisponiveis[indexSorteioEmissao - 1];
+                transformEmissao = pontoEmissao.GameObject.transform;
+            }
+
+            var objEmitido = Instantiate(bonus, transformEmissao); 
             objEmitido.transform.SetParent(null);
-            ObstaculosEmitidos.Add(objEmitido);
-            AplicaBulletBehaivor(objEmitido);
+            ObstaculosEmitidos.Add(objEmitido.gameObject);
+            AplicaBulletBehaivor(objEmitido.gameObject);
         }
 
         Temp_IntervaloEmissaoBonus = GameControlador.Self.Global_IntevaloEmissaoBonus;
-        Emitir = false;
+        EmitirBonus = false;
     }
 
     private void AplicaBulletBehaivor(GameObject objEmitido)
