@@ -61,7 +61,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
                     AudioControlador.Self.Play("Vantagem_Recolhida");
                     var bonus = collision.gameObject.GetComponent<Bonus>();
                     this.VidaAtual += bonus.Vida;
-                    GameControlador.Self.Save.QtdPassacoins += bonus.Passacoins;
+                    GameControlador.Self.Saves.Geral.Moedas += bonus.Passacoins;
                     MenusControlador.Self.AtualizaDadosHudGameplay(this.VidaAtual);
 
                     if (bonus.EhVantagem)

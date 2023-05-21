@@ -3,31 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Models
 {
     [Serializable]
     public class SaveFile : Arquivos
     {
+        public int Moedas;
+
+        public string NomeUsuario;
+
+        public int QuantidadeMortes;
+
         public List<int> ItensAdquiridosLoja;
 
-        public int PassaralhoAtualId;
-
-        public int QtdPassacoins;
+        public string PassaralhoSelecionado;
 
         public int Pontuacao;
 
         public float DistanciaPercorrida;
 
-        public string UserName;
+        
 
-        public SaveFile() : base("SaveBug.bug")
+        public SaveFile(bool criptografar) : base("Geral.game", criptografar)
         {
             ItensAdquiridosLoja = new List<int>();
             ItensAdquiridosLoja.Add(1);
-            PassaralhoAtualId = 0;
-            QtdPassacoins = 0;
-            UserName = "Teste";
+            PassaralhoSelecionado = "Passaralho";
+            NomeUsuario = "";
+            Moedas = 0;
         }
     }
 

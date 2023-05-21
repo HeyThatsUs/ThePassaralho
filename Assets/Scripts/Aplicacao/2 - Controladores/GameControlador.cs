@@ -1,7 +1,6 @@
 using Assets.Models;
 using Assets.Scripts.Aplicacao._2___Controladores;
 using Assets.Scripts.Share._1___Dominio.Models;
-using Assets.Scripts.Share._2___Controladores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,43 +10,14 @@ using UnityEngine.SceneManagement;
 
 public class GameControlador : MonoBehaviour
 {
-    private ArquivoSaveControlador _arquivoSaveControlador;
-    private SaveFile _saveFile;
-
+  
     private Animator GameAnimator;
+    public SaveManager Saves;
     public GameObject MenuPrimeiroAcesso;
     public LojaControlador Loja_Controlador;
 
     [HideInInspector]
     public static GameControlador Self;
-
-
-    [HideInInspector]
-    public ArquivoSaveControlador ArquivoSave
-    {
-        get
-        {
-            if (_arquivoSaveControlador == null)
-            {
-                _arquivoSaveControlador = new ArquivoSaveControlador();
-            }
-            return _arquivoSaveControlador;
-        }
-    }
-
-    [HideInInspector]
-    public SaveFile Save
-    {
-        get
-        {
-            if (_saveFile == null)
-            {
-                _saveFile = ArquivoSave.Carregar();
-
-            }
-            return _saveFile;
-        }
-    }
 
     [HideInInspector]
     public bool PodeIniciar = false;
@@ -86,6 +56,7 @@ public class GameControlador : MonoBehaviour
 
     private void Awake()
     {
+        Saves = new SaveManager();
         Temp_Temporizador_Distancia = Temporizador_Distancia_Percorrida;
         Temp_ContadorTrocaDeCenario = ContadorTrocaDeCenario;
         Temp_ContadorTrocaDeCenarioEspaco = ContadorTrocaDeCenarioEspaco;
@@ -95,11 +66,7 @@ public class GameControlador : MonoBehaviour
         this.Loja_Controlador.GameControlador = this;
         GameControlador.Self = this;
 
-        Save.SetDiretorio(Application.persistentDataPath);
-        this._arquivoSaveControlador.Arquivo = Save;
-
-        //LoadGame
-        this.CarregaInformacoesSaveFile();
+        AtualizaDadosMenu();
     }
 
     private void FixedUpdate()
@@ -204,24 +171,17 @@ public class GameControlador : MonoBehaviour
         MenusGeralAnimator = MenusControlador.Self.MenusGeral_Animator;
     }
 
-    private void CarregaInformacoesSaveFile()
-    {
-        if (this.Save.PassaralhoAtualId == 0) this.Save.PassaralhoAtualId = 1;
-
-        AtualizaDadosMenu();
-
-    }
-
     private void AtualizaDadosMenu()
     {
-        MenusControlador.Self.AtualizarSaldoPassaCoins(this.Save.QtdPassacoins);
+       Saves.Carregar();
+       MenusControlador.Self.AtualizarSaldoPassaCoins(Saves.Geral.Moedas);
     }
 
     public void IniciaGame()
     {
         if (this.PodeIniciar)
         {
-            var passaralhoPrefab = this.Loja_Controlador.ItensLoja.Where(p => p.Id == this.Save.PassaralhoAtualId).FirstOrDefault().ObjectPreview;
+            var passaralhoPrefab = this.Loja_Controlador.ItensLoja.Where(p => p.Nome == Saves.Geral.PassaralhoSelecionado).FirstOrDefault().ObjectPreview;
             var passaralho = Instantiate(passaralhoPrefab, this.Player_Controlador.Passaralho.transform);
             this.Player_Controlador.Passaralho.transform.SetParent(passaralho.transform);
             this.Player_Controlador.Animator = passaralho.GetComponent<Animator>();
@@ -252,8 +212,6 @@ public class GameControlador : MonoBehaviour
 
     public void SalvarDadosPrimeiroAcesso()
     {
-        this.Save.UserName = "James";
-        ArquivoSave.Salvar();
         this.MenuPrimeiroAcesso.SetActive(false);
     }
 
@@ -268,11 +226,11 @@ public class GameControlador : MonoBehaviour
         MenusControlador.Self.HudGameplay.SetActive(false);
         MenusControlador.Self.MenuGameOver.SetActive(true);
         this.JogoIniciado = false;
-        this.Save.QtdPassacoins += DistanciaPercorrida;
+        Saves.Geral.DistanciaPercorrida += DistanciaPercorrida;
         ConverterMetrosEmPassacoins = true;
         Timer_inicioTransferencia = 3f;
         MenusControlador.Self.LblDistandiaConversor.text = "" + DistanciaPercorrida;
-        ArquivoSave.Salvar();
+        Saves.Salvar();
     }
 
     public void ReiniciaGame()

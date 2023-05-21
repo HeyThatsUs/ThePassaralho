@@ -16,16 +16,27 @@ public class ArquivosControlador<T> where T: Arquivos
 
     private void CriarDiretorio()
     {
-        if (!Directory.Exists(Arquivo.Diretorio))
+        if (Arquivo != null)
         {
-            Directory.CreateDirectory(Arquivo.Diretorio);
+            if (!Directory.Exists(Arquivo.Diretorio))
+            {
+                Directory.CreateDirectory(Arquivo.Diretorio);
+            }
         }
 
     }
 
     public bool ArquivoExiste()
     {
-        return File.Exists(Arquivo.DiretorioCompleto);
+        var retorno = false;
+
+        if(Arquivo != null) 
+        {
+            retorno = File.Exists(Arquivo.DiretorioCompleto);
+        }
+
+        return retorno;
+
     }
 
     public T Carregar()

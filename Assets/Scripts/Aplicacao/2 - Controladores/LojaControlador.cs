@@ -43,8 +43,8 @@ public class LojaControlador : MonoBehaviour
 
     public void IniciarLoja()
     {
-        var passaralhoInicial = this.ItensLoja.Where(p => p.Index == this.GameControlador.Save.PassaralhoAtualId).FirstOrDefault();
-        this.ItemAtual = new Item(passaralhoInicial);
+       var passaralhoInicial = this.ItensLoja.Where(p => p.Nome == this.GameControlador.Saves.Geral.PassaralhoSelecionado).FirstOrDefault();
+       this.ItemAtual = new Item(passaralhoInicial);
     }
 
     public void AddReferencias()
@@ -93,11 +93,11 @@ public class LojaControlador : MonoBehaviour
         PreviewAtual = Instantiate(ItemAtual.ObjectPreview, this.Display.transform);
         this.Display.transform.SetParent(PreviewAtual.transform);
 
-        if (this.GameControlador.Save.ItensAdquiridosLoja.Any(p => p == ItemAtual.Id))
+        if (this.GameControlador.Saves.Geral.ItensAdquiridosLoja.Any(p => p == ItemAtual.Id))
         {
-            this.PossuiItemAtual = true;
+           this.PossuiItemAtual = true;
 
-            if (ItemAtual.Id == this.GameControlador.Save.PassaralhoAtualId)
+            if (ItemAtual.Nome == this.GameControlador.Saves.Geral.PassaralhoSelecionado)
                 this.Menus_Controlador.LblEquiparComprar.text = "Equipado";
             else
                 this.Menus_Controlador.LblEquiparComprar.text = "Equipar";
@@ -114,24 +114,23 @@ public class LojaControlador : MonoBehaviour
             this.Menus_Controlador.LblValorItem.text = $"{ItemAtual.Nome}: ${ItemAtual.Valor}";
             this.BtnComprarEquipar.gameObject.SetActive(true);
             this.GameControlador.PodeIniciar = false;
-        }
-
+}
     }
 
     public void ComprarItem()
     {
-        if (GameControlador.Save.QtdPassacoins >= this.ItemAtual.Valor)
+        if (GameControlador.Saves.Geral.Moedas >= this.ItemAtual.Valor)
         {
-            GameControlador.Save.QtdPassacoins -= this.ItemAtual.Valor;
-            GameControlador.Save.ItensAdquiridosLoja.Add(ItemAtual.Id);
-            GameControlador.Save.PassaralhoAtualId = ItemAtual.Id;
+            GameControlador.Saves.Geral.Moedas -= this.ItemAtual.Valor;
+            GameControlador.Saves.Geral.ItensAdquiridosLoja.Add(ItemAtual.Id);
+            GameControlador.Saves.Geral.PassaralhoSelecionado = ItemAtual.Nome;
 
-            this.GameControlador.ArquivoSave.Salvar();
+            this.GameControlador.Saves.Salvar();
 
-            this.Menus_Controlador.AtualizarSaldoPassaCoins(GameControlador.Save.QtdPassacoins);
+            this.Menus_Controlador.AtualizarSaldoPassaCoins(GameControlador.Saves.Geral.Moedas);
         }
         else
-            this.Menus_Controlador.Notificar("Saldo insuficiente!");
+           this.Menus_Controlador.Notificar("Saldo insuficiente!");
     }
 
     public void EquiparItem(bool Atualizar = true)
@@ -141,8 +140,8 @@ public class LojaControlador : MonoBehaviour
             ComprarItem();
         }
 
-        GameControlador.Save.PassaralhoAtualId = this.ItemAtual.Id;
-        GameControlador.ArquivoSave.Salvar();
+        GameControlador.Saves.Geral.PassaralhoSelecionado = this.ItemAtual.Nome;
+        GameControlador.Saves.Salvar();
 
         if (Atualizar || PossuiItemAtual ==  false) this.AtualizaItemDisplay();
     }
