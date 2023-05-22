@@ -921,6 +921,7 @@ GameObject:
   - component: {fileID: 2944026825474007770}
   - component: {fileID: 7408045121896444152}
   - component: {fileID: 2517593274409104181}
+  - component: {fileID: 6170830791819211951}
   m_Layer: 0
   m_Name: Foguete
   m_TagString: Untagged
@@ -983,7 +984,9 @@ MonoBehaviour:
   Missil: {fileID: 9125592164460777534}
   PontoDisparoTransform: {fileID: 3602238173306115118}
   VelocidadeMissil: 10
+  AudioControlador: {fileID: 6170830791819211951}
   CoolDown: 3
+  CoolDownEpaco: 1.5
 --- !u!212 &2517593274409104181
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1036,6 +1039,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6170830791819211951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849711329723716816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35125425b3711c84bbae0d55fed7ecf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Audios:
+  - Nome: Voando_Loop
+    Som: {fileID: 8300000, guid: ceb8f5234c90b894083de4046db9ae63, type: 3}
+    Volume: 1
+    Tom: 0
+    Loop: 1
+    Source: {fileID: 0}
+  AudioGeral: 0
 --- !u!1 &5882177614640009003
 GameObject:
   m_ObjectHideFlags: 0

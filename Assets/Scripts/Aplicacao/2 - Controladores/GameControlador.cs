@@ -65,7 +65,6 @@ public class GameControlador : MonoBehaviour
 
         this.Loja_Controlador.GameControlador = this;
         GameControlador.Self = this;
-
         AtualizaDadosMenu();
     }
 

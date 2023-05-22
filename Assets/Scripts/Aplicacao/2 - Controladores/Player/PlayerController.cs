@@ -1,6 +1,8 @@
 ﻿using Assets.Models;
+using Assets.Scripts.Share._3___Enums;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,15 +25,20 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
         public int VidaFoguete = 300;
 
         //Internas
-        private int VidaAtual;
+        [HideInInspector]
+        public int VidaAtual;
+        [HideInInspector]
+        public int QtdVidas = 0;
         [HideInInspector]
         public int Temp_VidaFoguete;
-        private bool GameplayNave = false;
+        [HideInInspector]
+        public GameplayTipo TipoGameplay = GameplayTipo.Padrao;
         private Rigidbody2D Rb;
         private PassaralhoMovimentoControlador MovimentoControlador;
         private GameObject Nave;
         [HideInInspector]
         public PlayerVantagensController PlayerVantagens;
+
         private void Awake()
         {
             VidaAtual = Vida;
@@ -48,105 +55,90 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
             switch (collision.tag)
             {
                 case "Obstaculo":
-                    if (!PlayerVantagens.AtivoEscudoProtecao)
-                        this.RecebeDano(collision.gameObject.GetComponent<ObstaculoControlador>().ValorDano);
-                    else
-                        PlayerVantagens.DesativaVantagem(TipoVantagem.EscudoProtecao);
+                    this.RecebeDano(collision.gameObject.GetComponent<ObstaculoControlador>().ValorDano);
                     break;
                 case "Disparo":
                     this.RecebeDano(25);
                     Destroy(collision.gameObject);
                     break;
                 case "BonusItem":
-                    AudioControlador.Self.Play("Vantagem_Recolhida");
                     var bonus = collision.gameObject.GetComponent<Bonus>();
-                    this.VidaAtual += bonus.Vida;
-                    GameControlador.Self.Saves.Geral.Moedas += bonus.Passacoins;
-                    MenusControlador.Self.AtualizaDadosHudGameplay(this.VidaAtual);
-
-                    if (bonus.EhVantagem)
-                    {
-                        GerenciaVantagens(bonus.TipoVantagem);
-                    }
+                    PlayerVantagens.GerenciaVantagens(bonus);
                     Destroy(bonus.gameObject);
-                    break;
-            }
-        }
 
-        public void GerenciaVantagens(TipoVantagem tipoVantagem)
-        {
-            switch (tipoVantagem)
-            {
-                case TipoVantagem.VidaExtra:
-                    break;
-                case TipoVantagem.EscudoProtecao:
-                    this.ReferenciasPrefab.EscudoProtecao.SetActive(true);
-                    PlayerVantagens.AtivaVantagem(TipoVantagem.EscudoProtecao);
-                    break;
-                case TipoVantagem.Foguete:
-                    PlayerVantagens.AtivaVantagem(TipoVantagem.Foguete);
-                    if (GameplayNave == false)
-                        this.AtivaGameplayNave();
+                    AudioControlador.Self.Play("Vantagem_Recolhida");
+                    MenusControlador.Self.AtualizaDadosHudGameplay(this.VidaAtual);
                     break;
             }
         }
 
         public void RecebeDano(int valor)
         {
-
-            if (GameplayNave == false)
+            if (!PlayerVantagens.AtivoEscudoProtecao)
             {
-                this.VidaAtual -= valor;
-
-                var variacao = UnityEngine.Random.Range(1, 10);
-
-                if (variacao % 2 == 0)
-                {
-                    this.Animator.Play("RecebendoDano", 0, 0f);
-                }
-                else
-                    this.Animator.Play("RecebendoDano_Reverse", 0, 0f);
-
-                if (VidaAtual <= 0)
-                {
-                    this.Rb.gravityScale = 1;
-                    this.MovimentoControlador.Habilitado = false;
-                    GameControlador.Self.GameOver();
-                }
-
+                GerenciaDano(valor);
             }
             else
-            {
-                this.Temp_VidaFoguete -= valor;
-
-                if (Temp_VidaFoguete > 0)
-                {
-                    this.ReferenciasPrefab.Foguete.GetComponent<Animator>().Play("ReceberDano", -1, 0);
-                    var teste = (Temp_VidaFoguete * 100) / VidaFoguete;
-                    this.ReferenciasPrefab.Foguete_VidaDisplay.transform.localScale = new Vector3(teste / 10, 1f, 1f);
-                }
-                else
-                {
-                    this.ReferenciasPrefab.Foguete_VidaDisplay.transform.localScale = new Vector3(0f, 1f, 1f);
-                    this.ReferenciasPrefab.Foguete.GetComponent<Animator>().Play("Destroi");
-                }
-            }
+                PlayerVantagens.DesativaVantagem(TipoVantagem.EscudoProtecao);
 
             this.MenusControlador.LblVida.text = VidaAtual.ToString();
+        }
+
+        private void GerenciaDano(int valor)
+        {
+            switch (TipoGameplay)
+            {
+                case GameplayTipo.Padrao:
+                case GameplayTipo.Submarino:
+                    VidaAtual -= valor;
+                    var variacao = UnityEngine.Random.Range(1, 10);
+
+                    if (variacao % 2 == 0)
+                    {
+                        this.Animator.Play("RecebendoDano", 0, 0f);
+                    }
+                    else
+                        this.Animator.Play("RecebendoDano_Reverse", 0, 0f);
+
+                    if (VidaAtual <= 0)
+                    {
+                        this.Rb.gravityScale = 1;
+                        this.MovimentoControlador.Habilitado = false;
+                        GameControlador.Self.GameOver();
+                    }
+                    break;
+                case GameplayTipo.Nave:
+                    Temp_VidaFoguete -= valor;
+
+                    if (Temp_VidaFoguete > 0)
+                    {
+                        this.ReferenciasPrefab.Foguete.GetComponent<Animator>().Play("ReceberDano", -1, 0);
+                        var valorVidaDisplay = (Temp_VidaFoguete * 100) / VidaFoguete;
+                        this.ReferenciasPrefab.Foguete_VidaDisplay.transform.localScale = new Vector3(valorVidaDisplay / 10, 1f, 1f);
+                    }
+                    else
+                    {
+                        this.ReferenciasPrefab.Foguete_VidaDisplay.transform.localScale = new Vector3(0f, 1f, 1f);
+                        this.ReferenciasPrefab.Foguete.GetComponent<Animator>().Play("Destroi");
+                        this.DesativaGameplayNave();
+                        PlayerVantagens.DesativaVantagem(TipoVantagem.Foguete);
+                    }
+                    break;
+            }
         }
 
         public void AtivaGameplayNave()
         {
             this.ReferenciasPrefab.Foguete.SetActive(true);
             this.ReferenciasPrefab.Foguete.GetComponent<Animator>().Play("Entrada", -1, 0);
-            this.GameplayNave = true;
+            this.TipoGameplay = GameplayTipo.Nave;
             this.Temp_VidaFoguete = this.VidaFoguete;
         }
 
         public void DesativaGameplayNave()
         {
             this.ReferenciasPrefab.Foguete.SetActive(false);
-            this.GameplayNave = false;
+            this.TipoGameplay = GameplayTipo.Padrao;
             this.PlayerVantagens.DesativaVantagem(TipoVantagem.Foguete);
         }
     }

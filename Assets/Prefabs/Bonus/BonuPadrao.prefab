@@ -108,9 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Passacoins: 0
   Vida: 100
-  EhVantagem: 0
   UtilizaPontosEmissao: 1
-  TipoVantagem: 0
+  TipoVantagem: 1
 --- !u!1 &704832343696209742
 GameObject:
   m_ObjectHideFlags: 0

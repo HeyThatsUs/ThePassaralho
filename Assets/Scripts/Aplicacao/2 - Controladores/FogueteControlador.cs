@@ -9,14 +9,20 @@ public class FogueteControlador : MonoBehaviour
     public GameObject Missil;
     public Transform PontoDisparoTransform;
     public float VelocidadeMissil = 1.0f;
+    public AudioControlador AudioControlador;
 
-    public float CoolDown = 5f;
+    public float CoolDown = 3f;
+    public float CoolDownEpaco = 1.5f;
     private float Temp_CoolDown = 0f;
 
     private void Awake()
     {
         Temp_CoolDown = CoolDown;
-        AudioControlador.Self.Play("Foguete_Voando_Loop");
+    }
+
+    private void Start()
+    {
+        this.AudioControlador.Play("Voando_Loop");
     }
 
     private void FixedUpdate()
@@ -50,11 +56,6 @@ public class FogueteControlador : MonoBehaviour
     private void AnimacaoDestroiFinalizada()
     {
         GameControlador.Self.Player_Controlador.DesativaGameplayNave();
+        this.AudioControlador.Stop("Voando_Loop");
     }
-
-    private void OnDestroy()
-    {
-        AudioControlador.Self.Stop("Foguete_Voando_Loop");
-    }
-
 }

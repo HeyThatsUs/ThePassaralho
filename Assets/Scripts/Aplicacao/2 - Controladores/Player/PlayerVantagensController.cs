@@ -14,7 +14,32 @@ public class PlayerVantagensController : MonoBehaviour
     [HideInInspector]
     public bool AtivoFoguete { get; internal set; }
 
-    public void AtivaVantagem(TipoVantagem tipoVantagem)
+    public void GerenciaVantagens(Bonus bonus)
+    {
+        switch (bonus.TipoVantagem)
+        {
+            case TipoVantagem.Passacoins:
+                GameControlador.Self.Saves.Geral.Moedas += bonus.Passacoins;
+                break;
+            case TipoVantagem.Vida:
+                PlayerControlador.VidaAtual += bonus.Vida;
+                break;
+            case TipoVantagem.VidaExtra:
+                PlayerControlador.QtdVidas++;
+                break;
+            case TipoVantagem.EscudoProtecao:
+                PlayerControlador.ReferenciasPrefab.EscudoProtecao.SetActive(true);
+                AtivaVantagem(TipoVantagem.EscudoProtecao);
+                break;
+            case TipoVantagem.Foguete:
+                AtivaVantagem(TipoVantagem.Foguete);
+                if (PlayerControlador.TipoGameplay != Assets.Scripts.Share._3___Enums.GameplayTipo.Nave)
+                    PlayerControlador.AtivaGameplayNave();
+                break;
+        }
+    }
+
+    private void AtivaVantagem(TipoVantagem tipoVantagem)
     {
         switch (tipoVantagem)
         {

@@ -560,7 +560,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.6
+  m_fontSize: 149.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1280,46 +1280,41 @@ MonoBehaviour:
   Audios:
   - Nome: Missil_Disparo
     Som: {fileID: 8300000, guid: f799b2bd84b80da4c935f16e56b30bd9, type: 3}
-    Volume: 0.5
+    Volume: 0.05
     Tom: 1
     Loop: 0
     Source: {fileID: 0}
   - Nome: Missil_Explosao
     Som: {fileID: 8300000, guid: 216b80b02c05b92489d39c618f4a1ae0, type: 3}
-    Volume: 0.5
+    Volume: 0.05
     Tom: 1
     Loop: 0
     Source: {fileID: 0}
   - Nome: Vantagem_Recolhida
     Som: {fileID: 8300000, guid: c0b72ff0256ca95428e044ed6d77760a, type: 3}
-    Volume: 0.2
+    Volume: 0.05
     Tom: 2
     Loop: 0
     Source: {fileID: 0}
   - Nome: Laser_Disparo
     Som: {fileID: 8300000, guid: 5f582bb956a75654085f8b7b210d1827, type: 3}
-    Volume: 0.2
+    Volume: 0.05
     Tom: 1
     Loop: 0
     Source: {fileID: 0}
-  - Nome: Foguete_Voando_Loop
-    Som: {fileID: 8300000, guid: ceb8f5234c90b894083de4046db9ae63, type: 3}
-    Volume: 0.2
-    Tom: 1
-    Loop: 1
-    Source: {fileID: 0}
   - Nome: Madeira_Quebrando
     Som: {fileID: 8300000, guid: 55797dc24b9e64440944bb549467c461, type: 3}
-    Volume: 0.2
+    Volume: 0.05
     Tom: 1
     Loop: 0
     Source: {fileID: 0}
   - Nome: Menu
     Som: {fileID: 8300000, guid: 38fe3e85fc967c44c8332e9279cd02bd, type: 3}
-    Volume: 0.2
+    Volume: 0.05
     Tom: 1
     Loop: 1
     Source: {fileID: 0}
+  AudioGeral: 1
 --- !u!4 &216149860
 Transform:
   m_ObjectHideFlags: 0
@@ -3867,7 +3862,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.15
+  m_fontSize: 74.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3951,7 +3946,7 @@ Transform:
   - {fileID: 554094103}
   - {fileID: 1754052514}
   m_Father: {fileID: 1963450139}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &537016014
 MonoBehaviour:
@@ -4584,7 +4579,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.35
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10638,7 +10633,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.15
+  m_fontSize: 65.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13469,7 +13464,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.15
+  m_fontSize: 35.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14466,7 +14461,10 @@ MonoBehaviour:
   ReferenciasPrefab: {fileID: 0}
   Vida: 50000
   VidaFoguete: 150
+  VidaAtual: 0
+  QtdVidas: 0
   Temp_VidaFoguete: 0
+  TipoGameplay: 0
   PlayerVantagens: {fileID: 0}
 --- !u!50 &1137660220
 Rigidbody2D:
@@ -14709,7 +14707,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.15
+  m_fontSize: 73.3
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15216,7 +15214,7 @@ MonoBehaviour:
   Nome: Deserto
   FluxoHistoria: 0
   Inicio: 0
-  Ativo: 0
+  Ativo: 1
   Animator: {fileID: 0}
 --- !u!1 &1237840227
 GameObject:
@@ -16283,7 +16281,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.1
+  m_fontSize: 78.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17374,6 +17372,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402976630}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1408886750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408886751}
+  - component: {fileID: 1408886752}
+  m_Layer: 0
+  m_Name: EmissorDeserto
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1408886751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408886750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1963450139}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1408886752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408886750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bf00cc67be4b845a455fd5efd52668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Obstaculos:
+  - Ativo: 1
+    UtilizaPontosEmissao: 0
+    GameObject: {fileID: 5031246217145564698, guid: baefe6e66f78d424c96dce2fca944b69, type: 3}
+    TipoPontoEmissao: 2
+  - Ativo: 1
+    UtilizaPontosEmissao: 0
+    GameObject: {fileID: 5031246217145564698, guid: 0015e63c7d3d844489f6b1e8370d1be6, type: 3}
+    TipoPontoEmissao: 2
+  ListaItensBonus: []
+  EmissaoAtiva: 0
+  Bonus: []
+  VelocidadeObstaculos: 1
 --- !u!1 &1409272650
 GameObject:
   m_ObjectHideFlags: 0
@@ -23554,7 +23609,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.3
+  m_fontSize: 80.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -23841,7 +23896,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.3
+  m_fontSize: 80.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -25546,7 +25601,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.15
+  m_fontSize: 149.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -26559,6 +26614,9 @@ MonoBehaviour:
   - Nome: Espaco
     Ativo: 1
     GameObject: {fileID: 106607275}
+  - Nome: Deserto
+    Ativo: 1
+    GameObject: {fileID: 1408886750}
   Global_IntevaloEmissao: 3
   Global_IntevaloEmissaoBonus: 10
   Global_VelocidadeGame: 3
@@ -27744,6 +27802,7 @@ Transform:
   - {fileID: 434842765}
   - {fileID: 235545894}
   - {fileID: 106607276}
+  - {fileID: 1408886751}
   - {fileID: 537016013}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -28456,7 +28515,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.6
+  m_fontSize: 85.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -29503,7 +29562,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 64.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

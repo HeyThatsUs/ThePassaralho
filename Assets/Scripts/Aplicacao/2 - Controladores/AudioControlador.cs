@@ -8,6 +8,7 @@ public class AudioControlador : MonoBehaviour
 {
     public List<Audio> Audios;
     public static AudioControlador Self;
+    public bool AudioGeral = false;
 
     private void Awake()
     {
@@ -20,13 +21,22 @@ public class AudioControlador : MonoBehaviour
             audio.Source.loop = audio.Loop;
         }
 
-        Self = this;
+        if(AudioGeral)
+            Self = this;
     }
 
     public void Play(string audioNome)
     {
-        var audio = this.Audios.Where(p => p.Nome == audioNome).FirstOrDefault();
-        audio.Source.Play();
+        try
+        {
+            var audio = this.Audios.Where(p => p.Nome == audioNome).FirstOrDefault();
+            audio.Source.Play();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log(audioNome);
+            throw ex;
+        }
     }
 
     public void Stop(string audioNome)

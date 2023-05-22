@@ -13,8 +13,24 @@ public class ItemDestrutivelController : MonoBehaviour
         switch (collision.tag)
         {
             case "Player":
+                AplicaDestruicao();
+                break;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
             case "Missil":
-                var particulas = new List<GameObject>
+                AplicaDestruicao();
+                break;
+        }
+    }
+
+    private void AplicaDestruicao()
+    {
+        var particulas = new List<GameObject>
                 {
                     Instantiate(particula),
                     Instantiate(particula),
@@ -23,18 +39,17 @@ public class ItemDestrutivelController : MonoBehaviour
                     Instantiate(particula)
                 };
 
-                foreach (var item in particulas)
-                {
-                    item.transform.localPosition = this.transform.localPosition;
-                    var rb = item.GetComponent<Rigidbody2D>();
-                    rb.AddForce(new Vector2(UtilitarioRandom.GerarNumeroAleatorio(5, 10), UtilitarioRandom.GerarNumeroAleatorio(5, 10)), ForceMode2D.Impulse);
-                    rb.AddTorque(UtilitarioRandom.GerarNumeroAleatorio(50, 200));
-                    AudioControlador.Self.Play("Madeira_Quebrando");
-                }
-
-                Destroy(this.gameObject);
-                break;
+        foreach (var item in particulas)
+        {
+            item.gameObject.layer = LayerMask.NameToLayer("Particulas");
+            item.transform.position = this.transform.position;
+            var rb = item.GetComponent<Rigidbody2D>();
+            rb.AddForce(new Vector2(UtilitarioRandom.GerarNumeroAleatorio(5, 10), UtilitarioRandom.GerarNumeroAleatorio(5, 10)), ForceMode2D.Impulse);
+            rb.AddTorque(UtilitarioRandom.GerarNumeroAleatorio(50, 200));
+            AudioControlador.Self.Play("Madeira_Quebrando");
         }
+
+        Destroy(this.gameObject);
     }
 
     public void AnimcaoDestruicaoFinalizada()
