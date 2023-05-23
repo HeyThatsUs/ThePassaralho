@@ -44,7 +44,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
         {
             AudioControlador.Self.Play("Laser_Disparo");
             var objEmitido = Instantiate(Disparo, this.transform);
-            objEmitido.transform.parent= null;
+            objEmitido.transform.parent = null;
             objEmitido.SetActive(true);
             objEmitido.GetComponent<Rigidbody2D>().AddForce( new Vector2(-20, 0f), ForceMode2D.Impulse);
             TimerDisparo = GetVariacaoTempoDisparo();

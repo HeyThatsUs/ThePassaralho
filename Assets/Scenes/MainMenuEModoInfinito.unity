@@ -11859,7 +11859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &891797204
 Transform:
   m_ObjectHideFlags: 0
@@ -11916,7 +11916,7 @@ MonoBehaviour:
   Nome: Mar
   FluxoHistoria: 0
   Inicio: 0
-  Ativo: 0
+  Ativo: 1
   Animator: {fileID: 0}
 --- !u!1 &897007715
 GameObject:
@@ -15214,7 +15214,7 @@ MonoBehaviour:
   Nome: Deserto
   FluxoHistoria: 0
   Inicio: 0
-  Ativo: 1
+  Ativo: 0
   Animator: {fileID: 0}
 --- !u!1 &1237840227
 GameObject:
@@ -23167,7 +23167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1507765903
 Transform:
   m_ObjectHideFlags: 0
@@ -23206,7 +23206,7 @@ MonoBehaviour:
   Nome: Floresta
   FluxoHistoria: 1
   Inicio: 1
-  Ativo: 1
+  Ativo: 0
   Animator: {fileID: 0}
 --- !u!1 &1508977123
 GameObject:
@@ -26198,7 +26198,7 @@ MonoBehaviour:
   Nome: Espaco
   FluxoHistoria: 1
   Inicio: 0
-  Ativo: 1
+  Ativo: 0
   Animator: {fileID: 0}
 --- !u!1 &1847124623
 GameObject:

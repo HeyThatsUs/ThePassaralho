@@ -21,7 +21,7 @@ public class Arquivos
     public Arquivos(string nomeArquivo, bool criptografar)
     {
         Nome = nomeArquivo;
-        Diretorio = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/ThePassaralho";
+        Diretorio = Application.persistentDataPath + "/ThePassaralho";
         DiretorioCompleto = $"{Diretorio}/{Nome}";
         Criptografar = criptografar;
     }
