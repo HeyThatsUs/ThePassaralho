@@ -7,4 +7,5 @@ public class PlayerPrefabReferenciasControlador : MonoBehaviour
     public GameObject Foguete;
     public GameObject EscudoProtecao;
     public GameObject Foguete_VidaDisplay;
+    public GameObject Submarino;
 }

@@ -1,4 +1,5 @@
 ﻿using Assets.Models;
+using Assets.Scripts.Share._1___Dominio;
 using Assets.Scripts.Share._3___Enums;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
         [HideInInspector]
         public int VidaAtual;
         [HideInInspector]
+        public static PlayerController Self;
+        [HideInInspector]
         public int QtdVidas = 0;
         [HideInInspector]
         public int Temp_VidaFoguete;
@@ -48,6 +51,8 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
             this.MovimentoControlador = GetComponent<PassaralhoMovimentoControlador>();
             this.ReferenciasPrefab = GetComponentInChildren<PlayerPrefabReferenciasControlador>();
             this.PlayerVantagens = GetComponentInChildren<PlayerVantagensController>();
+            Self = this;
+            this.TipoGameplay = GameplayTipo.Padrao;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -91,21 +96,16 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
                 case GameplayTipo.Padrao:
                 case GameplayTipo.Submarino:
                     VidaAtual -= valor;
-                    var variacao = UnityEngine.Random.Range(1, 10);
-
-                    if (variacao % 2 == 0)
-                    {
-                        this.Animator.Play("RecebendoDano", 0, 0f);
-                    }
-                    else
-                        this.Animator.Play("RecebendoDano_Reverse", 0, 0f);
-
                     if (VidaAtual <= 0)
                     {
                         this.Rb.gravityScale = 1;
                         this.MovimentoControlador.Habilitado = false;
                         GameControlador.Self.GameOver();
                     }
+                    if (TipoGameplay == GameplayTipo.Padrao)
+                        AplicaAnimacaoDano();
+                    else
+                        this.ReferenciasPrefab.Submarino.gameObject.GetComponent<Animator>().Play("ReceberDano", -1, 0f);
                     break;
                 case GameplayTipo.Nave:
                     Temp_VidaFoguete -= valor;
@@ -140,6 +140,15 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
             this.ReferenciasPrefab.Foguete.SetActive(false);
             this.TipoGameplay = GameplayTipo.Padrao;
             this.PlayerVantagens.DesativaVantagem(TipoVantagem.Foguete);
+        }
+        public void AplicaAnimacaoDano()
+        {
+            var variacao = UtilitarioRandom.GerarNumeroAleatorio(0, 1);
+
+            if(variacao == 1) 
+                this.Animator.Play("RecebendoDano");
+            else
+                this.Animator.Play("RecebendoDano_Reverse");
         }
     }
 }

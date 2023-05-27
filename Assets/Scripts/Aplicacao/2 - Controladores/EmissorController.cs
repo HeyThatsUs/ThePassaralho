@@ -88,7 +88,7 @@ public class EmissorController : MonoBehaviour
             var objEmitido = Instantiate(obstaculo.GameObject, transformEmissao);
             objEmitido.transform.SetParent(null);
             ObstaculosEmitidos.Add(objEmitido);
-            AplicaBulletBehaivor(objEmitido);
+            AplicaBulletBehaivor(objEmitido, obstaculo.AplicaTorque);
         }
 
         Temp_IntervaloEmissao = GameControlador.Self.Global_IntevaloEmissao;
@@ -118,14 +118,16 @@ public class EmissorController : MonoBehaviour
         }
 
         Temp_IntervaloEmissaoBonus = GameControlador.Self.Global_IntevaloEmissaoBonus;
-        EmitirBonus = false;
+        EmitirBonus = false; 
     }
 
-    private void AplicaBulletBehaivor(GameObject objEmitido)
+    private void AplicaBulletBehaivor(GameObject objEmitido, bool torque = false)
     {
         var rb = objEmitido.GetComponent<Rigidbody2D>();
         var velocidade = -150f * GameControlador.Self.Global_VelocidadeGame;
         rb.AddForce(new Vector2(-150f * GameControlador.Self.Global_VelocidadeGame, 0f));
+
+        if(torque) rb.AddTorque(UtilitarioRandom.GerarNumeroAleatorio(50, 200)); ;
     }
 
     public void DestroiObstaculosEmTela()

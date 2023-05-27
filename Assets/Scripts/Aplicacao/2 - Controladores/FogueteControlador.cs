@@ -22,7 +22,7 @@ public class FogueteControlador : MonoBehaviour
 
     private void Start()
     {
-        this.AudioControlador.Play("Voando_Loop");
+        //this.AudioControlador.Play("Voando_Loop");
     }
 
     private void FixedUpdate()

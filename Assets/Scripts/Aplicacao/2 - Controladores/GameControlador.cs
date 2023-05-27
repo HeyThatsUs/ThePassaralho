@@ -129,14 +129,24 @@ public class GameControlador : MonoBehaviour
 
         EmissorAtual.GameObject.GetComponent<EmissorController>().EmissaoAtiva = false;
 
+        //ResetPadroes
+        PlayerController.Self.ReferenciasPrefab.Submarino.SetActive(false);
+
         switch (cenario)
         {
             case "Espaco":
                 HabilitaGameplayEspaco();
-                MenusControlador.Self.LblInimigosRestantes.text = "" + ContadorTrocaDeCenarioEspaco;
+                MenusControlador.Self.LblInimigosRestantes.text = "" + Temp_ContadorTrocaDeCenarioEspaco;
                 EmissorAtual = Emissores.Where(p => p.Nome == "Espaco").FirstOrDefault();
+                this.Player_Controlador.ReferenciasPrefab.Foguete.GetComponent<FogueteControlador>().CoolDown = 1.5f;
+                break;
+            case "Mar":
+                PlayerController.Self.PlayerVantagens.DesativaVantagem(TipoVantagem.Foguete);
+                PlayerController.Self.ReferenciasPrefab.Submarino.SetActive(true);
+                PlayerController.Self.TipoGameplay = Assets.Scripts.Share._3___Enums.GameplayTipo.Submarino;
                 break;
             default:
+                PlayerController.Self.TipoGameplay = Assets.Scripts.Share._3___Enums.GameplayTipo.Padrao;
                 this.Player_Controlador.ReferenciasPrefab.Foguete.GetComponent<FogueteControlador>().CoolDown = 5;
                 break;
         }

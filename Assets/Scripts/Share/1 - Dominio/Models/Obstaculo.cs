@@ -14,6 +14,7 @@ namespace Assets.Scripts.Share._1___Dominio.Models
         [SerializeField] public bool Ativo;
         [SerializeField] public bool UtilizaPontosEmissao;
         [SerializeField] public GameObject GameObject;
+        [SerializeField] public bool AplicaTorque = false;
         [SerializeField] public TipoPontoEmissao TipoPontoEmissao;
     }
 }

@@ -1,3 +1,4 @@
+using Assets.Scripts.Aplicacao._2___Controladores;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,11 @@ public class AnimationTriggerControlador : MonoBehaviour
         switch (collision.tag)
         {
             case "Player":
-                var animator = collision.gameObject.GetComponentInChildren<Animator>();
-                animator.Play(NomeAnimacao, -1, 0f);
+                if (PlayerController.Self.TipoGameplay == Assets.Scripts.Share._3___Enums.GameplayTipo.Padrao)
+                {
+                    var animator = collision.gameObject.GetComponentInChildren<Animator>();
+                    animator.Play(NomeAnimacao, -1, 0f);
+                }
                 break;
         }
     }

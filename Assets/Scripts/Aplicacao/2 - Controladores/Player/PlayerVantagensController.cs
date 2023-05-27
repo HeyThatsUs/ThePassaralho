@@ -14,8 +14,11 @@ public class PlayerVantagensController : MonoBehaviour
     [HideInInspector]
     public bool AtivoFoguete { get; internal set; }
 
+    public TipoVantagem? VantagemAtual;
+
     public void GerenciaVantagens(Bonus bonus)
     {
+
         switch (bonus.TipoVantagem)
         {
             case TipoVantagem.Passacoins:
@@ -28,10 +31,12 @@ public class PlayerVantagensController : MonoBehaviour
                 PlayerControlador.QtdVidas++;
                 break;
             case TipoVantagem.EscudoProtecao:
+                if (VantagemAtual.HasValue) DesativaVantagem(VantagemAtual.Value);
                 PlayerControlador.ReferenciasPrefab.EscudoProtecao.SetActive(true);
                 AtivaVantagem(TipoVantagem.EscudoProtecao);
                 break;
             case TipoVantagem.Foguete:
+                if (VantagemAtual.HasValue) DesativaVantagem(VantagemAtual.Value);
                 AtivaVantagem(TipoVantagem.Foguete);
                 if (PlayerControlador.TipoGameplay != Assets.Scripts.Share._3___Enums.GameplayTipo.Nave)
                     PlayerControlador.AtivaGameplayNave();
@@ -44,14 +49,14 @@ public class PlayerVantagensController : MonoBehaviour
         switch (tipoVantagem)
         {
             case TipoVantagem.EscudoProtecao:
-                if (!AtivoEscudoProtecao)
+                if (VantagemAtual == TipoVantagem.EscudoProtecao)
                 {
                     AtivoEscudoProtecao = true;
                     PlayerControlador.ReferenciasPrefab.EscudoProtecao.SetActive(true);
                 }
                 break;
             case TipoVantagem.Foguete:
-                if (!AtivoFoguete)
+                if (VantagemAtual == TipoVantagem.Foguete)
                 {
                     AtivoFoguete = true;
                     PlayerControlador.ReferenciasPrefab.Foguete.SetActive(true);
@@ -68,6 +73,8 @@ public class PlayerVantagensController : MonoBehaviour
                 }
                 break;
         }
+
+        VantagemAtual = tipoVantagem;
     }
 
 
@@ -76,11 +83,9 @@ public class PlayerVantagensController : MonoBehaviour
         switch (tipoVantagem)
         {
             case TipoVantagem.EscudoProtecao:
-                AtivoEscudoProtecao = false;
                 PlayerControlador.ReferenciasPrefab.EscudoProtecao.SetActive(false);
                 break;
             case TipoVantagem.Foguete:
-                AtivoFoguete = false;
                 PlayerControlador.ReferenciasPrefab.Foguete.SetActive(false);
                 break;
         }

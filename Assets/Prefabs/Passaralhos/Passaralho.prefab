@@ -432,6 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6558209272020755955}
+  - component: {fileID: 286088193429834727}
   m_Layer: 0
   m_Name: Submarino
   m_TagString: Untagged
@@ -452,11 +453,31 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8805326607539298538}
-  - {fileID: 4974406653261389031}
   - {fileID: 3474560701895425265}
+  - {fileID: 6846823872892678955}
   m_Father: {fileID: 6580556246771439578}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &286088193429834727
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188408928341587993}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 114dac0c505be3c4b9a6cd27b5be082c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1344834804034505855
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +509,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6558209272020755955}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -89.994, z: 0}
 --- !u!198 &9184766433663016717
 ParticleSystem:
@@ -5852,7 +5873,6 @@ GameObject:
   - component: {fileID: 2944026825474007770}
   - component: {fileID: 7408045121896444152}
   - component: {fileID: 2517593274409104181}
-  - component: {fileID: 6170830791819211951}
   m_Layer: 0
   m_Name: Foguete
   m_TagString: Untagged
@@ -5915,7 +5935,7 @@ MonoBehaviour:
   Missil: {fileID: 9125592164460777534}
   PontoDisparoTransform: {fileID: 3602238173306115118}
   VelocidadeMissil: 10
-  AudioControlador: {fileID: 6170830791819211951}
+  AudioControlador: {fileID: 0}
   CoolDown: 3
   CoolDownEpaco: 1.5
 --- !u!212 &2517593274409104181
@@ -5970,26 +5990,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6170830791819211951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5849711329723716816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35125425b3711c84bbae0d55fed7ecf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Audios:
-  - Nome: Voando_Loop
-    Som: {fileID: 8300000, guid: ceb8f5234c90b894083de4046db9ae63, type: 3}
-    Volume: 1
-    Tom: 0
-    Loop: 1
-    Source: {fileID: 0}
-  AudioGeral: 0
 --- !u!1 &5882177614640009003
 GameObject:
   m_ObjectHideFlags: 0
@@ -6470,8 +6470,8 @@ Transform:
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6558209272020755955}
-  m_RootOrder: 1
+  m_Father: {fileID: 6846823872892678955}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5846495501633099580
 SpriteRenderer:
@@ -6642,6 +6642,38 @@ Transform:
   m_Father: {fileID: 1083698402467092395}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8564036792836094112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6846823872892678955}
+  m_Layer: 0
+  m_Name: RaboOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6846823872892678955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8564036792836094112}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.56, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4974406653261389031}
+  m_Father: {fileID: 6558209272020755955}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8582562329808438148
 GameObject:
   m_ObjectHideFlags: 0
@@ -6751,6 +6783,7 @@ MonoBehaviour:
   Foguete: {fileID: 5849711329723716816}
   EscudoProtecao: {fileID: 809745338661162681}
   Foguete_VidaDisplay: {fileID: 8582562329808438148}
+  Submarino: {fileID: 1188408928341587993}
 --- !u!1 &8865941993680073921
 GameObject:
   m_ObjectHideFlags: 0

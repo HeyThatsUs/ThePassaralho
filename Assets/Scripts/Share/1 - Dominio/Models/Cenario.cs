@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Cenario :  MonoBehaviour
 {
-    public int Id;
     [HideInInspector]
+    public int Id;
     public string Nome;
     public bool FluxoHistoria;
     public bool Inicio;
