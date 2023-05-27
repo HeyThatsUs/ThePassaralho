@@ -1,6 +1,7 @@
 using Assets.Models;
 using Assets.Scripts.Aplicacao._2___Controladores;
 using Assets.Scripts.Share._1___Dominio.Models;
+using Assets.Scripts.Share._3___Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -143,10 +144,10 @@ public class GameControlador : MonoBehaviour
             case "Mar":
                 PlayerController.Self.PlayerVantagens.DesativaVantagem(TipoVantagem.Foguete);
                 PlayerController.Self.ReferenciasPrefab.Submarino.SetActive(true);
-                PlayerController.Self.TipoGameplay = Assets.Scripts.Share._3___Enums.GameplayTipo.Submarino;
+                PlayerController.Self.TipoGameplay = GameplayTipo.Submarino;
                 break;
             default:
-                PlayerController.Self.TipoGameplay = Assets.Scripts.Share._3___Enums.GameplayTipo.Padrao;
+                PlayerController.Self.TipoGameplay = GameplayTipo.Padrao;
                 this.Player_Controlador.ReferenciasPrefab.Foguete.GetComponent<FogueteControlador>().CoolDown = 5;
                 break;
         }
@@ -238,6 +239,7 @@ public class GameControlador : MonoBehaviour
         Saves.Geral.DistanciaPercorrida += DistanciaPercorrida;
         ConverterMetrosEmPassacoins = true;
         Timer_inicioTransferencia = 3f;
+        Saves.Geral.Moedas = DistanciaPercorrida;
         MenusControlador.Self.LblDistandiaConversor.text = "" + DistanciaPercorrida;
         Saves.Salvar();
     }
@@ -262,6 +264,7 @@ public class GameControlador : MonoBehaviour
         this.GameplayEspaco = true;
         this.Player_Controlador.AtivaGameplayNave();
         LimitadorCentral.SetActive(true);
+        PlayerController.Self.TipoGameplay = GameplayTipo.Nave;
     }
 
     public void AdicionaLevelGame()

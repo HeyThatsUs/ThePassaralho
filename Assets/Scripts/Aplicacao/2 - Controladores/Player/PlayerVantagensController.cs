@@ -1,4 +1,5 @@
 using Assets.Scripts.Aplicacao._2___Controladores;
+using Assets.Scripts.Share._3___Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +39,7 @@ public class PlayerVantagensController : MonoBehaviour
             case TipoVantagem.Foguete:
                 if (VantagemAtual.HasValue) DesativaVantagem(VantagemAtual.Value);
                 AtivaVantagem(TipoVantagem.Foguete);
-                if (PlayerControlador.TipoGameplay != Assets.Scripts.Share._3___Enums.GameplayTipo.Nave)
+                if (PlayerControlador.TipoGameplay != GameplayTipo.Nave)
                     PlayerControlador.AtivaGameplayNave();
                 break;
         }

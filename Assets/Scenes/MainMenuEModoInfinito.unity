@@ -1739,15 +1739,16 @@ MonoBehaviour:
     GameObject: {fileID: 7130102514179013576, guid: b812865a7d466ec4d85edaf625c01692, type: 3}
     AplicaTorque: 0
     TipoPontoEmissao: 0
+  - Ativo: 1
+    UtilizaPontosEmissao: 0
+    GameObject: {fileID: 5031246217145564698, guid: 904caf9cb57468a459083b75cf665a59, type: 3}
+    AplicaTorque: 0
+    TipoPontoEmissao: 0
   ListaItensBonus:
   - Ativo: 1
     Bonus: {fileID: 1697911855708212969, guid: 72d5eefb7e1fc2d44b4ee81ae8d80040, type: 3}
   - Ativo: 1
     Bonus: {fileID: 5452486379733884670, guid: 56eb436e28dad144e84d2d91fbb357da, type: 3}
-  - Ativo: 1
-    Bonus: {fileID: 1628874156990653223, guid: 50bb8c5fc4b3d7c48a146915f0d5e3a1, type: 3}
-  - Ativo: 1
-    Bonus: {fileID: 1628874156990653223, guid: 50bb8c5fc4b3d7c48a146915f0d5e3a1, type: 3}
   EmissaoAtiva: 0
   Bonus:
   - {fileID: 0}
@@ -8286,6 +8287,21 @@ MonoBehaviour:
   - Ativo: 1
     UtilizaPontosEmissao: 1
     GameObject: {fileID: 7627974603346895021, guid: 0e82d25a5d24e3f4b9005d05eece81a0, type: 3}
+    AplicaTorque: 0
+    TipoPontoEmissao: 2
+  - Ativo: 1
+    UtilizaPontosEmissao: 0
+    GameObject: {fileID: 5031246217145564698, guid: 6f37c1ad9e801cb4584c1d742991d620, type: 3}
+    AplicaTorque: 0
+    TipoPontoEmissao: 2
+  - Ativo: 1
+    UtilizaPontosEmissao: 0
+    GameObject: {fileID: 5522075082889164777, guid: b267385d7d8342845999eff76a0402a8, type: 3}
+    AplicaTorque: 0
+    TipoPontoEmissao: 2
+  - Ativo: 1
+    UtilizaPontosEmissao: 0
+    GameObject: {fileID: 5522075082889164777, guid: 2c223c83ff4c1704eb1fdbb36a41a671, type: 3}
     AplicaTorque: 0
     TipoPontoEmissao: 2
   ListaItensBonus: []
@@ -27822,7 +27838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1507765903
 Transform:
   m_ObjectHideFlags: 0
@@ -29425,7 +29441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1618357765
 Transform:
   m_ObjectHideFlags: 0
@@ -31383,7 +31399,7 @@ MonoBehaviour:
   Global_IntevaloEmissaoBonus: 10
   Global_VelocidadeGame: 3
   VelocidadeGameEspaco: 0.5
-  ContadorTrocaDeCenario: 30
+  ContadorTrocaDeCenario: 3
   ContadorTrocaDeCenarioEspaco: 5
   ConverterMetrosEmPassacoins: 0
   LevelAtual: 0

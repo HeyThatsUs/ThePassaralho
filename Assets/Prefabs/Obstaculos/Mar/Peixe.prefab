@@ -286,9 +286,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0, y: 0}
+  m_Offset: {x: -0, y: 0.23922408}
   serializedVersion: 2
-  m_Radius: 0.8408459
+  m_Radius: 1.1328793
 --- !u!114 &973734796518345412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,7 +304,10 @@ MonoBehaviour:
   ValorDano: 50
   Atira: 0
   Disparo: {fileID: 0}
-  Explosao: {fileID: 3976349965764320033, guid: 61c39eb87fd54a345878ca0d363c5993, type: 3}
+  EmiteParticulaOnDestroi: 0
+  QuantidadeParticulas: 0
+  Particula: {fileID: 0}
+  AudioQuebra: 
 --- !u!95 &375565400772491490
 Animator:
   serializedVersion: 5
