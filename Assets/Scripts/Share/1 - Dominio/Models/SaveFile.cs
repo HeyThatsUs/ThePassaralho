@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace Assets.Models
 {
-    [Serializable]
     public class SaveFile : Arquivos
     {
         public int Moedas;

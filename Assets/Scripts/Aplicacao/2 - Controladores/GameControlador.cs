@@ -57,7 +57,7 @@ public class GameControlador : MonoBehaviour
 
     private void Awake()
     {
-        Saves = new SaveManager();
+        //Saves.Carregar();
         Temp_Temporizador_Distancia = Temporizador_Distancia_Percorrida;
         Temp_ContadorTrocaDeCenario = ContadorTrocaDeCenario;
         Temp_ContadorTrocaDeCenarioEspaco = ContadorTrocaDeCenarioEspaco;

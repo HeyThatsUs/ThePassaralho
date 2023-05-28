@@ -1,36 +1,81 @@
+using Newtonsoft.Json;
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using Assets.Scripts.Share.Aplicacao;
 
 
 [Serializable]
 public class Arquivos
 {
-
     public bool Criptografar { get; }
 
-    [HideInInspector]
+    [JsonIgnore]
     public string Nome { get; }
-    [HideInInspector]
-    public string Diretorio;
-    [HideInInspector]
-    public string DiretorioCompleto;
+    [JsonIgnore]
+    public string Diretorio
+    {
+        get
+        {
+            string _diretorio = ObterDiretorioFormatado(Application.persistentDataPath);
+
+            switch (Plataforma)
+            {
+                case TPlataformas.Windows:
+                    _diretorio = ObterDiretorioFormatado(Path.GetDirectoryName(Application.dataPath));
+                    break;
+
+            }
+
+            return _diretorio;
+        }
+    }
+
+    [JsonIgnore]
+    public TPlataformas Plataforma
+    {
+        get
+        {
+
+            var _plataforma = TPlataformas.Windows;
+
+            switch (Application.platform)
+            {
+
+                case RuntimePlatform.OSXEditor:
+                case RuntimePlatform.OSXPlayer:
+                    _plataforma = TPlataformas.Mac;
+                    break;
+
+                case RuntimePlatform.Android:
+                    _plataforma = TPlataformas.Android;
+                    break;
+
+                case RuntimePlatform.IPhonePlayer:
+                    _plataforma = TPlataformas.IOS;
+                    break;
+            }
+
+            return _plataforma;
+        }
+    }
+
+    [JsonIgnore]
+    public string DiretorioCompleto
+    {
+        get { return Path.Combine(Diretorio, Nome); }
+    }
 
 
     public Arquivos(string nomeArquivo, bool criptografar)
     {
         Nome = nomeArquivo;
-        Diretorio = Application.persistentDataPath + "/ThePassaralho";
-        DiretorioCompleto = $"{Diretorio}/{Nome}";
         Criptografar = criptografar;
     }
 
-    public void SetDiretorio(string diretorioNovo)
+    private string ObterDiretorioFormatado(string _diretorio)
     {
-        Diretorio = diretorioNovo + "/ThePassaralho";
-        DiretorioCompleto = $"{Diretorio}/{Nome}";
+        return Path.Combine(_diretorio, "files");
     }
 
-    
 }
