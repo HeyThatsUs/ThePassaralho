@@ -149,6 +149,7 @@ public class GameControlador : MonoBehaviour
             default:
                 PlayerController.Self.TipoGameplay = GameplayTipo.Padrao;
                 this.Player_Controlador.ReferenciasPrefab.Foguete.GetComponent<FogueteControlador>().CoolDown = 5;
+                DesabilitaGameplayEspaco();
                 break;
         }
 
@@ -265,6 +266,14 @@ public class GameControlador : MonoBehaviour
         this.Player_Controlador.AtivaGameplayNave();
         LimitadorCentral.SetActive(true);
         PlayerController.Self.TipoGameplay = GameplayTipo.Nave;
+    }
+
+    public void DesabilitaGameplayEspaco()
+    {
+        this.GameplayEspaco = false;
+        this.Player_Controlador.DesativaGameplayNave();
+        LimitadorCentral.SetActive(false);
+        PlayerController.Self.TipoGameplay = GameplayTipo.Padrao;
     }
 
     public void AdicionaLevelGame()

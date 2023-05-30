@@ -560,7 +560,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 149.9
+  m_fontSize: 145.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6613,7 +6613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocidade: 1
-  sortingLayer: Frente
+  sortingLayer: Fundo
   sortingOrder: 11
 --- !u!64 &265167740
 MeshCollider:
@@ -8292,16 +8292,6 @@ MonoBehaviour:
   - Ativo: 1
     UtilizaPontosEmissao: 0
     GameObject: {fileID: 5031246217145564698, guid: 6f37c1ad9e801cb4584c1d742991d620, type: 3}
-    AplicaTorque: 0
-    TipoPontoEmissao: 2
-  - Ativo: 1
-    UtilizaPontosEmissao: 0
-    GameObject: {fileID: 5522075082889164777, guid: b267385d7d8342845999eff76a0402a8, type: 3}
-    AplicaTorque: 0
-    TipoPontoEmissao: 2
-  - Ativo: 1
-    UtilizaPontosEmissao: 0
-    GameObject: {fileID: 5522075082889164777, guid: 2c223c83ff4c1704eb1fdbb36a41a671, type: 3}
     AplicaTorque: 0
     TipoPontoEmissao: 2
   ListaItensBonus: []
@@ -10392,7 +10382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocidade: 1
-  sortingLayer: Frente
+  sortingLayer: Fundo
   sortingOrder: 15
 --- !u!1 &757047437
 GameObject:
@@ -17199,7 +17189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocidade: 0.6
-  sortingLayer: Frente
+  sortingLayer: Fundo
   sortingOrder: 12
 --- !u!64 &974574620
 MeshCollider:
@@ -18366,7 +18356,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.15
+  m_fontSize: 34.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21267,7 +21257,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 78.4
+  m_fontSize: 76.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21365,7 +21355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocidade: 0.4
-  sortingLayer: Frente
+  sortingLayer: Fundo
   sortingOrder: 13
 --- !u!64 &1342963524
 MeshCollider:
@@ -30475,7 +30465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocidade: 1
-  sortingLayer: Frente
+  sortingLayer: Fundo
   sortingOrder: 8
 --- !u!1 &1719453814
 GameObject:
@@ -32602,7 +32592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocidade: 1
-  sortingLayer: Frente
+  sortingLayer: Fundo
   sortingOrder: 10
 --- !u!64 &1896053016
 MeshCollider:
