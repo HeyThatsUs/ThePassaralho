@@ -17,6 +17,8 @@ namespace Assets.Models
 
         public List<int> ItensAdquiridosLoja;
 
+        public List<int> ConquistasObtidas;
+
         public string PassaralhoSelecionado;
 
         public int Pontuacao;

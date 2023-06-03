@@ -26,7 +26,7 @@ public class PlayerVantagensController : MonoBehaviour
                 GameControlador.Self.Saves.Geral.Moedas += bonus.Passacoins;
                 break;
             case TipoVantagem.Vida:
-                PlayerControlador.VidaAtual += bonus.Vida;
+                GerenciaBonusVida(bonus);
                 break;
             case TipoVantagem.VidaExtra:
                 PlayerControlador.QtdVidas++;
@@ -43,6 +43,17 @@ public class PlayerVantagensController : MonoBehaviour
                     PlayerControlador.AtivaGameplayNave();
                 break;
         }
+    }
+
+    private void GerenciaBonusVida(Bonus bonus)
+    {
+        var vidaFutura = PlayerControlador.VidaAtual + bonus.Vida;
+
+        if (vidaFutura < PlayerControlador.VidaMaxima)
+            PlayerControlador.VidaAtual += bonus.Vida;
+
+        if (vidaFutura > PlayerControlador.VidaMaxima)
+            PlayerControlador.VidaAtual = PlayerControlador.VidaMaxima;
     }
 
     private void AtivaVantagem(TipoVantagem tipoVantagem)

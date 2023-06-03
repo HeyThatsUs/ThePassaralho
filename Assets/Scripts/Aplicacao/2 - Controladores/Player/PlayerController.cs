@@ -23,6 +23,7 @@ namespace Assets.Scripts.Aplicacao._2___Controladores
 
         [Header("Variaveis")]
         public int Vida = 100;
+        public int VidaMaxima = 100;
         public int VidaFoguete = 300;
 
         //Internas
