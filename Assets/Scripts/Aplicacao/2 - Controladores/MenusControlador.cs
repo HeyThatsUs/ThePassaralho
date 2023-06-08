@@ -1,3 +1,4 @@
+using Assets.Scripts.Share._1___Dominio.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -13,6 +14,12 @@ public class MenusControlador : MonoBehaviour
     public GameObject MenuModoGame;
     public GameObject HudGameplay;
     public GameObject MenuPontuacoes;
+    public GameObject MenuUpgrades;
+    public GameObject MenuRanking;
+    public GameObject MenuConfiguracoes;
+
+    [Header("Menus Refatoracao")]
+    public List<Menu> Menus;
 
     [Header("Referencia Animators")]
     public Animator MenuConfiguracoes_Animator;
@@ -78,9 +85,17 @@ public class MenusControlador : MonoBehaviour
         ExibeNotificacoes();
     }
 
-    public void AbreMenuPontuacao()
+    public void AbreMenu(GameObject menu)
     {
-        this.MenuPontuacoes.SetActive(true);
+        menu.SetActive(true);
+        
+        var menuAnimator = menu.GetComponentInChildren<Animator>();
+        if (menuAnimator != null) menuAnimator.Play("Abrir", -1, 0f);
+    }
+
+    public void FechaMenu(GameObject menu)
+    {
+        menu.SetActive(false);
     }
 
 
