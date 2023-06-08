@@ -13,6 +13,7 @@ namespace Assets.Models
         [SerializeField] public string Descricao;
         [SerializeField] public int Valor;
         [SerializeField] public GameObject ObjectPreview;
+        [SerializeField] public bool ItemExclusivoPorPlataforma = false;
         [SerializeField] public TPlataformas[] Plataformas;
     }
 
@@ -29,6 +30,7 @@ namespace Assets.Models
             Descricao = obj.Descricao;
             Valor = obj.Valor;
             ObjectPreview = obj.ObjectPreview;
+            ItemExclusivoPorPlataforma = obj.ItemExclusivoPorPlataforma;
             Plataformas = obj.Plataformas;
         }
     }

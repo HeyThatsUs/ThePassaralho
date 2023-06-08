@@ -8251,6 +8251,7 @@ MonoBehaviour:
     Descricao: Teste
     Valor: 50
     ObjectPreview: {fileID: 8732830805882465027, guid: 2abb18f0e91944844b06dcb379fab8df, type: 3}
+    ItemExclusivoPorPlataforma: 0
     Plataformas: 
   - Id: 2
     Index: 0
@@ -8258,21 +8259,24 @@ MonoBehaviour:
     Descricao: Teste
     Valor: 100
     ObjectPreview: {fileID: 352399343482677042, guid: 7a855fbb3f3ed0c44ba36c6e512f32f2, type: 3}
-    Plataformas: 00000000
+    ItemExclusivoPorPlataforma: 0
+    Plataformas: 
   - Id: 3
     Index: 0
     Nome: Sustoralho
     Descricao: Teste
     Valor: 150
     ObjectPreview: {fileID: 2627939572676345580, guid: 1ee61b051d348f94d98d75f949800ea0, type: 3}
-    Plataformas: 00000000
+    ItemExclusivoPorPlataforma: 0
+    Plataformas: 
   - Id: 4
     Index: 0
     Nome: Zombiralho
     Descricao: Teste
     Valor: 200
     ObjectPreview: {fileID: 5521328875043057669, guid: d2ca3e39ed2ad3248b60eb2573f995fd, type: 3}
-    Plataformas: 01000000
+    ItemExclusivoPorPlataforma: 0
+    Plataformas: 
   Display: {fileID: 284688279}
   GameControlador: {fileID: 0}
   BtnComprarEquipar: {fileID: 1582552434}
@@ -41712,7 +41716,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.2
+  m_fontSize: 21.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

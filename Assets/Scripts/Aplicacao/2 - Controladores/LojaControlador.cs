@@ -33,7 +33,7 @@ public class LojaControlador : MonoBehaviour
         Plataforma_Controlador = new PlataformaControlador();
         foreach (var item in ItensLoja)
         {
-            if (item.Plataformas.Contains(Plataforma_Controlador.ObterPlataforma()))
+            if (item.Plataformas.Contains(Plataforma_Controlador.ObterPlataforma()) || (!item.ItemExclusivoPorPlataforma))
             {
                 item.Index = this.indexGerador;
                 this.indexGerador++;
