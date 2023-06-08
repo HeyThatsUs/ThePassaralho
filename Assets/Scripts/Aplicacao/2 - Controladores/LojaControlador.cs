@@ -15,6 +15,7 @@ public class LojaControlador : MonoBehaviour
 
     //Referencias Internas
     private MenusControlador Menus_Controlador;
+    private PlataformaControlador Plataforma_Controlador;
 
     private Item ItemAtual;
     private GameObject PreviewAtual;
@@ -29,10 +30,14 @@ public class LojaControlador : MonoBehaviour
 
     private void Start()
     {
+        Plataforma_Controlador = new PlataformaControlador();
         foreach (var item in ItensLoja)
         {
-            item.Index = this.indexGerador;
-            this.indexGerador++;
+            if (item.Plataformas.Contains(Plataforma_Controlador.ObterPlataforma()))
+            {
+                item.Index = this.indexGerador;
+                this.indexGerador++;
+            }
         }
         this.ItemAtual = new Item(ItensLoja.FirstOrDefault());
 

@@ -694,7 +694,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.8
+  m_fontSize: 22.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1912,7 +1912,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 38.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8251,24 +8251,28 @@ MonoBehaviour:
     Descricao: Teste
     Valor: 50
     ObjectPreview: {fileID: 8732830805882465027, guid: 2abb18f0e91944844b06dcb379fab8df, type: 3}
+    Plataformas: 
   - Id: 2
     Index: 0
     Nome: Piratalho
     Descricao: Teste
     Valor: 100
     ObjectPreview: {fileID: 352399343482677042, guid: 7a855fbb3f3ed0c44ba36c6e512f32f2, type: 3}
+    Plataformas: 00000000
   - Id: 3
     Index: 0
     Nome: Sustoralho
     Descricao: Teste
     Valor: 150
     ObjectPreview: {fileID: 2627939572676345580, guid: 1ee61b051d348f94d98d75f949800ea0, type: 3}
+    Plataformas: 00000000
   - Id: 4
     Index: 0
     Nome: Zombiralho
     Descricao: Teste
     Valor: 200
     ObjectPreview: {fileID: 5521328875043057669, guid: d2ca3e39ed2ad3248b60eb2573f995fd, type: 3}
+    Plataformas: 01000000
   Display: {fileID: 284688279}
   GameControlador: {fileID: 0}
   BtnComprarEquipar: {fileID: 1582552434}
@@ -9703,7 +9707,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 91.65
+  m_fontSize: 47.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9830,7 +9834,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 85.95
+  m_fontSize: 42.05
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13530,7 +13534,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.45
+  m_fontSize: 32.85
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -18945,7 +18949,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 22.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -22419,7 +22423,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7.7
+  m_fontSize: 7.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -34378,7 +34382,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.05
+  m_fontSize: 29.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -34848,7 +34852,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.05
+  m_fontSize: 29.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -41658,7 +41662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.24089475}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.99993896}
+  m_AnchoredPosition: {x: -0.000061035156, y: -0.9999428}
   m_SizeDelta: {x: 0, y: -2}
   m_Pivot: {x: 0.5, y: 0.4999998}
 --- !u!114 &2072526455
@@ -41708,7 +41712,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.6
+  m_fontSize: 24.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -42255,7 +42259,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.9
+  m_fontSize: 23.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
