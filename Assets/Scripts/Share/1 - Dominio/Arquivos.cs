@@ -36,27 +36,7 @@ public class Arquivos
     {
         get
         {
-
-            var _plataforma = TPlataformas.Windows;
-
-            switch (Application.platform)
-            {
-
-                case RuntimePlatform.OSXEditor:
-                case RuntimePlatform.OSXPlayer:
-                    _plataforma = TPlataformas.Mac;
-                    break;
-
-                case RuntimePlatform.Android:
-                    _plataforma = TPlataformas.Android;
-                    break;
-
-                case RuntimePlatform.IPhonePlayer:
-                    _plataforma = TPlataformas.IOS;
-                    break;
-            }
-
-            return _plataforma;
+            return new PlataformaControlador().ObterPlataforma();
         }
     }
 

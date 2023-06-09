@@ -13,8 +13,15 @@ namespace Assets.Scripts.Share.Aplicacao
         [Description("Android")]
         Android,
         [Description("Iphone")]
-        IOS
-       
+        IOS,
+        [Description("Xbox")]
+        XBOX,
+        [Description("PlayStation")]
+        PlayStation,
+        [Description("Nintendo Switch")]
+        NintedoSwitch
+
+
     }
 
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.Share.Aplicacao;
+using System;
 using UnityEngine;
 
 namespace Assets.Models
@@ -16,6 +13,8 @@ namespace Assets.Models
         [SerializeField] public string Descricao;
         [SerializeField] public int Valor;
         [SerializeField] public GameObject ObjectPreview;
+        [SerializeField] public bool ItemExclusivoPorPlataforma = false;
+        [SerializeField] public TPlataformas[] Plataformas;
     }
 
     [Serializable]
@@ -31,6 +30,8 @@ namespace Assets.Models
             Descricao = obj.Descricao;
             Valor = obj.Valor;
             ObjectPreview = obj.ObjectPreview;
+            ItemExclusivoPorPlataforma = obj.ItemExclusivoPorPlataforma;
+            Plataformas = obj.Plataformas;
         }
     }
 }
