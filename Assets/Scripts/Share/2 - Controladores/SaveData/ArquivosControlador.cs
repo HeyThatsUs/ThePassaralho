@@ -26,7 +26,7 @@ public class ArquivosControlador<T> where T: Arquivos
 
     }
 
-    public bool ArquivoExiste()
+    private bool ArquivoExiste()
     {
         var retorno = false;
 
