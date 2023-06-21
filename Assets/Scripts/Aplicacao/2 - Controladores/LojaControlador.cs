@@ -130,7 +130,7 @@ public class LojaControlador : MonoBehaviour
             GameControlador.Saves.Geral.ItensAdquiridosLoja.Add(ItemAtual.Id);
             GameControlador.Saves.Geral.PassaralhoSelecionado = ItemAtual.Nome;
 
-            this.GameControlador.Saves.Salvar();
+            this.GameControlador.Saves.Salvar(this.GameControlador.Saves.Geral);
 
             this.Menus_Controlador.AtualizarSaldoPassaCoins(GameControlador.Saves.Geral.Moedas);
         }
@@ -146,7 +146,7 @@ public class LojaControlador : MonoBehaviour
         }
 
         GameControlador.Saves.Geral.PassaralhoSelecionado = this.ItemAtual.Nome;
-        GameControlador.Saves.Salvar();
+        GameControlador.Saves.Salvar(this.GameControlador.Saves.Geral);
 
         if (Atualizar || PossuiItemAtual ==  false) this.AtualizaItemDisplay();
     }

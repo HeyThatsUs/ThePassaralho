@@ -1,4 +1,5 @@
 using Assets.Models;
+using Assets.Scripts.Aplicacao._2___Controladores;
 using Assets.Scripts.Share._1___Dominio.Models;
 using Assets.Scripts.Share._3___Enums;
 using System.Collections;
@@ -23,8 +24,13 @@ public class UpgradesControlador : MonoBehaviour
         var upgradeAtual = Upgrades.Where(p => p == upgrade.GetComponent<Upgrade>()).FirstOrDefault();
         if (upgradeAtual.LevelAtual < upgradeAtual.QuantidadeLeveis)
         {
-            upgradeAtual.LevelAtual++;
-            SetLevelUpgrade(upgradeAtual);
+            if (GameControlador.Self.Saves.Geral.Moedas > ValorUpgrades)
+            {
+                upgradeAtual.LevelAtual++;
+                SetLevelUpgrade(upgradeAtual);
+                GameControlador.Self.Saves.Geral.Moedas = GameControlador.Self.Saves.Geral.Moedas - ValorUpgrades;
+                GameControlador.Self.Saves.Salvar(GameControlador.Self.Saves.Geral);
+            }
         }
     }
 
@@ -34,7 +40,7 @@ public class UpgradesControlador : MonoBehaviour
         {
             Upgrade upgradeSalvo = null;
 
-            if(upgradeSalvo == null)
+            if (upgradeSalvo == null)
                 SetLevelUpgrade(upgrade);
             else
                 SetLevelUpgrade(upgradeSalvo);

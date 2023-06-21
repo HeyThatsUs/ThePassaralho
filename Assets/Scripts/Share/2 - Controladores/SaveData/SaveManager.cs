@@ -22,13 +22,14 @@ public class SaveManager : MonoBehaviour
         this.Geral = arquivoSaveFile.Carregar();
     }
 
-    public void Salvar()
+    public void Salvar(SaveFile save)
     {
+        arquivoSaveFile.Arquivo = save;
         arquivoSaveFile.Salvar();
     }
 
     private void OnApplicationQuit()
     {
-        Salvar();
+        Salvar(this.Geral);
     }
 }

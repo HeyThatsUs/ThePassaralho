@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class GameControlador : MonoBehaviour
 {
-  
+
     private Animator GameAnimator;
     public SaveManager Saves;
     public GameObject MenuPrimeiroAcesso;
@@ -57,7 +57,8 @@ public class GameControlador : MonoBehaviour
 
     private void Awake()
     {
-        //Saves.Carregar();
+        Saves.Carregar();
+
         Temp_Temporizador_Distancia = Temporizador_Distancia_Percorrida;
         Temp_ContadorTrocaDeCenario = ContadorTrocaDeCenario;
         Temp_ContadorTrocaDeCenarioEspaco = ContadorTrocaDeCenarioEspaco;
@@ -68,6 +69,22 @@ public class GameControlador : MonoBehaviour
         GameControlador.Self = this;
         AtualizaDadosMenu();
     }
+
+    private void Start()
+    {
+        GameAnimator = this.GetComponent<Animator>();
+
+        if (PrimeiroAcesso)
+        {
+            AbreMenuPrimeiroAcesso();
+            PrimeiroAcesso = false;
+        }
+
+        AddReferencias();
+
+        AudioControlador.Self.Play("Menu");
+    }
+
 
     private void FixedUpdate()
     {
@@ -155,27 +172,13 @@ public class GameControlador : MonoBehaviour
 
         EmissorAtual = Emissores.Where(p => p.Nome == cenario).FirstOrDefault();
 
-        if(EmissorAtual == null)
+        if (EmissorAtual == null)
             EmissorAtual = Emissores.Where(p => p.Nome == "Floresta").FirstOrDefault();
 
         if (EmissorAtual != null)
             EmissorAtual.GameObject.GetComponent<EmissorController>().EmissaoAtiva = true;
     }
 
-    private void Start()
-    {
-        GameAnimator = this.GetComponent<Animator>();
-
-        if (PrimeiroAcesso)
-        {
-            AbreMenuPrimeiroAcesso();
-            PrimeiroAcesso = false;
-        }
-
-        AddReferencias();
-
-        AudioControlador.Self.Play("Menu");
-    }
 
     private void AddReferencias()
     {
@@ -184,8 +187,8 @@ public class GameControlador : MonoBehaviour
 
     private void AtualizaDadosMenu()
     {
-       Saves.Carregar();
-       MenusControlador.Self.AtualizarSaldoPassaCoins(Saves.Geral.Moedas);
+        var saveGeral = this.Saves.Geral;
+        MenusControlador.Self.AtualizarSaldoPassaCoins(saveGeral.Moedas);
     }
 
     public void IniciaGame()
@@ -242,7 +245,7 @@ public class GameControlador : MonoBehaviour
         Timer_inicioTransferencia = 3f;
         Saves.Geral.Moedas = DistanciaPercorrida;
         MenusControlador.Self.LblDistandiaConversor.text = "" + DistanciaPercorrida;
-        Saves.Salvar();
+        Saves.Salvar(Saves.Geral);
     }
 
     public void ReiniciaGame()
